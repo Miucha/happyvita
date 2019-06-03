@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_205632) do
     t.index ["activity_id"], name: "index_bookings_on_activity_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
-  
+
   create_table "interests", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -94,12 +94,11 @@ ActiveRecord::Schema.define(version: 2019_06_03_205632) do
   end
 
   add_foreign_key "activities", "users"
+  add_foreign_key "activity_interests", "activities"
+  add_foreign_key "activity_interests", "interests"
   add_foreign_key "addresses", "users"
   add_foreign_key "bookings", "activities"
   add_foreign_key "bookings", "users"
-  add_foreign_key "activity_interests", "activities"
-  add_foreign_key "activity_interests", "interests"
   add_foreign_key "user_interests", "interests"
   add_foreign_key "user_interests", "users"
-
 end
