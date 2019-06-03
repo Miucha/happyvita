@@ -10,28 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2019_06_03_201343) do
-
+ActiveRecord::Schema.define(version: 2019_06_03_204017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-
-  create_table "addresses", force: :cascade do |t|
-    t.string "street"
-    t.integer "number"
-    t.string "suite"
-    t.string "district"
-    t.string "city"
-    t.string "state"
-    t.integer "zipcode"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_addresses_on_user_id"
-  end
-
 
   create_table "activities", force: :cascade do |t|
     t.string "title"
@@ -47,11 +29,35 @@ ActiveRecord::Schema.define(version: 2019_06_03_201343) do
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.integer "number"
+    t.string "suite"
+    t.string "district"
+    t.string "city"
+    t.string "state"
+    t.integer "zipcode"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.boolean "check"
+    t.date "schedule_date"
+    t.bigint "activity_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_bookings_on_activity_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
   create_table "interests", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,8 +72,8 @@ ActiveRecord::Schema.define(version: 2019_06_03_201343) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-
-  add_foreign_key "addresses", "users"
   add_foreign_key "activities", "users"
-  
+  add_foreign_key "addresses", "users"
+  add_foreign_key "bookings", "activities"
+  add_foreign_key "bookings", "users"
 end
