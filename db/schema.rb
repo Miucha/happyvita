@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2019_06_03_205632) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +30,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_205632) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
+
 
   create_table "activity_interests", force: :cascade do |t|
     t.bigint "activity_id"
@@ -52,10 +55,13 @@ ActiveRecord::Schema.define(version: 2019_06_03_205632) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+
   create_table "interests", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+
+
   end
 
   create_table "user_interests", force: :cascade do |t|
@@ -65,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_205632) do
     t.datetime "updated_at", null: false
     t.index ["interest_id"], name: "index_user_interests_on_interest_id"
     t.index ["user_id"], name: "index_user_interests_on_user_id"
+
   end
 
   create_table "users", force: :cascade do |t|
