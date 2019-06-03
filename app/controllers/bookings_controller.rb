@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @activity = Activity.find(params[:activity_id])
     @booking.activity = @activity
-    @booking.check = false
+
     if @activity.event
       @booking.schdule_date = @activity.event_date
     else
