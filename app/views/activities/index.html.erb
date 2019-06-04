@@ -1,7 +1,11 @@
 <h1>Activities</h1>
 
 <% @activities.each do |activity| %>
-Atividade: <%= link_to activity.title, activity_path(activity)%><br>
+<%= cl_image_tag(activity.photo,
+      width: 400, height: 300, crop: :fill) %>
+<br>
+<%= link_to activity.title, activity_path(activity)%><br>
 Descrição: <%= activity.description %><br>
+<br>
 <br>
 <% end %>
