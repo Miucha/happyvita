@@ -1,28 +1,45 @@
 <%= simple_form_for(@activity) do |f| %>
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <div class="form-inputs">
-        <%= f.input :title, label: "Nome da atividade:" %>
-    </div>
+  <div class="form-inputs">
+    <%= f.input :title, label: "Nome da atividade:" %>
+  </div>
 
-    <div class="form-inputs">
-        <%= f.input :description, label: "Descrição:" %>
-    </div>
+  <div class="form-inputs">
+    <%= f.input :description, label: "Descrição:" %>
+  </div>
 
-    <div class="form-inputs">
-        <%= f.input :address, label: "Local:" %>
-    </div>
+  <div class="form-inputs">
+    <%= f.input :address, label: "Local:" %>
+  </div>
 
-    <div class="form-inputs">
-        <%= f.input :capacity, input_html: { min: '1', step: 'any'}, label: "Capacidade do evento:" %>
-    </div>
+  <div class="form-inputs">
+    <%= f.input :event, label: "É um evento?" %>
+  </div>
 
-    <div class="form-inputs">
-        <%= f.input :event_date, label: "Data do evento:" %>
-    </div>
 
-    <div class="form-actions btn btn-success mb-2 p-0">
-        <%= f.button :submit %>
-    </div>
+  <div class="form-inputs">
+    <%= f.input :group, label: "Essa atividade é em grupo?" %>
+  </div>
+
+<!-- precisa colocar essa parte em java para aparecer quando o campo event for selecionado
+  <div class="form-inputs">
+    <%= f.input :capacity, input_html: { min: '1', step: 'any'}, label: "Capacidade da Atividade:" %>
+  </div>
+  colocar em java opção de address também
+  <div class="form-inputs">
+    <%= f.input :event_date, label: "Data do evento:" %>
+  </div>
+  colocar photo
+ -->
+
+  <div class="form-inputs">
+    <%= f.input :event_date, label: "Data do evento:" %>
+  </div>
+
+  <div class="form-actions btn btn-success mb-2 p-0">
+    <%= f.button :submit %>
+  </div>
+
 <% end %>
