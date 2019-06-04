@@ -13,7 +13,7 @@
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
+    <%# stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
     <%= render 'shared/navbar' %>
@@ -23,18 +23,5 @@
     </div>
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
-    <script type="text/javascript">
-      $(function() {
-        $( "#calendario" ).datepicker({
-          dateFormat: 'dd/mm/yy',
-          dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
-          dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-          dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-          monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-          monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
-        });
-      });
-    </script>
-
   </body>
 </html>
