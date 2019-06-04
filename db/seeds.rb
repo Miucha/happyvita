@@ -7,9 +7,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 puts 'Cleaning database...'
+Interest.destroy_all
 User.destroy_all
 Address.destroy_all
 Activity.destroy_all
+
+puts 'Creating interests...'
+interests_attributes = [ { name: 'Caminhada'}, { name: 'Culinária'}, { name: 'Cursos'}, { name: 'Dança'}, { name: 'Esporte'}, { name: 'História'}, { name: 'Finanças'}, { name: 'Música'}, { name: 'Saúde'}, { name: 'Show'}, { name: 'Teatro'}, { name: 'Yoga'} ]
+
+Interest.create!(interests_attributes)
+puts "Finished! #{Interest.count} interests created."
+
 
 puts 'Creating users...'
 users_attributes = [
@@ -43,14 +51,23 @@ addresses_attributes = [
   {
     street: 'Rua Oscar Freire',
     number: 2500,
-    suite: '',
+    suite: 'Unibes Cultural',
     district: 'Sumaré',
     city: 'São Paulo',
     state: 'SP'
-    zipcode: '05409-12',
-    id_users: 1,
-    id_address: 1
+    zipcode: '05409-012',
+    user_id: 1,
   },
+  {
+    street: 'Rua Catalão',
+    number: 72,
+    suite: 'Centro de Musicoterapia Benenzon Brasil',
+    district: 'Sumaré',
+    city: 'São Paulo',
+    state: 'SP'
+    zipcode: '01255-020',
+    user_id: 2,
+  }
 ]
 Address.create!(addresses_attributes)
 puts "Finished! #{Address.count} addresses created."
@@ -64,7 +81,7 @@ activities_attributes = [
     group: true,
     event_date: '29/08/2019 19:00'
     photo: 'http://osepeense.com/wp-content/uploads/2015/09/1idosos-shutterstock_23529820-300x252.jpg'
-    capacity: 50,
+    capacity: 20,
     confirmed: true,
     user_id: 1,
     address_id: 1
@@ -80,6 +97,18 @@ activities_attributes = [
     confirmed: true,
     user_id: 1,
     address_id: 1
+  },
+  {
+    title: 'Musicoterapia com Idosos: a experiência musical na prevenção e reabilitação',
+    description: 'Seja bem vindo Congresso nacional de treinamento para grupos especiais. Temos como objetivo reunir 4 profissionais que decidiram se dedicar a este este perfil que tende a crescer cada vez mais (idosos), Personal Trainer de idosos é uma das principais tendências do mercado, mas poucos tem capacidade para tal! Este publico exige uma atenção redobrada, E por que deve investir neste nicho? Em 2030, estima-se que o Brasil terá aproximadamente ~ 33 milhões de idosos, o que leva o país a ocupar o 5º lugar no ranking mundial de população idosa. Porém, o mercado de profissionais de Educação Física nessa área é escasso. Tenha um público diferenciado, O que realmente pode fazer toda diferença em sua carreira profissional sendo capacitado a atender este público com maior responsabilidade.',
+    event: true,
+    group: true,
+    event_date: '29/06/2019 09:00'
+    photo: 'https://static.wixstatic.com/media/7d2c22_5275a20ca5c3446cbdc330bd9d364c0b~mv2.jpg/v1/fill/w_630,h_294,al_c,lg_1,q_80/7d2c22_5275a20ca5c3446cbdc330bd9d364c0b~mv2.jpg'
+    capacity: 15,
+    confirmed: true,
+    user_id: 2,
+    address_id: 2
   },
 ]
 Activity.create!(activities_attributes)
