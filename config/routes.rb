@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :bookings, only: [:update, :destroy]
 
+  patch 'activities/:id/cancel', to: 'activities#cancel', as: 'cancel_activity'
+
   resources :activities, except: :destroy do
     resources :bookings, only: :create
   end

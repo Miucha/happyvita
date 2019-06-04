@@ -2,5 +2,10 @@
 
 Nome: <%= @activity.title %><br>
 Descrição: <%= @activity.description %><br>
-
-<%= button_to "Edit", edit_activity_path(@activity) %>
+<br>
+<!--#verificar a rota Agendar-->
+<%= button_to "Agendar", activity_bookings_path(@activity), method: :get %> 
+<br>
+<%= button_to "Editar", edit_activity_path(@activity), method: :get %>
+<br>
+<%= button_to "Cancelar", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" } %>
