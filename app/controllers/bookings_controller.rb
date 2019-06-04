@@ -23,7 +23,6 @@ class BookingsController < ApplicationController
   end
 
   def update
-    @activity = Activity.find(params[:activity_id])
     unless @activity.event
       #forma de pegar a data do calendário
       # @booking.schdule_date = ??
