@@ -53,7 +53,6 @@ class ActivitiesController < ApplicationController
       #falta :address
     end
 
-
     def cancel_params
       params.require(:activity).permit(:confirmed)
       #falta :address
