@@ -3,4 +3,5 @@
 <% @activities.each do |activity| %>
 Atividade: <%= link_to activity.title, activity_path(activity)%><br>
 Descrição: <%= activity.description %><br>
+<br>
 <% end %>
