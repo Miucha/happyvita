@@ -16,6 +16,13 @@ class ActivitiesController < ApplicationController
     end
 
     def edit
+        @activity = Activity.find(params[:id])
+        if current_user && @activity.user
+          render :edit
+        else
+          redirect_to @activity, notice: current_user != @activity.user ? 'Usuario indevido' : 'Esta atividade não foi criada por você.'
+        end
+    
     end
 
     def update
