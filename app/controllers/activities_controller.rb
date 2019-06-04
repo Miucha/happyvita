@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-    before_action :set_activity, only: [:show]
+    before_action :set_activity, only: [:show, :edit, :update, :cancel]
 
     def index
         @activities = Activity.all
@@ -16,7 +16,6 @@ class ActivitiesController < ApplicationController
     end
 
     def edit
-        @activity = Activity.find(params[:id])
         if current_user && @activity.user
           render :edit
         else
@@ -26,9 +25,37 @@ class ActivitiesController < ApplicationController
     end
 
     def update
+      @activity.update(activity_params)
+      if @activity.save
+          redirect_to @activity, notice: 'Atividade editada com sucesso.'
+      else
+          render :edit
+      end  
+    end
+
+    def cancel
+      @activity.confirmed = false
+      # @activity.update(cancel_params)
+      if @activity.save
+          redirect_to @activity, notice: 'Atividade cancelada com sucesso.'
+      else
+          render :edit
+      end  
     end
 
     def set_activity
         @activity = Activity.find(params[:id])
       end
+
+    def activity_params
+      params.require(:activity).permit(:title, :description, :event, :group, :event_date,
+                                    :photo, :capacity, :user, :confirmed)
+      #falta :address
+    end
+
+
+    def cancel_params
+      params.require(:activity).permit(:confirmed)
+      #falta :address
+    end  
 end
