@@ -1,1 +1,6 @@
-<h1> You are @ Index.html.erb </h1>
+<h1>Activities</h1>
+
+<% @activities.each do |activity| %>
+Nome: <%= activity.title %><br>
+Descrição: <%= activity.description %><br>
+<% end %>
