@@ -1,11 +1,15 @@
 <h5 class="btn btn-dark m-1 shadow">FILTRAR</h5>
 
 <div class="cards-container mx-1">
-
   <% @activities.each do |activity| %>
     <div class="card-activity bg-white mb-5">
-      <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
-      </div>
+      <% if activity.photo? then %>
+        <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
+      <% else %>
+        <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip', height: 400, crop: :fit %>')"></div>
+      <% end %>
+        </div>
+    
       <div class="card-activity-infos shadow">
         <div class="card-event-date text-center mr-2 mt-1">
           <h1><%= activity.event_date.strftime("%d")%></h1>
@@ -20,7 +24,5 @@
       <div class="card-footer-bg-light-gray w-2"><br></div>
     </div>
   <% end %>
-
 </div>
-
 
