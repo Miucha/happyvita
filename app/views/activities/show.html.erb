@@ -7,13 +7,15 @@
 Descrição: <%= @activity.description %><br>
 <br>
 <!--#verificar a rota Agendar-->
-<% booking = current_user.bookings.select { |booking| booking.activity_id == @activity.id } %>
+<% booking = [] %>
+<% booking = current_user.bookings.select { |booking| booking.activity_id == @activity.id } unless current_user.nil?%>
 <% if current_user == nil || booking == []%>
   <% if @activity.event %>
     <%= button_to "AGENDAR", activity_bookings_path(@activity), method: :post, class: "btn btn-primary shadow" %>
   <% else %>
     <%= button_to "AGENDAR", new_activity_booking_path(@activity), method: :get, class: "btn btn-primary shadow" %>
     <% end %>
+
 <% elsif @activity.event %>
   <h5>AGENDADO PARA: <%= booking.first.schedule_date.strftime("%d") %> de <%= booking.first.schedule_date.strftime("%B") %> de <%= booking.first.schedule_date.strftime("%Y") %></h5>
 <!--   destroy -->

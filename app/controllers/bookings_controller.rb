@@ -7,9 +7,9 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(booking_params)
-    @booking.user = current_user
     @activity = Activity.find(params[:activity_id])
+    @booking = Booking.new
+    @booking.user = current_user
     @booking.activity = @activity
 
     @booking.schedule_date = @activity.event_date if @activity.event
