@@ -1,0 +1,11 @@
+<% if @activity.photo? then %>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @activity.photo, height: 800, crop: :fit %>')">
+  </div>
+<% else %>
+  <div class="banner_noimage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip_large', height: 600, crop: :fit %>')">
+  </div>
+<% end %>
+
+<%# <%= cl_image_tag(@activity.photo, %>
+      <%# width: 400, height: 300, crop: :fill) %>
+

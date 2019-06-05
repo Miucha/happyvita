@@ -1,7 +1,6 @@
 <h1>Activities Show</h1>
 
-<%= cl_image_tag(@activity.photo,
-      width: 400, height: 300, crop: :fill) %><br>
+<%= render 'photo_image'%>
 
 <%= @activity.title %><br>
 <br>
