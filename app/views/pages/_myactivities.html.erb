@@ -1,0 +1,41 @@
+<div class="shadow mt-5 p-2 bg-light rounded">
+  <h2 class="text-center mb-2">Meus Próximos Eventos</h2>
+  
+  <% activities_ordered = @activities.sort_by(&:event_date) %>
+
+  <% activities_ordered.each do |activity| %>
+  <!-- Imagem -->
+    <div class="card-trip card-trip-horizontal m-3">
+      <% if activity.photo? then %>
+        <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
+      <% else %>
+        <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip_square', height: 400, crop: :fit %>')">
+      <% end %>
+      </div>
+      <!-- imagem fim -->
+
+      <div class="card-trip-infos p-2">
+        <div class="card-top-details mb-2">
+          <div id="aligned-name-info">
+            <div>
+                <h2 class="pr-2"><%= activity.title %>
+                    <%= link_to activity do %>
+                    <i class="fas fa-info-circle"></i>
+                    <% end %>
+                </h2>
+                <h4><%= activity.description %></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+              
+      <div class="card-bottom-details">
+        <div>
+          <h5><%= activity.address %></h5>
+          <p>Data: <%= activity.event_date.strftime("%d/%m/%Y") %> </p>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+</div>

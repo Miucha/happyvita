@@ -1,0 +1,60 @@
+    <div class="shadow mt-5 p-5 bg-light rounded">
+      <h2 class="text-center mb-2">Viagens que fiz</h2>
+      <!-- aplicar GROUP_BY ID para aparecer somente 1 vez o mesmo pacote com várias reservas-->
+      <% groups_by_id = @my_booked_trips.group_by{|x| x.trip_id}.values %>
+      <% bookings_count = [] %>
+      <% new_groups_by_id = [] %>
+      <% groups_by_id.each do |trip| %>
+        <% trip_start = Trip.find(trip.first.trip_id).trip_start %>
+        <% today = Time.now %>
+        <% if today > trip_start then %>
+          <% bc = {} %>
+          <% bc[:id] = trip[0].trip_id %>
+          <% bc[:count] = trip.count %>
+          <% bookings_count << bc %>
+          <% new_groups_by_id << trip %>
+          <% end %>
+      <% end %>
+
+      <% trips_grouped = new_groups_by_id.map do |booked_trip_group| %>
+        <% Trip.find(booked_trip_group[0].trip_id) %>
+      <% end %>
+      <% trips_ordered = trips_grouped.sort_by(&:trip_start) %>
+      <% trips_ordered.each do |booked_trip| %>
+        <div class="card-trip card-trip-horizontal m-3">
+        <% if booked_trip.photo? then %>
+          <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booked_trip.photo, height: 400, crop: :fit %>')">
+          </div>
+        <% else %>
+          <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip_square', height: 400, crop: :fit %>')">
+          </div>
+        <% end %>
+
+            <div class="card-trip-infos p-2">
+              <div class="card-top-details mb-2">
+                <div id="aligned-name-info">
+                  <div>
+                    <h2 class="pr-2"><%= booked_trip.name %>
+                    <%= link_to booked_trip do %>
+                      <i class="fas fa-info-circle"></i>
+                    <% end %></h2>
+                  </div>
+                  <% b_count = bookings_count.select{ |item| item[:id] == booked_trip.id }[0][:count] %>
+                  <h5>Vagas reservadas: <%= b_count %></h5>
+                </div>
+                <h4><%= booked_trip.description %></h4>
+              </div>
+              <div class="card-bottom-details">
+                <div>
+                  <h5><%= booked_trip.place %></h5>
+                  <p>Ida: <%= booked_trip.trip_start.strftime("%d/%m/%Y") %> | Volta: <%= booked_trip.trip_end.strftime("%d/%m/%Y") %></p>
+                </div>
+                <div class="text-right">
+                  <h5 class="card-trip-pricing mb-2">R$ <%= booked_trip.price %>/pessoa | Total: R$ <%= booked_trip.price * b_count %></h5>
+                  <%= link_to "Reserve mais uma vaga", new_trip_booking_path(booked_trip), class: "ml-2 px-4 btn-banner-orange" %>
+                </div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>

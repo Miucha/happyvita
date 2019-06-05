@@ -4,14 +4,13 @@ Rails.application.routes.draw do
 
   resources :bookings, only: [:update, :destroy]
 
+  get 'dashboard', to: 'pages#dashboard', as: :dashboard
   patch 'activities/:id/cancel', to: 'activities#cancel', as: 'cancel_activity'
 
   resources :activities, except: :destroy do
     resources :bookings, only: :create
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   resources :addresses, only: [ :create ]
-
-  get 'dashboard', to: 'pages#dashboard', as: :dashboard
-
 end
