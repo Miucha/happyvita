@@ -29,7 +29,7 @@
           <div id="aligned-name-info">
             <div>
                 <h2 class="pr-2"><%= booking.activity.title %>
-                    <%= link_to booking do %>
+                    <%= link_to activity_path(booking.activity) do %>
                     <i class="fas fa-info-circle"></i>
                     <% end %>
                 </h2>
