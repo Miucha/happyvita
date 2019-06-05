@@ -1,0 +1,28 @@
+<script type="text/javascript">
+  $(function() {
+    $( "#calendario" ).datepicker({
+      dateFormat: 'dd/mm/yy',
+      dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+      dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+      dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+      monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+      monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+    });
+  });
+</script>
+
+<%= simple_form_for [@activity, @booking] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <%= f.input :schedule_date, :as => :string,
+        :input_html => {
+          :id => 'calendario',
+          :class => ' date_picker form-control date-mask'
+        },
+        label: 'Data da Atividade:' %>
+  <br>
+  <div class="form-actions btn btn-success mb-2 p-0">
+    <%= f.button :submit %>
+  </div>
+<% end %>
