@@ -7,8 +7,16 @@
 Descrição: <%= @activity.description %><br>
 <br>
 <!--#verificar a rota Agendar-->
-<%= button_to "Agendar", activity_bookings_path(@activity), method: :get %> 
+<% if current_user == nil %>
+  <%= button_to "AGENDAR", activity_bookings_path(@activity), method: :post, class: "btn btn-primary card-activity-booking-btn shadow" %>
+<% else %>
+  <% if current_user.bookings.select { |booking| booking.activity_id == @activity.id } %>
+    <h5>AGENDADO</h5>
+    <% else %>
+      <%= button_to "AGENDAR", activity_bookings_path(@activity), method: :post, class: "btn btn-primary card-activity-booking-btn shadow" %>
+    <% end %>
+<% end %>
 <br>
-<%= button_to "Editar", edit_activity_path(@activity), method: :get %>
+<%= button_to "EDITAR", edit_activity_path(@activity), method: :get %>
 <br>
-<%= button_to "Cancelar", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" } %>
+<%= button_to "CANCELAR", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" } %>
