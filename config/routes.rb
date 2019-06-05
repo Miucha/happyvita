@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'activities#index'
 
-  resources :bookings, only: [:update, :destroy]
+  resources :bookings, only: [:edit, :update, :destroy]
 
   get 'dashboard', to: 'pages#dashboard', as: :dashboard
   patch 'activities/:id/cancel', to: 'activities#cancel', as: 'cancel_activity'
