@@ -7,7 +7,7 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new
+    @booking = Booking.new(booking_params)
     @booking.user = current_user
     @activity = Activity.find(params[:activity_id])
     @booking.activity = @activity
@@ -19,29 +19,29 @@ class BookingsController < ApplicationController
     else
       render :new
     end
+  end
 
+  def edit
   end
 
   def update
-    unless @activity.event
-      #forma de pegar a data do calendário
-      # @booking.schdule_date = ??
-    end
-    if @activity.update
-      # encaminhar par o dashboard ??
+    if @booking.update(booking_params)
+      redirect_to activity_path(@booking.activity), notice: 'Agendamento editado com sucesso.'
     else
-      # terá o caso de data incorreta??
-      # render
+      render :edit
     end
   end
 
   def destroy
-
   end
 
   private
 
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def booking_params
+    params.require(:booking).permit(:schedule_date, :check)
   end
 end
