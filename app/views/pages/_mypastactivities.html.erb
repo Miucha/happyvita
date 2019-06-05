@@ -1,51 +1,77 @@
+<h2 class="text-center mb-2">Atividades Passadas (criadas por mim)</h2>
 <% mypast_activities = [] %>
 <% @activities.each do |activity| %>
-  <%# <% event_date = Activity.find(activity.id).event_date %> 
+  <%# <% event_date = Activity.find(activity.id).event_date %>
   <% today = Time.now %>
-  <% if today > activity.event_date then %>
-      <% mypast_activities << activity %>
+
+  <% if activity.event_date %>
+    <% if today < activity.event_date then %>
+        <% mypast_activities << activity %>
+    <% end %>
+  <% else %>
+    <% mypast_activities << activity %>
   <% end %>
-<% end %>
 
+    <% if activity.event_date %>
+      <% activities_ordered = mypast_activities.sort_by(&:event_date) %>
+    <div class="cards-container mx-1">
+      <% activities_ordered.each do |activity| %>
+      <!-- Imagem -->
+        <div class="card-activity bg-white mb-5">
+          <% if activity.photo? then %>
+            <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
+          <% else %>
+            <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip', height: 400, crop: :fit %>')">
+          <% end %>
+          </div>
+          <!-- imagem fim -->
 
-<div class="shadow mt-5 p-2 bg-light rounded">
-  <h2 class="text-center mb-2">Atividades Passadas (criadas por mim)</h2>
-  
-  <% activities_ordered = mypast_activities.sort_by(&:event_date) %>
-
-  <% activities_ordered.each do |activity| %>
-  <!-- Imagem -->
-    <div class="card-trip card-trip-horizontal m-3">
-      <% if activity.photo? then %>
-        <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')"> 
-      <% else %>
-        <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip_square', height: 400, crop: :fit %>')">
-      <% end %>
-      </div>
-      <!-- imagem fim -->
-      
-      <div class="card-trip-infos p-2">
-        <div class="card-top-details mb-2">
-          <div id="aligned-name-info">
-            <div>
-                <h2 class="pr-2"><%= activity.title %>
-                    <%= link_to activity do %>
-                    <i class="fas fa-info-circle"></i>
-                    <% end %>
-                </h2>
-                <h4><%= activity.description %></h4>
+          <div class="card-activity-infos shadow">
+            <div class="card-event-date text-center mr-2 mt-1">
+              <% if activity.event_date %>
+              <h1><%= activity.event_date.strftime("%d")%></h1>
+              <h4><%= activity.event_date.strftime("%b")%></h4>
+              <% end %>
+            </div>
+            <div class="card-title-and-buttons">
+              <h4><%= link_to "+ INFO", activity_path(activity), class: "btn btn-info card-activity-info-btn shadow" %></h4>
+              <h4 class="mt-1 ml-2 text-left"><%= link_to activity.title, activity_path(activity),class: "title-link text-decoration-none"%></h4>
+              <p class="mt-1 ml-2 text-left"><%=activity.address.district%>, <%=activity.address.city%>, <%=activity.address.state%></p>
+              <h4><%= link_to "AGENDAR", activity_path(activity), class: "btn btn-primary card-activity-booking-btn shadow" %></h4>
             </div>
           </div>
+          <div class="card-footer-bg-light-gray w-2"><br></div>
         </div>
-      </div>
-              
-      <div class="card-bottom-details">
-        <div>
-          <h5><%= activity.address %></h5>
-          <p>Data: <%= activity.event_date.strftime("%d/%m/%Y") %> </p>
+      <% end %>
+    <% else %>
+      <% mypast_activities.each do |activity| %>
+      <!-- Imagem -->
+        <div class="card-activity bg-white mb-5">
+          <% if activity.photo? then %>
+            <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
+          <% else %>
+            <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip', height: 400, crop: :fit %>')">
+          <% end %>
         </div>
-      </div>
-    </div>
+          <!-- imagem fim -->
 
-  <% end %>
-</div>
+          <div class="card-activity-infos shadow">
+            <div class="card-event-date text-center mr-2 mt-1">
+              <% if activity.event_date %>
+              <h1><%= activity.event_date.strftime("%d")%></h1>
+              <h4><%= activity.event_date.strftime("%b")%></h4>
+              <% end %>
+            </div>
+            <div class="card-title-and-buttons">
+              <h4><%= link_to "+ INFO", activity_path(activity), class: "btn btn-info card-activity-info-btn shadow" %></h4>
+              <h4 class="mt-1 ml-2 text-left"><%= link_to activity.title, activity_path(activity),class: "title-link text-decoration-none"%></h4>
+              <p class="mt-1 ml-2 text-left"><%=activity.address.district%>, <%=activity.address.city%>, <%=activity.address.state%></p>
+              <h4><%= link_to "AGENDAR", activity_path(activity), class: "btn btn-primary card-activity-booking-btn shadow" %></h4>
+            </div>
+          </div>
+          <div class="card-footer-bg-light-gray w-2"><br></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
