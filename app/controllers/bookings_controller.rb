@@ -1,5 +1,10 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, except: :create
+  before_action :set_booking, except: [:create, :new]
+
+  def new
+    @booking = Booking.new
+    @activity = Activity.find(params[:activity_id])
+  end
 
   def create
     @booking = Booking.new
@@ -7,17 +12,12 @@ class BookingsController < ApplicationController
     @activity = Activity.find(params[:activity_id])
     @booking.activity = @activity
 
-    if @activity.event
-      @booking.schdule_date = @activity.event_date
-    else
-      # criar forma de pegar data com caledário
-      # @booking.schdule_date = ???
-    end
+    @booking.schedule_date = @activity.event_date if @activity.event
+
     if @booking.save
-      # encaminhar par o dashboard ??
+      redirect_to activity_path(@activity)
     else
-      # terá o caso de data incorreta??
-      # render
+      render :new
     end
 
   end
