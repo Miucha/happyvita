@@ -1,11 +1,20 @@
-<h1>Activities</h1>
+<h5 class="btn btn-dark m-1 shadow">FILTRAR</h5>
 
 <% @activities.each do |activity| %>
-<%= cl_image_tag(activity.photo,
-      width: 400, height: 300, crop: :fill) %>
-<br>
-<%= link_to activity.title, activity_path(activity)%><br>
-Descrição: <%= activity.description %><br>
-<br>
-<br>
+  <div class="card-activity bg-white mb-5">
+    <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
+    </div>
+    <div class="card-activity-infos shadow">
+      <div class="text-center mr-2">
+        <h1 class="mt-1"><%= activity.event_date.strftime("%d")%></h1>
+        <h4><%= activity.event_date.strftime("%b")%></h4>
+      </div>
+      <h4><%= link_to "+ INFO", activity_path(activity), class: "btn btn-info card-activity-info-btn shadow" %></h4>
+      <h4 class="mt-1 ml-2"><%= link_to activity.title, activity_path(activity),class: "title-link text-decoration-none"%></h4>
+      <h4><%= link_to "AGENDAR", activity_path(activity), class: "btn btn-primary card-activity-booking-btn shadow" %></h4>
+    </div>
+    <div class="card-footer-bg-light-gray w-2"><br></div>
+  </div>
 <% end %>
+
+
