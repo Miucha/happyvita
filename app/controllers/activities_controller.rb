@@ -15,6 +15,7 @@ class ActivitiesController < ApplicationController
     def create
       @activity = Activity.new(activity_params)
       @activity.owner = current_user
+      @activity.address = Address.first
       if @activity.save
         redirect_to @activity, notice: "Atividade criada com sucesso"
       else

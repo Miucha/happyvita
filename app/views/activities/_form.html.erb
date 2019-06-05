@@ -22,9 +22,7 @@
     <%= f.input :description, label: "Descrição:" %>
   </div>
 
-  <div class="form-inputs">
-    <%= f.input :address, label: "Local:" %>
-  </div>
+  <!-- encaminhar para a criação ou usar um address antigo -->
 
   <div class="form-inputs">
     <%= f.input :event, label: "É um evento?" %>
@@ -46,11 +44,23 @@
   colocar em java opção de address também
   colocar photo
  -->
-  <label for="activity[event_date]" class="sr-only">Data</label>
-  <div class="input-group datepicker">
-    <input id="calendario" name="activity[event_date]" type="text" class="form-control date-mask" placeholder="dd/mm/aaaa">
-  </div>
-  <br>
+ <% if @activity.event_date.present? %>
+  <%= f.input :event_date, :as => :string,
+        :input_html => {
+          :id => 'calendario',
+          :class => ' date_picker form-control date-mask',
+          value: @activity.event_date.strftime("%d/%m/%Y")
+        },
+        label: 'Data da Atividade:' %>
+<% else %>
+  <%= f.input :event_date, :as => :string,
+        :input_html => {
+          :id => 'calendario',
+          :class => ' date_picker form-control date-mask'
+        },
+        label: 'Data da Atividade:' %>
+<% end %>
+<br>
 
 
   <div class="form-actions btn btn-success mb-2 p-0">
