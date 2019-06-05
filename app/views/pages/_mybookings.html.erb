@@ -1,17 +1,7 @@
-<% mypast_activities = [] %>
-<% @activities.each do |activity| %>
-  <%# <% event_date = Activity.find(activity.id).event_date %> 
-  <% today = Time.now %>
-  <% if today > activity.event_date then %>
-      <% mypast_activities << activity %>
-  <% end %>
-<% end %>
-
-
 <div class="shadow mt-5 p-2 bg-light rounded">
-  <h2 class="text-center mb-2">Atividades Passadas (criadas por mim)</h2>
+  <h2 class="text-center mb-2">Meus Próximos Eventos</h2>
   
-  <% activities_ordered = mypast_activities.sort_by(&:event_date) %>
+  <% activities_ordered = @activities.sort_by(&:event_date) %>
 
   <% activities_ordered.each do |activity| %>
   <!-- Imagem -->
