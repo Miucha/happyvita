@@ -13,14 +13,21 @@ class ActivitiesController < ApplicationController
     end
 
     def create
+      @activity = Activity.new(activity_params)
+      @activity.owner = current_user
+      if @activity.save
+        redirect_to @activity, notice: "Atividade criada com sucesso"
+      else
+        render :new
+      end
     end
 
     def edit
-        if current_user == @activity.user
-          render :edit
-        else
-          redirect_to @activity, notice: current_user != @activity.user ? 'Usuario indevido' : 'Esta atividade não foi criada por você.'
-        end
+      if current_user == @activity.user
+        render :edit
+      else
+        redirect_to @activity, notice: 'Esta atividade não foi criada por você.'
+      end
 
     end
 
@@ -49,7 +56,7 @@ class ActivitiesController < ApplicationController
 
     def activity_params
       params.require(:activity).permit(:title, :description, :event, :group, :event_date,
-                                    :photo, :capacity, :user, :confirmed)
+                                    :photo, :capacity, :confirmed)
       #falta :address
     end
 
