@@ -1,3 +1,15 @@
+<script type="text/javascript">
+  $(function() {
+    $( "#calendario" ).datepicker({
+      dateFormat: 'dd/mm/yy',
+      dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+      dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+      dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+      monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+      monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+    });
+  });
+</script>
 <%= simple_form_for(@activity) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -38,6 +50,7 @@
   <div class="input-group datepicker">
     <input id="calendario" name="activity[event_date]" type="text" class="form-control date-mask" placeholder="dd/mm/aaaa">
   </div>
+  <br>
 
 
   <div class="form-actions btn btn-success mb-2 p-0">
