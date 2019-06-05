@@ -1,9 +1,9 @@
-<div class="d-flex justify-content-between align-items-center m-1">
-  <h5 class="btn btn-dark shadow">FILTROS</h5>
+<div class="search-container d-flex justify-content-between align-items-center fixed-top bg-light">
+  <h5 class="btn btn-dark shadow m-2">FILTROS</h5>
   <%= form_tag activities_path, method: :get do %>
     <%= text_field_tag :query,
       params[:query],
-      class: "form-control",
+      class: "form-control m-2",
       placeholder: "Busque uma atividade"
     %>
   <% end %>
