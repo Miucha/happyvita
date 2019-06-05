@@ -1,5 +1,13 @@
-<h5 class="btn btn-dark m-1 shadow">FILTRAR</h5>
-
+<div class="d-flex justify-content-between align-items-center m-1">
+  <h5 class="btn btn-dark shadow">FILTROS</h5>
+  <%= form_tag activities_path, method: :get do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control",
+      placeholder: "Busque uma atividade"
+    %>
+  <% end %>
+</div>
 <div class="cards-container mx-1">
   <% @activities.each do |activity| %>
     <div class="card-activity bg-white mb-5">
@@ -9,7 +17,7 @@
         <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip', height: 400, crop: :fit %>')"></div>
       <% end %>
         </div>
-    
+
       <div class="card-activity-infos shadow">
         <div class="card-event-date text-center mr-2 mt-1">
           <h1><%= activity.event_date.strftime("%d")%></h1>
@@ -18,6 +26,7 @@
         <div class="card-title-and-buttons">
           <h4><%= link_to "+ INFO", activity_path(activity), class: "btn btn-info card-activity-info-btn shadow" %></h4>
           <h4 class="mt-1 ml-2 text-left"><%= link_to activity.title, activity_path(activity),class: "title-link text-decoration-none"%></h4>
+          <p class="mt-1 ml-2 text-left"><%=activity.address.district%>, <%=activity.address.city%>, <%=activity.address.state%></p>
           <h4><%= link_to "AGENDAR", activity_path(activity), class: "btn btn-primary card-activity-booking-btn shadow" %></h4>
         </div>
       </div>
