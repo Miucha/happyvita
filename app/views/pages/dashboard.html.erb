@@ -6,8 +6,8 @@
         <%= link_to "Participe de um evento", root_path, class: "ml-2 btn-banner-orange" %>
     </div>
   <% else %>
-    <%# <%= render 'mybookings' %> %>
-    <%# <%= render 'mypastbookings' %> %>
+    <%= render 'mybookings' %>
+    <%= render 'mypastbookings' %>
   <% end %>
 
   <% if @current_user.activities.empty? then %>
@@ -17,6 +17,6 @@
     </div>
   <% else %>
     <%= render 'myactivities' %>
-    <%# <%= render 'mypastactivities' %> %>
+    <%= render 'mypastactivities' %>
   <% end %>
 </div>
