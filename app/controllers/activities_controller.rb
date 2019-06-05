@@ -35,7 +35,7 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
-    if current_user == @activity.user
+    if current_user == @activity.owner
       render :edit
     else
       redirect_to @activity, notice: 'Esta atividade não foi criada por você.'
