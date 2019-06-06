@@ -72,7 +72,6 @@ class ActivitiesController < ApplicationController
 
   def update
     @activity.update(activity_params)
-    @activity.address = Address.find(params[:activity][:address])
     if @activity.save
         redirect_to @activity, notice: 'Atividade editada com sucesso.'
     else
