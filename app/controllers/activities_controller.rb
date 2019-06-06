@@ -15,7 +15,7 @@ class ActivitiesController < ApplicationController
     def create
       @activity = Activity.new(activity_params)
       @activity.owner = current_user
-      @activity.address = Address.first
+      @activity.address = Address.find(params[:activity][:address])
       if @activity.save
         redirect_to @activity, notice: "Atividade criada com sucesso"
       else
@@ -34,6 +34,7 @@ class ActivitiesController < ApplicationController
 
     def update
       @activity.update(activity_params)
+      @activity.address = Address.find(params[:activity][:address])
       if @activity.save
           redirect_to @activity, notice: 'Atividade editada com sucesso.'
       else
@@ -57,8 +58,7 @@ class ActivitiesController < ApplicationController
 
     def activity_params
       params.require(:activity).permit(:title, :description, :event, :group, :event_date,
-                                    :photo, :capacity, :confirmed)
-      #falta :address
+                                       :photo, :capacity, :confirmed)
     end
 
     def cancel_params
