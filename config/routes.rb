@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'new_challenge', to: 'activities#new_challenge'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  post 'users/:user_id/addresses', to: 'addresses#create', as: 'create_address'
+
+  resources :addresses, only: [:new, :create]
 
 end
