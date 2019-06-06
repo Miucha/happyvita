@@ -1,7 +1,7 @@
 <% if @current_user.bookings.empty? then %>
   <div class="text-center shadow mt-5 p-5 bg-light rounded">
-       <h2 class="dark-gray"> Você ainda não tem eventos ou desafios reservados! <h2>
-      <%= link_to "Participe de um evento", root_path, class: "ml-2 btn-banner-orange" %>
+       <h2 class="dark-gray"> Você ainda não agendou eventos ou desafios! <h2>
+      <%= link_to "PARTICIPE DE UMA ATIVIDADE", root_path, class: "ml-2 btn btn-primary shadow font-weight-bold" %>
   </div>
 <% else %>
   <%= render 'mybookings' %>
@@ -10,11 +10,12 @@
 
 <% if @current_user.activities.empty? then %>
   <div class="text-center shadow mt-5 p-5 bg-light rounded">
-    <h2>Você ainda não criou Eventos ou Desafios! </h2>
-    <%= link_to "Crie um Evento ou Desafio", new_activity_path, class: "ml-2 btn-banner-green" %>
+    <h2>Você ainda não publicou eventos ou desafios! </h2>
+    <%= link_to "CRIE UM EVENTO OU DESAFIO", new_activity_path, class: "ml-2 btn-publish shadow font-weight-bold" %>
   </div>
 <% else %>
   <%= render 'myactivities' %>
+  <br>
   <%= render 'mypastactivities' %>
 <% end %>
 
