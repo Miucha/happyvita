@@ -10,9 +10,9 @@ class ActivitiesController < ApplicationController
         OR addresses.city @@ :query \
         OR addresses.zipcode @@ :query \
       "
-      @activities = Activity.joins(:address).where(sql_query, query: "%#{params[:query]}%")
+      @activities = Activity.joins(:address).where(sql_query, query: "%#{params[:query]}%").where('confirmed = true')
     else
-      @activities = Activity.all
+      @activities = Activity.where('confirmed = true')
     end
   end
 
