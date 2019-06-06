@@ -25,7 +25,11 @@ Descrição: <%= @activity.description.gsub(/\n/, '<br/>').html_safe %><br>
 <br>
 <div class="d-flex align-items-center">
   <% if current_user == @activity.owner%>
-    <%= button_to "EDITAR INFORMAÇÕES DA ATIVIDADE", edit_activity_path(@activity), method: :get, class: "btn btn-dark shadow m-1" %>
+    <% if @activity.event %>
+      <%= button_to "EDITAR INFORMAÇÕES DO EVENTO", edit_event_path(@activity), method: :get, class: "btn btn-dark shadow m-1" %>
+    <% else %>
+      <%= button_to "EDITAR INFORMAÇÕES DO DESAFIO", edit_challenge_path(@activity), method: :get, class: "btn btn-dark shadow m-1" %>
+    <% end %>
     <br>
     <%= button_to "CANCELAR ATIVIDADE PUBLICADA", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "btn btn-dark shadow m-1" %>
   <% end %>
