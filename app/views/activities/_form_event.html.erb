@@ -1,4 +1,3 @@
-
 <%= simple_form_for(@activity) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -11,17 +10,30 @@
     <%= f.input :description, label: "Descrição:" %>
   </div>
 
+  <% if @activity.event_date.present? %>
+    <%= f.input :event_date, :as => :string,
+          :input_html => {
+            :id => 'calendario',
+            :class => ' date_picker form-control date-mask',
+            value: @activity.event_date.strftime("%d/%m/%Y")
+          },
+          label: 'Data da Atividade:' %>
+  <% else %>
+    <%= f.input :event_date, :as => :string,
+          :input_html => {
+            :id => 'calendario',
+            :class => ' date_picker form-control date-mask'
+          },
+          label: 'Data da Atividade:' %>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.input :capacity, input_html: { min: '1', step: 'any'}, label: "Capacidade da Atividade:" %>
+  </div>
+
   <!-- encaminhar para a criação ou usar um address antigo -->
   <div class="form-inputs">
     <%= f.input :address, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2'}, include_hidden: false %>
-  </div>
-
-  <div class="form-inputs">
-    <%= f.input :event, label: "É um evento?" %>
-  </div>
-
-  <div class="form-inputs">
-    <%= f.input :group, label: "Atividade é em grupo?" %>
   </div>
 
   <div>
@@ -29,29 +41,9 @@
     <%= f.input :photo_cache, as: :hidden %>
   </div>
 
-<!-- precisa colocar essa parte em java para aparecer quando o campo event for selecionado
-  <div class="form-inputs">
-    <%= f.input :capacity, input_html: { min: '1', step: 'any'}, label: "Capacidade da Atividade:" %>
-  </div>
-  colocar em java opção de address também
-  colocar photo
- -->
- <% if @activity.event_date.present? %>
-  <%= f.input :event_date, :as => :string,
-        :input_html => {
-          :id => 'calendario',
-          :class => ' date_picker form-control date-mask',
-          value: @activity.event_date.strftime("%d/%m/%Y")
-        },
-        label: 'Data da Atividade:' %>
-<% else %>
-  <%= f.input :event_date, :as => :string,
-        :input_html => {
-          :id => 'calendario',
-          :class => ' date_picker form-control date-mask'
-        },
-        label: 'Data da Atividade:' %>
-<% end %>
+<!--   colocar em java opção de address também
+  colocar photo -->
+
 <br>
   <div class="form-actions btn btn-success mb-2 p-0">
     <%= f.button :submit %>
