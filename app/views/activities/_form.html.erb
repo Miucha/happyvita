@@ -12,6 +12,7 @@
   </div>
 
   <!-- encaminhar para a criação ou usar um address antigo -->
+  <%= link_to "novo endereço", new_address_path %>
   <div class="form-inputs">
     <%= f.input :address, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2'}, include_hidden: false %>
   </div>
