@@ -2,12 +2,21 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
+<% if @object.errors.messages[:base].present? %>
+    <ul class="error_messages_container">
+    <% @object.errors.messages[:base].each do |e| %>
+      <li><%= e %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+  
   <%= f.hidden_field :event, value: '0'%>
 
   <p>Todos os campos são obrigatórios:</p><br>
 
   <div class="form-inputs">
-    <%= f.input :title, label: "Nome do Desafio:" %>
+    <%= f.input :title, required: true, label: "Nome do Desafio:" %>
   </div>
 
   <div class="form-inputs">
