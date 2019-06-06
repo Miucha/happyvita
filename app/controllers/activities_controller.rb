@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: [:show, :edit, :update, :cancel]
+  before_action :set_activity, except: [:index, :new_event, :new_challenge, :create]
 
   def index
     if params[:query].present?
@@ -55,11 +55,19 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  def edit
+  def edit_event
     if current_user == @activity.owner
-      render :edit
+      render :edit_event
     else
-      redirect_to @activity, notice: 'Esta atividade não foi criada por você.'
+      redirect_to @activity, notice: 'Este evento não foi criado por você.'
+    end
+  end
+
+  def edit_challenge
+    if current_user == @activity.owner
+      render :edit_challenge
+    else
+      redirect_to @activity, notice: 'Este desafio não foi criado por você.'
     end
   end
 
@@ -84,10 +92,6 @@ class ActivitiesController < ApplicationController
   end
 
   private
-  def set_activity
-      @activity = Activity.find(params[:id])
-  end
-
   def set_activity
       @activity = Activity.find(params[:id])
   end

@@ -8,7 +8,7 @@ class AddressesController < ApplicationController
     @address = Address.new(address_params)
     @address.user = current_user
     if @address.save
-      redirect_to new_activity_path, notice: "Endereço criado com sucesso"
+      redirect_to new_event_path, notice: "Endereço criado com sucesso"
     else
       render :new
     end
