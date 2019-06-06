@@ -30,11 +30,22 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
     @activity.owner = current_user
-    @activity.address = Address.find(params[:activity][:address])
-    if @activity.save
-      redirect_to @activity, notice: "Atividade criada com sucesso"
+
+    if @activity.event? then
+      @activity.address = Address.find(params[:activity][:address])
+      save_msg = "Evento criado com sucesso!"
     else
-      render :new
+      @activity.address = Address.find(14)
+      save_msg = "Desafio criado com sucesso!"
+    end
+    if @activity.save
+      redirect_to @activity, notice: "#{save_msg}"
+    else
+      if @activity.event? then
+        render :new_event
+      else
+        render :new_challenge
+      end
     end
   end
 

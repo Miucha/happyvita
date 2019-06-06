@@ -1,10 +1,8 @@
-<h1>Activities Show</h1>
-
 <%= render 'photo_image'%>
 
 <%= @activity.title %><br>
 <br>
-Descrição: <%= @activity.description %><br>
+Descrição: <%= @activity.description.gsub(/\n/, '<br/>').html_safe %><br>
 <br>
 <!--#verificar a rota Agendar-->
 <% booking = [] %>
