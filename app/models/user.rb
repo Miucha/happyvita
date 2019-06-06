@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :bookings
+  has_many :addresses
   has_many :activities  #, through: :bookings
 
   # Include default devise modules. Others available are:
