@@ -19,7 +19,11 @@ class ActivitiesController < ApplicationController
   def show
   end
 
-  def new
+  def new_event
+    @activity = Activity.new
+  end
+
+  def new_challenge
     @activity = Activity.new
   end
 
