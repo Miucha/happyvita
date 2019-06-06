@@ -87,7 +87,7 @@ activities_attributes = [
     photo: 'http://osepeense.com/wp-content/uploads/2015/09/1idosos-shutterstock_23529820-300x252.jpg',
     capacity: 20,
     confirmed: true,
-    user: User.first,
+    owner: User.first,
     address: Address.first
   },
   {
@@ -99,7 +99,7 @@ activities_attributes = [
     photo: 'https://www.eusemfronteiras.com.br/wp-content/uploads/2018/12/59039135_m-810x537.jpg',
     capacity: 50,
     confirmed: true,
-    user: User.first,
+    owner: User.first,
     address: Address.first
   },
   {
@@ -111,7 +111,7 @@ activities_attributes = [
     photo: 'https://static.wixstatic.com/media/7d2c22_5275a20ca5c3446cbdc330bd9d364c0b~mv2.jpg/v1/fill/w_630,h_294,al_c,lg_1,q_80/7d2c22_5275a20ca5c3446cbdc330bd9d364c0b~mv2.jpg',
     capacity: 15,
     confirmed: true,
-    user: User.last,
+    owner: User.last,
     address: Address.last
   },
 ]
