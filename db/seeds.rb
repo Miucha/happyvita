@@ -14,9 +14,12 @@ Address.destroy_all
 User.destroy_all
 
 
-
 puts 'Creating users...'
 users_attributes = [
+  {
+    email: 'address@local',
+    password: 'youmutnotusethisuserfornothingtakeyourhandsout',
+  },
   {
     email: 'maria@maria.com',
     password: 'maria123',
@@ -47,6 +50,9 @@ first = User.first
 last = User.last
 addresses_attributes = [
   {
+    user: User.first
+  },
+  {
     street: 'Rua Oscar Freire',
     number: 2500,
     suite: 'Unibes Cultural',
@@ -54,7 +60,7 @@ addresses_attributes = [
     city: 'São Paulo',
     state: 'SP',
     zipcode: '05409-012',
-    user: first
+    user: last
   },
   {
     street: 'Rua Catalão',
@@ -87,7 +93,7 @@ activities_attributes = [
     photo: 'http://osepeense.com/wp-content/uploads/2015/09/1idosos-shutterstock_23529820-300x252.jpg',
     capacity: 20,
     confirmed: true,
-    owner: User.first,
+    owner: User.last,
     address: Address.first
   },
   {
@@ -99,7 +105,7 @@ activities_attributes = [
     photo: 'https://www.eusemfronteiras.com.br/wp-content/uploads/2018/12/59039135_m-810x537.jpg',
     capacity: 50,
     confirmed: true,
-    owner: User.first,
+    owner: User.last,
     address: Address.first
   },
   {

@@ -1,10 +1,10 @@
-<%= simple_form_for(@activity) do |f| %>
+<%= simple_form_for @activity do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <%= f.hidden_field :event, value: '1'%>
   
-  <p>*campos são obrigatórios:</p><br>
+  <p>*campos obrigatórios:</p><br>
 
   <div class="form-inputs">
     <%= f.input :title, label: "Nome da atividade:" %>
@@ -41,7 +41,8 @@
 
   <!-- encaminhar para a criação ou usar um address antigo -->
   <div class="form-inputs">
-    <%= f.input :address, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2'}, include_hidden: false %>
+    <%= f.input :address_id, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2'} %>
+<%# , include_hidden: false %>
   </div>
   <%= link_to "Criar novo endereço", new_address_path %>
   <br><br>
