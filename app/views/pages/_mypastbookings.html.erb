@@ -9,7 +9,7 @@
 <% end %>
 
 
-  <h2 class="text-center mb-2">Eventos que participei</h2>
+  <h2 class="text-center mb-2">ATIVIDADES PASSADAS QUE AGENDEI</h2>
   <%# <% raise   Sem sort %>
   <%# <% activities_ordered = myfuture_bookings.activity.sort_by(&:event_date) %>
 <div class="cards-container mx-1">
@@ -30,7 +30,7 @@
           <h4><%= booking.schedule_date.strftime("%b")%></h4>
         </div>
         <div class="card-title-and-buttons">
-          <h4><%= link_to "+ INFO", activity_path(booking.activity), class: "btn btn-info card-activity-info-btn shadow" %></h4>
+          <h4><%= link_to "+ INFO", activity_path(booking.activity), class: "btn btn-info card-activity-info-btn shadow font-weight-bold" %></h4>
           <h4 class="mt-1 ml-2 text-left"><%= link_to booking.activity.title, activity_path(booking.activity),class: "title-link text-decoration-none"%></h4>
           <p class="mt-1 ml-2 text-left"><%=booking.activity.address.district%>, <%=booking.activity.address.city%>, <%=booking.activity.address.state%></p>
         </div>
