@@ -48,7 +48,7 @@
 }
 
 
-.card-activity .card-activity-infos {
+.card-activity-infos {
   height: 120px;
   padding: 16px;
   display: flex;
@@ -57,21 +57,21 @@
   position: relative;
 }
 
-.card-activity-infos .card-event-date {
+.card-event-date {
   width: 40px;
 }
 
-.card-activity-infos .card-title-and-buttons {
+.card-title-and-buttons {
   width: 100%;
 }
 
-.card-activity-infos .card-activity-info-btn {
+.card-activity-info-btn {
   position: absolute;
   right: 16px;
   top: -20px;
 }
 
-.card-activity-infos .card-activity-booking-btn {
+.card-activity-booking-btn {
   position: absolute;
   right: 16px;
   bottom: -20px;

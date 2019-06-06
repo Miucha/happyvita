@@ -1,51 +1,41 @@
 <% myfuture_bookings = [] %>
 <% @bookings.each do |booking| %>
-  <%# <% event_date = Activity.find(activity.id).event_date %> 
+  <%# <% event_date = Activity.find(activity.id).event_date %>
   <% today = Time.now %>
-  
-  <% if today > booking.activity.event_date then %>
+
+  <% if today > booking.schedule_date then %>
       <% myfuture_bookings << booking %>
   <% end %>
 <% end %>
 
-<div class="shadow mt-5 p-2 bg-light rounded">
+
   <h2 class="text-center mb-2">Eventos que participei</h2>
   <%# <% raise   Sem sort %>
-  <%# <% activities_ordered = myfuture_bookings.activity.sort_by(&:event_date) %> 
-
+  <%# <% activities_ordered = myfuture_bookings.activity.sort_by(&:event_date) %>
+<div class="cards-container mx-1">
   <% myfuture_bookings.each do |booking| %>
-  <!-- Imagem -->
-    <div class="card-trip card-trip-horizontal m-3">
+    <div class="card-activity bg-white mb-5">
+      <!-- Imagem -->
       <% if booking.activity.photo? then %>
-        <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booking.activity.photo, height: 400, crop: :fit %>')"> 
+        <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booking.activity.photo, height: 400, crop: :fit %>')">
       <% else %>
         <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip_square', height: 400, crop: :fit %>')">
       <% end %>
       </div>
       <!-- imagem fim -->
-      
-      <div class="card-trip-infos p-2">
-        <div class="card-top-details mb-2">
-          <div id="aligned-name-info">
-            <div>
-                <h2 class="pr-2"><%= booking.activity.title %>
-                    <%= link_to activity_path(booking.activity) do %>
-                    <i class="fas fa-info-circle"></i>
-                    <% end %>
-                </h2>
-                <h4><%= booking.activity.description %></h4>
-            </div>
-          </div>
-        </div>
-      </div>
-              
-      <div class="card-bottom-details">
-        <div>
-          <h5><%= booking.activity.address %></h5>
-          <p>Data: <%= booking.activity.event_date.strftime("%d/%m/%Y") %> </p>
-        </div>
-      </div>
-    </div>
 
+      <div class="card-activity-infos shadow">
+        <div class="card-event-date text-center mr-2 mt-1">
+          <h1><%= booking.schedule_date.strftime("%d")%></h1>
+          <h4><%= booking.schedule_date.strftime("%b")%></h4>
+        </div>
+        <div class="card-title-and-buttons">
+          <h4><%= link_to "+ INFO", activity_path(booking.activity), class: "btn btn-info card-activity-info-btn shadow" %></h4>
+          <h4 class="mt-1 ml-2 text-left"><%= link_to booking.activity.title, activity_path(booking.activity),class: "title-link text-decoration-none"%></h4>
+          <p class="mt-1 ml-2 text-left"><%=booking.activity.address.district%>, <%=booking.activity.address.city%>, <%=booking.activity.address.state%></p>
+        </div>
+      </div>
+      <div class="card-footer-bg-light-gray w-2"><br></div>
+    </div>
   <% end %>
 </div>
