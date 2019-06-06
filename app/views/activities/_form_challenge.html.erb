@@ -1,11 +1,13 @@
-
 <%= simple_form_for(@activity) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
+  <%= f.hidden_field :event, value: '0'%>
+
+  <p>Todos os campos são obrigatórios:</p><br>
 
   <div class="form-inputs">
-    <%= f.input :title, label: "Nome da atividade:" %>
+    <%= f.input :title, label: "Nome do Desafio:" %>
   </div>
 
   <div class="form-inputs">
@@ -16,17 +18,10 @@
     <%= f.input :group, label: "Atividade é em grupo?" %>
   </div>
 
-  <!-- encaminhar para a criação ou usar um address antigo -->
-  <div class="form-inputs">
-    <%= f.input :address, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2'}, include_hidden: false %>
-  </div>
-
   <div>
     <%= f.input :photo %>
     <%= f.input :photo_cache, as: :hidden %>
   </div>
-
-<!-- precisa colocar essa parte em java para aparecer quando o campo event for selecionado -->
 
 <!--   colocar em java opção de address também
   colocar photo -->
