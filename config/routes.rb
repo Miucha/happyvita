@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     resources :bookings, only: [:create, :new]
   end
 
-  get 'new_event', to: 'activities#event'
-  get 'new_challenge', to: 'activities#challenge'
+  get 'new_event', to: 'activities#new_event'
+  get 'new_challenge', to: 'activities#new_challenge'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   post 'users/:user_id/addresses', to: 'addresses#create', as: 'create_address'
