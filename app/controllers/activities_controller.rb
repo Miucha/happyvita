@@ -31,11 +31,10 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     @activity.owner = current_user
 
-    if @activity.event? then
-      @activity.address = Address.find(params[:activity][:address])
+    if @activity.event?  then
       save_msg = "Evento criado com sucesso!"
     else
-      @activity.address = Address.find(14)
+      @activity.address = Address.first
       save_msg = "Desafio criado com sucesso!"
     end
     if @activity.save
@@ -88,7 +87,7 @@ class ActivitiesController < ApplicationController
 
   def activity_params
     params.require(:activity).permit(:title, :description, :event, :group, :event_date,
-                                      :photo, :capacity, :confirmed)
+                                      :photo, :capacity, :confirmed, :address_id)
   end
 
   def cancel_params

@@ -8,6 +8,12 @@ class Activity < ApplicationRecord
   has_many :activity_interests
   has_many :interests, through: :activity_interests
 
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :event_date, presence: true
+  validates :capacity, presence: true
+  validates :address_id, presence: true
+
   validate :date_cannot_be_in_the_past
 
   def date_cannot_be_in_the_past
