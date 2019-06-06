@@ -1,3 +1,22 @@
+.cards-container {
+  margin: 120px 10px 10px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+
+@media(max-width: 992px) {
+  .cards-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width: 768px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 .card-activity {
   overflow: hidden;
   background: white;
@@ -29,7 +48,8 @@
 }
 
 
-.card-activity .card-activity-infos {
+.card-activity-infos {
+  height: 120px;
   padding: 16px;
   display: flex;
   justify-content: space-between;
@@ -37,13 +57,21 @@
   position: relative;
 }
 
-.card-activity-infos .card-activity-info-btn {
+.card-event-date {
+  width: 40px;
+}
+
+.card-title-and-buttons {
+  width: 100%;
+}
+
+.card-activity-info-btn {
   position: absolute;
   right: 16px;
   top: -20px;
 }
 
-.card-activity-infos .card-activity-booking-btn {
+.card-activity-booking-btn {
   position: absolute;
   right: 16px;
   bottom: -20px;

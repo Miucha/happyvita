@@ -1,0 +1,94 @@
+<h2 class="text-center mb-2">Atividades Futuras (criadas por mim)</h2>
+<% myfuture_activities = [] %>
+<% @activities.each do |activity| %>
+  <%# <% event_date = Activity.find(activity.id).event_date %>
+  <% today = Time.now %>
+  <% if activity.event_date %>
+    <% if today < activity.event_date then %>
+        <% myfuture_activities << activity %>
+    <% end %>
+  <% else %>
+    <% myfuture_activities << activity %>
+  <% end %>
+
+  <% if activity.event_date %>
+      <% activities_ordered = myfuture_activities.sort_by(&:event_date) %>
+
+    <div class="cards-container mx-1">
+      <% activities_ordered.each do |activity| %>
+      <!-- Imagem -->
+        <div class="card-trip card-trip-horizontal m-3">
+          <% if activity.photo? then %>
+            <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
+          <% else %>
+            <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip_square', height: 400, crop: :fit %>')">
+          <% end %>
+          </div>
+          <!-- imagem fim -->
+
+          <div class="card-trip-infos p-2">
+            <div class="card-top-details mb-2">
+              <div id="aligned-name-info">
+                <div>
+                    <h2 class="pr-2"><%= activity.title %>
+                        <%= link_to activity do %>
+                        <i class="fas fa-info-circle"></i>
+                        <% end %>
+                    </h2>
+                    <h4><%= activity.description %></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-bottom-details">
+            <div>
+              <h5><%= activity.address %></h5>
+              <% if activity.event_date %>
+                <p>Data: <%= activity.event_date.strftime("%d/%m/%Y") %> </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+
+      <% myfuture_activities.each do |activity| %>
+      <!-- Imagem -->
+        <div class="card-trip card-trip-horizontal m-3">
+          <% if activity.photo? then %>
+            <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
+          <% else %>
+            <div class="banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'trip_square', height: 400, crop: :fit %>')">
+          <% end %>
+          </div>
+          <!-- imagem fim -->
+
+          <div class="card-trip-infos p-2">
+            <div class="card-top-details mb-2">
+              <div id="aligned-name-info">
+                <div>
+                    <h2 class="pr-2"><%= activity.title %>
+                        <%= link_to activity do %>
+                        <i class="fas fa-info-circle"></i>
+                        <% end %>
+                    </h2>
+                    <h4><%= activity.description %></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-bottom-details">
+            <div>
+              <h5><%= activity.address %></h5>
+              <% if activity.event_date %>
+                <p>Data: <%= activity.event_date.strftime("%d/%m/%Y") %> </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
