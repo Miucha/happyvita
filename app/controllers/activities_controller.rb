@@ -11,8 +11,14 @@ class ActivitiesController < ApplicationController
         OR addresses.zipcode @@ :query \
       "
       @activities = Activity.joins(:address).where(sql_query, query: "%#{params[:query]}%").where('confirmed = true')
+      if current_user != nil && current_user.bookings != []
+        @user_bookings = current_user.bookings
+      end
     else
       @activities = Activity.where('confirmed = true')
+      if current_user != nil && current_user.bookings != []
+        @user_bookings = current_user.bookings
+      end
     end
   end
 
