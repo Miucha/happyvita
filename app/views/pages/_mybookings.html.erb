@@ -2,7 +2,7 @@
 <% @bookings.each do |booking| %>
   <%# <% event_date = Activity.find(activity.id).event_date %>
   <% today = Time.now %>
-
+<% raise %>
   <% if today < booking.schedule_date then %>
       <% myfuture_bookings << booking %>
   <% end %>
