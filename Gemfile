@@ -3,6 +3,7 @@ ruby '2.5.3'
 
 gem "simple_calendar", "~> 2.0"
 
+gem 'geocoder'
 
 gem 'bootsnap', require: false
 gem 'devise'

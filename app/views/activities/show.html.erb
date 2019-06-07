@@ -30,3 +30,13 @@ Descrição: <%= @activity.description.gsub(/\n/, '<br/>').html_safe %><br>
     <%= button_to "CANCELAR ATIVIDADE PUBLICADA", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "btn btn-dark shadow m-1" %>
   <% end %>
 </div>
+
+
+<div
+  id="map"
+  style="width: 100%;
+  height: 400px;"
+  data-markers="<%= @markers_activity.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+></div>
+
