@@ -25,12 +25,16 @@
         <div class="card-activity-infos shadow">
           <div class="card-event-date text-center mr-2 mt-1">
             <% if activity.event_date %>
-            <h1><%= activity.event_date.strftime("%d")%></h1>
-            <h4><%= activity.event_date.strftime("%b")%></h4>
+              <h1><%= activity.event_date.strftime("%d")%></h1>
+              <h4><%= activity.event_date.strftime("%b")%></h4>
+            <% else %>
+              <h1><%= link_to activity_path(activity) do %>
+                <i class="far fa-calendar-alt title-link text-decoration-none"></i>
+              <% end %></h1>
             <% end %>
           </div>
           <div class="card-title-and-buttons">
-            <h4><%= link_to "+ INFO", activity_path(activity), class: "btn btn-info card-activity-info-btn shadow font-weight-bold" %></h4>
+            <h4><%= link_to "+ INFO", activity_path(activity), class: "btn btn-info card-btn-position-img-bottom shadow font-weight-bold" %></h4>
             <h4 class="mt-1 ml-2 text-left"><%= link_to activity.title, activity_path(activity),class: "title-link text-decoration-none"%></h4>
             <p class="mt-1 ml-2 text-left"><%=activity.address.district%>, <%=activity.address.city%>, <%=activity.address.state%></p>
             <% if current_user != nil && @user_bookings != nil && @user_bookings.select { |booking| booking.activity_id == activity.id } != [] %>
