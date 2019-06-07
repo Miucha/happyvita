@@ -14,12 +14,14 @@
 <!--Se a atividade não tiver data específica ou se tiver data só aparecerá se for data futura: -->
     <% if activity.event_date == nil || (activity.event_date != nil && activity.event_date > Time.now) %>
       <div class="card-activity bg-white mb-5">
-        <% if activity.photo? then %>
-          <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
-        <% else %>
-          <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', height: 400, crop: :fit %>')">
+        <%= link_to activity_path(activity) do %>
+          <% if activity.photo? then %>
+            <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
+          <% else %>
+            <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', height: 400, crop: :fit %>')">
+          <% end %>
+            </div>
         <% end %>
-          </div>
 
         <div class="card-activity-infos shadow">
           <div class="card-event-date text-center mr-2 mt-1">
