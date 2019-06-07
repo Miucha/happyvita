@@ -85,6 +85,54 @@ puts "Finished! #{Interest.count} interests created."
 puts 'Creating activities...'
 activities_attributes = [
   {
+    title: 'A melhor época do ano chegou: Organize um almoço de festa junina!',
+    description: 'É hora de vestir xadrez, fazer trancinha, esquentar com vinho quente e dançar quadrilha!
+                  Escolha a turma e faça o convite pro arraiá.
+                  Cada um pode escolher algo pra providenciar, que vai ficar super fácil e divertido!
+
+                  Aqui vai uma lista de ideias típicas:
+
+                  Para beliscar:
+                  - Amendoim
+                  - Milho cozido
+                  - Pamonha
+                  - Pipoca
+
+                  Para adocicar:
+                  - Bolo de Churros
+                  - Bolo de Milho
+                  - Paçoca
+
+                  Para beber:
+                  - Quentão
+                  - Vinho quente
+
+                  Para decorar:
+                  - Bandeirinhas
+                  - Balões de papel
+                  - Toalhas de mesa coloridas
+                  - Chapéus de palha
+
+                  Pra ouvir e dançar:
+                  - Forró
+                  - Sertanejo
+                  - Quadrilha',
+    event: false,
+    group: true,
+    confirmed: true,
+    owner: User.last,
+  },
+  {
+    title: 'Crie a sua receita de Naked Cake: o famoso ‘bolo pelado’!',
+    description: 'Use a criatividade pra experimentar uma nova receita!
+                  Escolha o sabor da massa, seus recheios preferidos, os complementos e arrase na decoração.
+                  Faça aquela combinação que você sempre teve curiosidade de saber como ficaria e convide amigos e familiares para provar com você!',
+    event: false,
+    group: true,
+    confirmed: true,
+    owner: User.last,
+  },
+  {
     title: 'Capital financeiro: Importância para um envelhecimento ativo.',
     description: 'Palestra na Unibes Cultural com Prof. Dr. Hélio Zylberstajn, sênior da Faculdade de Economia, Administração e Contabilidade da USP',
     event: true,
