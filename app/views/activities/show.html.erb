@@ -36,40 +36,49 @@
               <% end %>
 
             <% elsif @activity.event %>
-                <h5 class="show-btn-position-img-bottom text-right bg-light border border-white rounded p-2 shadow font-weight-bold">AGENDADO PARA: <%= booking.first.schedule_date %></h5>
+                <h5 class="show-btn-position-img-bottom text-right bg-info border border-info rounded p-2 shadow font-weight-bold">AGENDADO PARA: <%= booking.first.schedule_date.strftime("%m/%d/%Y") %></h5>
               <!--   destroy -->
             <% else %>
-              <div class="show-btn-position-img-bottom d-flex align-items-center text-right bg-light border border-white rounded p-2 shadow">
-                <h5 class="mr-2 font-weight-bold">AGENDADO PARA: <%= booking.first.schedule_date %></h5>
-                <%= button_to "ALTERAR DATA", edit_booking_path(booking.first), method: :get, class: "btn btn-info shadow font-weight-bold" %>
+              <div class="show-btn-position-img-bottom d-flex align-items-center text-right bg-info border border-info rounded p-2 shadow">
+                <h5 class="mr-2 font-weight-bold">AGENDADO PARA: <%= booking.first.schedule_date.strftime("%m/%d/%Y") %></h5>
+                <%= button_to "ALTERAR DATA", edit_booking_path(booking.first), method: :get, class: "btn btn-body-color shadow font-weight-bold" %>
               </div>
             <% end %>
+            <% street = @activity.address.street.nil? ? street = " " : @activity.address.street %>
+            <% number = @activity.address.number.nil? ? number = " " : @activity.address.number %>
             <% district = @activity.address.district.nil? ? district = " " : @activity.address.district %>
             <% city = @activity.address.city.nil? ? city = " " : @activity.address.city %>
             <% state = @activity.address.state.nil? ? state = " " : @activity.address.state %>
+            <% zipcode = @activity.address.zipcode.nil? ? zipcode = " " : @activity.address.zipcode %>
 
             <div class="text-left mt-3 ml-4">
-              <h4 class="mt-1"><%= link_to @activity.title, activity_path(@activity),class: "title-link text-decoration-none"%></h4>
-              <p class="mt-1"><%= "#{district} #{city} #{state} "%></p>
+              <h4 class="mt-1 font-weight-bold"><%=@activity.title%></h4>
+              <h5 class="mt-1"><%= "#{street} #{number}"%></h5>
+              <h5><%= "#{district} #{city} #{state} #{zipcode}"%></h5>
               <br>
               <h4>Descrição:</h4><br>
               <h5><%= @activity.description.gsub(/\n/, '<br/>').html_safe %></h5>
             </div>
-
           </div>
         </div>
     </div>
 </div>
 
-  <div>
+  <div class="container">
     <% if current_user == @activity.owner%>
       <% if @activity.event %>
-        <%= button_to "EDITAR INFORMAÇÕES DO EVENTO", edit_event_path(@activity), method: :get, class: "btn btn-dark shadow mb-2" %>
+        <h5>Acesso do administrador do evento publicado:</h5>
+        <div class="d-flex mr-2 my-2">
+          <%= button_to "EDITAR", edit_event_path(@activity), method: :get, class: "bg-light border border-black rounded p-2 shadow" %>
+          <%= button_to "CANCELAR", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "bg-light border border-black rounded p-2 shadow" %>
+        </div>
       <% else %>
-        <%= button_to "EDITAR INFORMAÇÕES DO DESAFIO", edit_challenge_path(@activity), method: :get, class: "btn btn-dark shadow mb-2" %>
+        <h5>Acesso do administrador do desafio publicado:</h5>
+        <div class="d-flex mr-2 my-2">
+        <%= button_to "EDITAR", edit_challenge_path(@activity), method: :get, class: "bg-white border border-black rounded p-2 shadow" %>
+        <%= button_to "CANCELAR", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "bg-white border border-black rounded p-2 shadow" %>
+        </div>
       <% end %>
-      <br>
-      <%= button_to "CANCELAR ATIVIDADE PUBLICADA", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "btn btn-dark shadow mb-2" %>
     <% end %>
   </div>
 
