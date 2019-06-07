@@ -1,5 +1,8 @@
-.cards-container {
+.home-cards-container {
   margin: 120px 10px 10px 10px;
+}
+
+.cards-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;

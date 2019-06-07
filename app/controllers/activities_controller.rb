@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: [:show, :edit, :update, :cancel]
+  before_action :set_activity, except: [:index, :new_event, :new_challenge, :create]
 
   def index
     if params[:query].present?
@@ -11,8 +11,14 @@ class ActivitiesController < ApplicationController
         OR addresses.zipcode @@ :query \
       "
       @activities = Activity.joins(:address).where(sql_query, query: "%#{params[:query]}%").where('confirmed = true')
+      if current_user != nil && current_user.bookings != []
+        @user_bookings = current_user.bookings
+      end
     else
       @activities = Activity.where('confirmed = true')
+      if current_user != nil && current_user.bookings != []
+        @user_bookings = current_user.bookings
+      end
     end
   end
 
@@ -42,11 +48,10 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     @activity.owner = current_user
 
-    if @activity.event? then
-      @activity.address = Address.find(params[:activity][:address])
+    if @activity.event?  then
       save_msg = "Evento criado com sucesso!"
     else
-      @activity.address = Address.find(14)
+      @activity.address = Address.first
       save_msg = "Desafio criado com sucesso!"
     end
     if @activity.save
@@ -60,21 +65,34 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  def edit
+  def edit_event
     if current_user == @activity.owner
-      render :edit
+      render :edit_event
     else
-      redirect_to @activity, notice: 'Esta atividade não foi criada por você.'
+      redirect_to @activity, notice: 'Este evento não foi criado por você.'
+    end
+  end
+
+  def edit_challenge
+    if current_user == @activity.owner
+      # raise
+      render :edit_challenge
+    else
+      raise
+      redirect_to @activity, notice: 'Este desafio não foi criado por você.'
     end
   end
 
   def update
     @activity.update(activity_params)
-    @activity.address = Address.find(params[:activity][:address])
     if @activity.save
         redirect_to @activity, notice: 'Atividade editada com sucesso.'
     else
-        render :edit
+      if activity.event? then
+        render :edit_event
+      else
+        render :edit_challenge
+      end
     end
   end
 
@@ -93,13 +111,9 @@ class ActivitiesController < ApplicationController
       @activity = Activity.find(params[:id])
   end
 
-  def set_activity
-      @activity = Activity.find(params[:id])
-  end
-
   def activity_params
     params.require(:activity).permit(:title, :description, :event, :group, :event_date,
-                                      :photo, :capacity, :confirmed)
+                                      :photo, :capacity, :confirmed, :address_id)
   end
 
   def cancel_params
