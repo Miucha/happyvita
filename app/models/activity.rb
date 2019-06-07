@@ -33,12 +33,13 @@ class Activity < ApplicationRecord
   end
 
   def e_capacity
-    if event.present? && capacity.nil?
-      errors.add(:capacity, "Quantas pessoas podem participar deste evento?")
-    elsif !capacity.positive? 
-      errors.add(:capacity, "O número de pessoas deve ser maior do que 0")
+    if event.present?
+      if capacity.nil?
+        errors.add(:capacity, "Quantas pessoas podem participar deste evento?")
+      elsif !capacity.positive? 
+        errors.add(:capacity, "O número de pessoas deve ser maior do que 0")
+      end
     end
-        
   end
 
   def e_address
