@@ -14,7 +14,12 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.activity = @activity
 
-    @booking.schedule_date = booking_params[:schedule_date] unless @activity.event?
+    if @activity.event? then
+      @booking.schedule_date = @activity.event_date
+    else
+      @booking.schedule_date = booking_params[:schedule_date]
+    end
+
     if @booking.save
       redirect_to activity_path(@activity)
     else
