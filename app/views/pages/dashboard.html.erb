@@ -15,7 +15,8 @@
     <% if @current_user.activities.empty? then %>
       <div class="text-center shadow mt-5 p-5 bg-light rounded">
         <h2>Você ainda não publicou eventos ou desafios! </h2>
-        <%= link_to "CRIE UM EVENTO OU DESAFIO", new_activity_path, class: "ml-2 btn-publish shadow font-weight-bold" %>
+        <%= link_to "Crie um novo Evento", new_event_path, class: "ml-2 btn-publish shadow font-weight-bold" %>
+        <%= link_to "Crie um novo Desafio", new_challenge_path, class: "ml-2 btn-publish shadow font-weight-bold" %>
       </div>
     <% else %>
       <div class="shadow mt-4"><%= render 'myactivities' %></div>
