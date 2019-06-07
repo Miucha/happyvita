@@ -1,21 +1,24 @@
-<% if @current_user.bookings.empty? then %>
-  <div class="text-center shadow mt-5 p-5 bg-light rounded">
-       <h2 class="dark-gray"> Você ainda não agendou eventos ou desafios! <h2>
-      <%= link_to "PARTICIPE DE UMA ATIVIDADE", root_path, class: "ml-2 btn btn-primary shadow font-weight-bold" %>
-  </div>
-<% else %>
-  <%= render 'mybookings' %>
-  <%= render 'mypastbookings' %>
-<% end %>
+<div class="container mt-5">
 
-<% if @current_user.activities.empty? then %>
-  <div class="text-center shadow mt-5 p-5 bg-light rounded">
-    <h2>Você ainda não publicou eventos ou desafios! </h2>
-    <%= link_to "CRIE UM EVENTO OU DESAFIO", new_activity_path, class: "ml-2 btn-publish shadow font-weight-bold" %>
-  </div>
-<% else %>
-  <%= render 'myactivities' %>
-  <br>
-  <%= render 'mypastactivities' %>
-<% end %>
+  <% if @current_user.bookings.empty? then %>
+    <div class="text-center shadow mt-5 p-5 bg-white rounded">
+         <h2 class="dark-gray"> Você ainda não agendou eventos ou desafios! <h2>
+        <%= link_to "PARTICIPE DE UMA ATIVIDADE", root_path, class: "ml-2 btn btn-primary shadow font-weight-bold" %>
+    </div>
+  <% else %>
+    <div class="shadow mt-4"><%= render 'mybookings' %></div>
+    <div class="shadow mt-4"><%= render 'mypastbookings' %></div>
+  <% end %>
+
+  <% if @current_user.activities.empty? then %>
+    <div class="text-center shadow mt-5 p-5 bg-light rounded">
+      <h2>Você ainda não publicou eventos ou desafios! </h2>
+      <%= link_to "CRIE UM EVENTO OU DESAFIO", new_activity_path, class: "ml-2 btn-publish shadow font-weight-bold" %>
+    </div>
+  <% else %>
+    <div class="shadow mt-4"><%= render 'myactivities' %></div>
+    <div class="shadow mt-4"><%= render 'mypastactivities' %></div>
+  <% end %>
+
+</div>
 
