@@ -1,0 +1,13 @@
+function refreshForm(innerHTML) {
+  const newReviewForm = document.getElementById('new_address');
+  newReviewForm.innerHTML = innerHTML;
+}
+
+
+<% if @address.errors.any? %>
+  refreshForm('<%= j render "addresses/form_address", address: @address %>');
+<% else %>
+  closeAddressModal();
+  addAddressToSelect2({ id: '<%= @address.id %>', text: '<%= @address.street %>' })
+
+<% end %>

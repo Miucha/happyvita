@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get 'users_localization', to: 'users#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :addresses, only: [:new, :create]
+  resources :addresses, only: :create
 
 
 end

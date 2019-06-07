@@ -9,4 +9,6 @@ class Address < ApplicationRecord
   geocoded_by :full_address
   after_validation :geocode
 
+  validates :street, presence: true
+
 end

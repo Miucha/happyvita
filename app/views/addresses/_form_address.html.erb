@@ -1,0 +1,39 @@
+<%= simple_form_for address, remote: true do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :street, label: "Endereço:" %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :number, label: "Número:" %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :suite, label: "Complemento:" %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :zipcode, label: "CEP:" %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :district, label: "Bairro:" %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :city, label: "Cidade:" %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :state, label: "Estado:" %>
+  </div>
+
+  <div class="form-actions btn btn-success mb-2 p-0">
+    <%= f.button :submit%>
+  </div>
+
+  <!-- <button type="button" class="btn btn-secondary mb-2" data-dismiss="modal">Close</button>
+  -->
+<% end %>
