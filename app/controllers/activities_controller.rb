@@ -64,8 +64,10 @@ class ActivitiesController < ApplicationController
 
   def edit_challenge
     if current_user == @activity.owner
+      # raise
       render :edit_challenge
     else
+      raise
       redirect_to @activity, notice: 'Este desafio não foi criado por você.'
     end
   end
@@ -75,7 +77,11 @@ class ActivitiesController < ApplicationController
     if @activity.save
         redirect_to @activity, notice: 'Atividade editada com sucesso.'
     else
-        render :edit
+      if activity.event? then
+        render :edit_event
+      else
+        render :edit_challenge
+      end
     end
   end
 
