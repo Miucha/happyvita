@@ -50,7 +50,8 @@ first = User.first
 last = User.last
 addresses_attributes = [
   {
-    user: User.first
+    user: User.first,
+    street: "nada"
   },
   {
     street: 'Rua Oscar Freire',
@@ -120,6 +121,7 @@ activities_attributes = [
     event: false,
     group: true,
     confirmed: true,
+    address: Address.first,
     owner: User.last,
   },
   {
@@ -128,6 +130,7 @@ activities_attributes = [
                   Escolha o sabor da massa, seus recheios preferidos, os complementos e arrase na decoração.
                   Faça aquela combinação que você sempre teve curiosidade de saber como ficaria e convide amigos e familiares para provar com você!',
     event: false,
+    address: Address.first,
     group: true,
     confirmed: true,
     owner: User.last,
