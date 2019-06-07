@@ -13,8 +13,7 @@ Descrição: <%= @activity.description.gsub(/\n/, '<br/>').html_safe %><br>
   <% else %>
     <%= button_to "AGENDAR", new_activity_booking_path(@activity), method: :get, class: "btn btn-primary shadow" %>
   <% end %>
-
-  <% elsif @activity.event %>
+  <% elsif !@activity.event %>
     <h5>AGENDADO PARA: <%= booking.first.schedule_date.strftime("%d") %> de <%= booking.first.schedule_date.strftime("%B") %> de <%= booking.first.schedule_date.strftime("%Y") %></h5>
   <!--   destroy -->
   <% else %>
