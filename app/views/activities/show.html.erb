@@ -1,3 +1,4 @@
+#------- activities-show-front-end
 <div class="card-activity-show">
 
 <div class="mx-1">
@@ -27,6 +28,43 @@
           </div>
           <div class="card-title-and-buttons">
 
+#-------------
+<%= render 'photo_image'%>
+
+<%= @activity.title %><br>
+<br>
+Descrição: <%= @activity.description.gsub(/\n/, '<br/>').html_safe %><br>
+<br>
+<!--#verificar a rota Agendar-->
+<% booking = [] %>
+<% booking = current_user.bookings.select { |booking| booking.activity_id == @activity.id } unless current_user.nil?%>
+<% if current_user == nil || booking == []%>
+  <% if @activity.event %>
+    <%= button_to "AGENDAR", activity_bookings_path(@activity), method: :post, class: "btn btn-primary shadow" %>
+  <% else %>
+    <%= button_to "AGENDAR", new_activity_booking_path(@activity), method: :get, class: "btn btn-primary shadow" %>
+  <% end %>
+  <% elsif !@activity.event %>
+    <h5>AGENDADO PARA: <%= booking.first.schedule_date.strftime("%d") %> de <%= booking.first.schedule_date.strftime("%B") %> de <%= booking.first.schedule_date.strftime("%Y") %></h5>
+  <!--   destroy -->
+  <% else %>
+    <h5>AGENDADO PARA: <%= booking.first.schedule_date %></h5>
+    <%= button_to "ALTERAR DATA", edit_booking_path(booking.first), method: :get, class: "btn btn-info shadow" %>
+<% end %>
+
+<br>
+<div class="d-flex align-items-center">
+  <% if current_user == @activity.owner%>
+    <% if @activity.event %>
+      <%= button_to "EDITAR INFORMAÇÕES DO EVENTO", edit_event_path(@activity), method: :get, class: "btn btn-dark shadow m-1" %>
+    <% else %>
+      <%= button_to "EDITAR INFORMAÇÕES DO DESAFIO", edit_challenge_path(@activity), method: :get, class: "btn btn-dark shadow m-1" %>
+    <% end %>
+    <br>
+    <%= button_to "CANCELAR ATIVIDADE PUBLICADA", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "btn btn-dark shadow m-1" %>
+  <% end %>
+</div>
+#------- master
 
             <% if current_user == nil || booking == []%>
               <% if @activity.event %>

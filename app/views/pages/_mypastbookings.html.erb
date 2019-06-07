@@ -30,9 +30,13 @@
           <h4><%= booking.schedule_date.strftime("%b")%></h4>
         </div>
         <div class="card-title-and-buttons">
+          <% district = activity.address.district.nil? ? district = " " : activity.address.district %>
+          <% city = activity.address.city.nil? ? city = " " : activity.address.city %>
+          <% state = activity.address.state.nil? ? state = " " : activity.address.state %>            
+
           <h4><%= link_to "+ INFO", activity_path(booking.activity), class: "btn btn-info card-activity-info-btn shadow font-weight-bold" %></h4>
           <h4 class="mt-1 ml-2 text-left"><%= link_to booking.activity.title, activity_path(booking.activity),class: "title-link text-decoration-none"%></h4>
-          <p class="mt-1 ml-2 text-left"><%=booking.activity.address.district%>, <%=booking.activity.address.city%>, <%=booking.activity.address.state%></p>
+          <p class="mt-1 ml-2 text-left"><%= "#{district} #{city} #{state} "%></p>
         </div>
       </div>
       <div class="card-footer-bg-light-gray w-2"><br></div>

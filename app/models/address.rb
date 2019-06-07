@@ -3,9 +3,10 @@ class Address < ApplicationRecord
   has_many :activities
 
   def full_address
-    [street, number, city].compact.join(‘, ‘)
+    "#{self.street}, #{self.number}, #{self.city}"
   end
 
   geocoded_by :full_address
+  after_validation :geocode
 
 end
