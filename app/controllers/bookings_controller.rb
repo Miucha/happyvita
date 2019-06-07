@@ -8,12 +8,13 @@ class BookingsController < ApplicationController
 
   def create
     @activity = Activity.find(params[:activity_id])
-    @booking = Booking.new
+    
+    @booking = @activity.event? ? Booking.new : Booking.new(booking_params)
+    
     @booking.user = current_user
     @booking.activity = @activity
 
-    @booking.schedule_date = @activity.event_date if @activity.event
-
+    @booking.schedule_date = booking_params[:schedule_date] unless @activity.event?
     if @booking.save
       redirect_to activity_path(@activity)
     else
@@ -42,6 +43,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
+  #Acredito que abaixo não precise do :check, mas não verifiquei
     params.require(:booking).permit(:schedule_date, :check)
   end
 end
