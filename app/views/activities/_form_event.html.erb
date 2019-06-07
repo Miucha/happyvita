@@ -11,7 +11,7 @@
   </div>
 
   <div class="form-inputs">
-    <%= f.input :description, label: "Descrição:" %>
+    <%= f.input :description, as: :text, label: "Descrição:" %>
   </div>
 
   <div class="form-inputs">
@@ -19,7 +19,7 @@
   </div>
 
   <% if @activity.event_date.present? %>
-    <%= f.input :event_date, :as => :string, required: true, 
+    <%= f.input :event_date, :as => :string, required: true,
           :input_html => {
             :id => 'calendario',
             :class => ' date_picker form-control date-mask',
@@ -27,7 +27,7 @@
           },
           label: 'Data da Atividade:' %>
   <% else %>
-    <%= f.input :event_date, :as => :string, required: true, 
+    <%= f.input :event_date, :as => :string, required: true,
           :input_html => {
             :id => 'calendario',
             :class => ' date_picker form-control date-mask'

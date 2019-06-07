@@ -1,3 +1,34 @@
+#------- activities-show-front-end
+<div class="card-activity-show">
+
+<div class="mx-1">
+      <div class="card-activity bg-white mb-5">
+        <% if @activity.photo? then %>
+          <div class="banner banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @activity.photo, height: 400, crop: :fit %>')">
+        <% else %>
+          <div class="banner banner_noimage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', height: 400, crop: :fit %>')">
+        <% end %>
+          </div>
+        <% booking = [] %>
+        <% booking = current_user.bookings.select { |booking| booking.activity_id == @activity.id } unless current_user.nil?%>
+
+        <div class="card-activity-infos-show shadow">
+          <div class="card-event-date text-center mr-2 mt-3">
+
+            <% if @activity.event_date %>
+              <h1><%= @activity.event_date.strftime("%d")%></h1>
+              <h4><%= @activity.event_date.strftime("%b")%></h4>
+            <% elsif booking != [] && booking.first.schedule_date %>
+              <h1><%= booking.first.schedule_date.strftime("%d")%></h1>
+              <h4><%= booking.first.schedule_date.strftime("%b")%></h4>
+            <% else %>
+              <h1><i class="far fa-calendar-alt title-link text-decoration-none"></i></h1>
+            <% end %>
+
+          </div>
+          <div class="card-title-and-buttons">
+
+#-------------
 <%= render 'photo_image'%>
 
 <%= @activity.title %><br>
@@ -33,13 +64,56 @@ Descrição: <%= @activity.description.gsub(/\n/, '<br/>').html_safe %><br>
     <%= button_to "CANCELAR ATIVIDADE PUBLICADA", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "btn btn-dark shadow m-1" %>
   <% end %>
 </div>
+#------- master
+
+            <% if current_user == nil || booking == []%>
+              <% if @activity.event %>
+                <%= button_to "AGENDAR", activity_bookings_path(@activity), method: :post, class: "show-btn-position-img-bottom btn btn-primary shadow text-right font-weight-bold" %>
+              <% else %>
+                <%= button_to "AGENDAR", new_activity_booking_path(@activity), method: :get, class: "show-btn-position-img-bottom btn btn-primary shadow text-right font-weight-bold" %>
+              <% end %>
+
+            <% elsif @activity.event %>
+                <h5 class="show-btn-position-img-bottom text-right bg-light border border-white rounded p-2 shadow font-weight-bold">AGENDADO PARA: <%= booking.first.schedule_date %></h5>
+              <!--   destroy -->
+            <% else %>
+              <div class="show-btn-position-img-bottom d-flex align-items-center text-right bg-light border border-white rounded p-2 shadow">
+                <h5 class="mr-2 font-weight-bold">AGENDADO PARA: <%= booking.first.schedule_date %></h5>
+                <%= button_to "ALTERAR DATA", edit_booking_path(booking.first), method: :get, class: "btn btn-info shadow font-weight-bold" %>
+              </div>
+            <% end %>
 
 
-<div
-  id="map"
-  style="width: 100%;
-  height: 400px;"
-  data-markers="<%= @markers_activity.to_json %>"
-  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-></div>
+            <div class="text-left mt-3 ml-4">
+              <h4 class="mt-1"><%= link_to @activity.title, activity_path(@activity),class: "title-link text-decoration-none"%></h4>
+              <p class="mt-1"><%=@activity.address.district%>, <%=@activity.address.city%>, <%=@activity.address.state%></p>
+              <br>
+              <h4>Descrição:</h4><br>
+              <h5><%= @activity.description.gsub(/\n/, '<br/>').html_safe %></h5>
+            </div>
 
+          </div>
+        </div>
+    </div>
+</div>
+
+  <div>
+    <% if current_user == @activity.owner%>
+      <% if @activity.event %>
+        <%= button_to "EDITAR INFORMAÇÕES DO EVENTO", edit_event_path(@activity), method: :get, class: "btn btn-dark shadow mb-2" %>
+      <% else %>
+        <%= button_to "EDITAR INFORMAÇÕES DO DESAFIO", edit_challenge_path(@activity), method: :get, class: "btn btn-dark shadow mb-2" %>
+      <% end %>
+      <br>
+      <%= button_to "CANCELAR ATIVIDADE PUBLICADA", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "btn btn-dark shadow mb-2" %>
+    <% end %>
+  </div>
+
+  <div
+    id="map"
+    style="width: 100%;
+    height: 400px;"
+    data-markers="<%= @markers_activity.to_json %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+  ></div>
+  </div>
