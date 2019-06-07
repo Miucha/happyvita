@@ -8,17 +8,17 @@
   grid-gap: 16px;
 }
 
-// @media(max-width: 992px) {
-//   .cards-container {
-//     grid-template-columns: 1fr 1fr;
-//   }
-// }
+@media(max-width: 992px) {
+  .cards-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
-// @media(max-width: 768px) {
-//   .cards-container {
-//     grid-template-columns: 1fr;
-//   }
-// }
+@media(max-width: 768px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+}
 
 .card-activity {
   overflow: hidden;
