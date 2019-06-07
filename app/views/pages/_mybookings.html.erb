@@ -32,9 +32,9 @@
         <div class="card-title-and-buttons">
           <% district = booking.activity.address.district.nil? ? district = " " : booking.activity.address.district %>
           <% city = booking.activity.address.city.nil? ? city = " " : booking.activity.address.city %>
-          <% state = booking.activity.address.state.nil? ? state = " " : booking.activity.address.state %>            
+          <% state = booking.activity.address.state.nil? ? state = " " : booking.activity.address.state %>
 
-          <h4><%= link_to "+ INFO", activity_path(booking.activity), class: "btn btn-info card-activity-info-btn shadow font-weight-bold" %></h4>
+          <h4><%= link_to "+ INFO", activity_path(booking.activity), class: "btn btn-info card-btn-position-img-bottom shadow font-weight-bold" %></h4>
           <h4 class="mt-1 ml-2 text-left"><%= link_to booking.activity.title, activity_path(booking.activity),class: "title-link text-decoration-none"%></h4>
           <p class="mt-1 ml-2 text-left"><%= "#{district} #{city} #{state} "%></p>
         </div>
