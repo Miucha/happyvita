@@ -35,11 +35,11 @@
           <div class="card-title-and-buttons">
             <h4><%= link_to "+ INFO", activity_path(activity), class: "btn btn-info card-btn-position-img-bottom shadow font-weight-bold" %></h4>
             <h4 class="mt-1 ml-2 text-left"><%= link_to activity.title, activity_path(activity),class: "title-link text-decoration-none"%></h4>
-            
+
             <% district = activity.address.district.nil? ? district = " " : activity.address.district %>
             <% city = activity.address.city.nil? ? city = " " : activity.address.city %>
             <% state = activity.address.state.nil? ? state = " " : activity.address.state %>
-            
+
             <p class="mt-1 ml-2 text-left"><%= "#{district} #{city} #{state} "%></p>
             <% if current_user != nil && @user_bookings != nil && @user_bookings.select { |booking| booking.activity_id == activity.id } != [] %>
               <h4><%= link_to "AGENDADO", activity_path(activity), class: "btn btn-success card-activity-booking-btn shadow font-weight-bold" %></h4>
