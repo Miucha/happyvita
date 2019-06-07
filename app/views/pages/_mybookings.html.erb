@@ -14,7 +14,7 @@
 <div class="cards-container my-4 mx-1">
   <% myfuture_bookings.each do |booking| %>
 
-    <div class="card-activity bg-white mb-5">
+    <div class="card-activity bg-white mb-3">
       <!-- Imagem -->
       <% if booking.activity.photo? then %>
         <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booking.activity.photo, height: 400, crop: :fit %>')">
@@ -30,9 +30,13 @@
           <h4><%= booking.schedule_date.strftime("%b")%></h4>
         </div>
         <div class="card-title-and-buttons">
+          <% district = booking.activity.address.district.nil? ? district = " " : booking.activity.address.district %>
+          <% city = booking.activity.address.city.nil? ? city = " " : booking.activity.address.city %>
+          <% state = booking.activity.address.state.nil? ? state = " " : booking.activity.address.state %>            
+
           <h4><%= link_to "+ INFO", activity_path(booking.activity), class: "btn btn-info card-activity-info-btn shadow font-weight-bold" %></h4>
           <h4 class="mt-1 ml-2 text-left"><%= link_to booking.activity.title, activity_path(booking.activity),class: "title-link text-decoration-none"%></h4>
-          <p class="mt-1 ml-2 text-left"><%=booking.activity.address.district%>, <%=booking.activity.address.city%>, <%=booking.activity.address.state%></p>
+          <p class="mt-1 ml-2 text-left"><%= "#{district} #{city} #{state} "%></p>
         </div>
       </div>
       <div class="card-footer-bg-light-gray w-2"><br></div>

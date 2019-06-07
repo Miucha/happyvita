@@ -45,7 +45,7 @@
 }
 
 .card-activity p {
-  font-size: 12px;
+  font-size: 14px;
   opacity: .7;
   margin: 0;
 }
@@ -53,6 +53,13 @@
 
 .card-activity-infos {
   height: 120px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-top;
+  position: relative;
+}
+.card-activity-infos-show {
   padding: 16px;
   display: flex;
   justify-content: space-between;
@@ -68,7 +75,13 @@
   width: 100%;
 }
 
-.card-activity-info-btn {
+.card-btn-position-img-bottom {
+  position: absolute;
+  right: 16px;
+  top: -20px;
+}
+
+.show-btn-position-img-bottom {
   position: absolute;
   right: 16px;
   top: -20px;

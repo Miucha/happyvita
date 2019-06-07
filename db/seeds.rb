@@ -84,6 +84,7 @@ Interest.create!(interests_attributes)
 puts "Finished! #{Interest.count} interests created."
 
 puts 'Creating activities...'
+addr = Address.all
 activities_attributes = [
   {
     title: 'A melhor época do ano chegou: Organize um almoço de festa junina!',
@@ -121,19 +122,9 @@ activities_attributes = [
     event: false,
     group: true,
     confirmed: true,
-    address: Address.first,
+    photo: 'festa_junina',
     owner: User.last,
-  },
-  {
-    title: 'Crie a sua receita de Naked Cake: o famoso ‘bolo pelado’!',
-    description: 'Use a criatividade pra experimentar uma nova receita!
-                  Escolha o sabor da massa, seus recheios preferidos, os complementos e arrase na decoração.
-                  Faça aquela combinação que você sempre teve curiosidade de saber como ficaria e convide amigos e familiares para provar com você!',
-    event: false,
-    address: Address.first,
-    group: true,
-    confirmed: true,
-    owner: User.last,
+    address: Address.first
   },
   {
     title: 'Capital financeiro: Importância para um envelhecimento ativo.',
@@ -141,9 +132,21 @@ activities_attributes = [
     event: true,
     group: true,
     event_date: '29/08/2019 19:00',
-    photo: 'http://osepeense.com/wp-content/uploads/2015/09/1idosos-shutterstock_23529820-300x252.jpg',
+    photo: 'finanças',
     capacity: 20,
     confirmed: true,
+    owner: User.last,
+    address: addr[1]
+  },
+  {
+    title: 'Crie a sua receita de Naked Cake: o famoso ‘bolo pelado’!',
+    description: 'Use a criatividade pra experimentar uma nova receita!
+                  Escolha o sabor da massa, seus recheios preferidos, os complementos e arrase na decoração.
+                  Faça aquela combinação que você sempre teve curiosidade de saber como ficaria e convide amigos e familiares para provar com você!',
+    event: false,
+    group: true,
+    confirmed: true,
+    photo: 'naked_cake',
     owner: User.last,
     address: Address.first
   },
@@ -153,11 +156,31 @@ activities_attributes = [
     event: true,
     group: true,
     event_date: '18/09/2019 19:00',
-    photo: 'https://www.eusemfronteiras.com.br/wp-content/uploads/2018/12/59039135_m-810x537.jpg',
+    photo: 'caminhada',
     capacity: 50,
     confirmed: true,
     owner: User.last,
+    address: addr[1]
+  },
+  {
+    title: 'Chame os amigos para um piquenique!',
+    description: 'Escolham um parque próximo de vocês e aproveitem!
+                  Sugestão de lista de itens para levarem:
+                  - Água
+                  - Amendoim e castanhas
+                  - Sanduíches
+                  - Frutas
+                  - Canga
+                  - Copos e pratinhos
+                  - Saco plástico para o lixo
+                  - Baralho',
+    event: false,
+    group: true,
+    confirmed: true,
+    photo: 'piquenique',
+    owner: User.last,
     address: Address.first
+
   },
   {
     title: 'Musicoterapia com Idosos: a experiência musical na prevenção e reabilitação',
@@ -165,11 +188,11 @@ activities_attributes = [
     event: true,
     group: true,
     event_date: '29/06/2019 09:00',
-    photo: 'https://static.wixstatic.com/media/7d2c22_5275a20ca5c3446cbdc330bd9d364c0b~mv2.jpg/v1/fill/w_630,h_294,al_c,lg_1,q_80/7d2c22_5275a20ca5c3446cbdc330bd9d364c0b~mv2.jpg',
+    photo: 'musicoterapia',
     capacity: 15,
     confirmed: true,
     owner: User.last,
-    address: Address.last
+    address: addr[2]
   },
 ]
 Activity.create!(activities_attributes)

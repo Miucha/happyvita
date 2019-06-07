@@ -3,6 +3,9 @@ class User < ApplicationRecord
   has_many :addresses
   has_many :activities  #, through: :bookings
 
+  geocoded_by :localization
+  after_validation :geocode, if: :will_save_change_to_localization?
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

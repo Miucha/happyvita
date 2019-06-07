@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'new_event', to: 'activities#new_event'
   get 'new_challenge', to: 'activities#new_challenge'
 
+  get 'users_localization', to: 'users#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :addresses, only: :create
