@@ -19,7 +19,7 @@
   </div>
 
   <% if @activity.event_date.present? %>
-    <%= f.input :event_date, :as => :string,
+    <%= f.input :event_date, :as => :string, required: true, 
           :input_html => {
             :id => 'calendario',
             :class => ' date_picker form-control date-mask',
@@ -27,7 +27,7 @@
           },
           label: 'Data da Atividade:' %>
   <% else %>
-    <%= f.input :event_date, :as => :string,
+    <%= f.input :event_date, :as => :string, required: true, 
           :input_html => {
             :id => 'calendario',
             :class => ' date_picker form-control date-mask'
@@ -36,13 +36,12 @@
   <% end %>
 
   <div class="form-inputs">
-    <%= f.input :capacity, input_html: { min: '1', step: 'any'}, label: "Capacidade da Atividade:" %>
+    <%= f.input :capacity, required: true, input_html: { min: '1', step: 'any'}, label: "Capacidade da Atividade:" %>
   </div>
 
   <!-- encaminhar para a criação ou usar um address antigo -->
   <div class="form-inputs">
-    <%= f.input :address_id, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2'}, label: "Escolha um dos seus endereços:" %>
-<%# , include_hidden: false %>
+    <%= f.input :address_id, required: true, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2'}, label: "Escolha um dos seus endereços:" %>
   </div>
   <%= link_to "Criar novo endereço", new_address_path%>
   <br><br>
@@ -59,7 +58,6 @@
     <%= f.button :submit %>
   </div>
 <% end %>
-
 <script type="text/javascript">
   $(function() {
     $( "#calendario" ).datepicker({
