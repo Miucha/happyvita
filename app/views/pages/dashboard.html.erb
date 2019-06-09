@@ -1,11 +1,57 @@
-<div id="#bg-agenda-white">
-  <div class="mt-5">
-<%# class container removed %>
+<% myfuture_bookings = [] %>
+<% @bookings.each do |booking| %>
+  <%# <% event_date = Activity.find(activity.id).event_date %>
+  <% today = Time.now %>
+
+  <% if today < booking.schedule_date then %>
+      <% myfuture_bookings << booking %>
+  <% end %>
+<% end %>
+
+<% mypast_bookings = [] %>
+<% @bookings.each do |booking| %>
+  <%# <% event_date = Activity.find(activity.id).event_date %>
+  <% today = Time.now %>
+
+  <% if today > booking.schedule_date then %>
+      <% mypast_bookings << booking %>
+  <% end %>
+<% end %>
+
+<% myfuture_activities = [] %>
+<% @activities.each do |activity| %>
+  <%# <% event_date = Activity.find(activity.id).event_date %>
+  <% today = Time.now %>
+  <% if activity.event_date && today < activity.event_date %>
+      <% myfuture_activities << activity %>
+  <% end %>
+<% end %>
+
+<% mypast_activities = [] %>
+<% @activities.each do |activity| %>
+  <%# <% event_date = Activity.find(activity.id).event_date %>
+  <% today = Time.now %>
+  <% if activity.event_date && today > activity.event_date %>
+      <% mypast_activities << activity %>
+  <% end %>
+<% end %>
+
+<div id="#bg-agenda-white" class="mt-5">
+  <div class="d-flex justify-content-center align-items-start text-center bg-white">
+    <h5 class="agenda-booked-or-published flex-fill p-2 font-weight-bold shadow">ATIVIDADES AGENDADAS</h5>
+    <h5 class="agenda-booked-or-published flex-fill p-2 font-weight-bold shadow">ATIVIDADES PUBLICADAS</h5>
+  </div>
+  <div class="d-flex justify-content-center align-items-start text-center bg-white">
+    <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">FUTURAS (<%=myfuture_bookings.count %>)</h5>
+    <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">PASSADAS (<%=mypast_bookings.count %>)</h5>
+    <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">FUTURAS (<%=myfuture_activities.count %>)</h5>
+    <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">PASSADAS (<%=mypast_activities.count %>)</h5>
+  </div>
 
     <% if @current_user.bookings.empty? then %>
-      <div class="text-center shadow mt-5 p-5 bg-white rounded">
-           <h2 class="dark-gray"> Você ainda não agendou eventos ou desafios! <h2>
-          <%= link_to "PARTICIPE DE UMA ATIVIDADE", root_path, class: "ml-2 btn btn-primary shadow font-weight-bold" %>
+      <div class="container text-center shadow mt-5 p-5 bg-white rounded">
+           <h2 class="dark-gray mb-2"> Você ainda não agendou eventos ou desafios! <h2>
+          <%= link_to "PARTICIPAR DE UMA ATIVIDADE", root_path, class: "ml-2 btn btn-primary shadow font-weight-bold" %>
       </div>
     <% else %>
       <div class="shadow mt-4"><%= render 'mybookings' %></div>
@@ -13,15 +59,14 @@
     <% end %>
 
     <% if @current_user.activities.empty? then %>
-      <div class="text-center shadow mt-5 p-5 bg-light rounded">
-        <h2>Você ainda não publicou eventos ou desafios! </h2>
-        <%= link_to "Crie um novo Evento", new_event_path, class: "ml-2 btn-publish shadow font-weight-bold" %>
-        <%= link_to "Crie um novo Desafio", new_challenge_path, class: "ml-2 btn-publish shadow font-weight-bold" %>
+      <div class="container text-center shadow mt-5 p-5 bg-light rounded">
+        <h2 class="dark-gray mb-2">Você ainda não publicou eventos ou desafios! </h2>
+        <%= link_to "CRIAR EVENTO", new_event_path, class: "ml-2 btn btn-info shadow font-weight-bold" %>
+        <%= link_to "CRIAR DESAFIO", new_challenge_path, class: "ml-2 btn btn-info shadow font-weight-bold" %>
       </div>
     <% else %>
       <div class="shadow mt-4"><%= render 'myactivities' %></div>
       <div class="shadow mt-4"><%= render 'mypastactivities' %></div>
     <% end %>
 
-  </div>
 </div>
