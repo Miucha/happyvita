@@ -13,10 +13,16 @@
       <ul class="navbar-nav mr-auto">
         <% if user_signed_in? %>
           <li class="nav-item dropdown">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <%# Imagem do Avatar na navbar           %>
+        <% if current_user.photo? then %>
+          <%= cl_image_tag current_user.photo, gravity: 'face', class: "avatar ", id: "navbarDropdown", data: { toggle: "dropdown" },'aria-haspopup': true, 'aria-expanded': false %>
+        <% else %>
+          <%= cl_image_tag 'profile_image', gravity: 'face', class: "avatar ", id: "navbarDropdown", data: { toggle: "dropdown" },'aria-haspopup': true, 'aria-expanded': false %>
+        <% end %>
+            <%# <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false  %>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <%= link_to "Início", "/", class: "nav-link" %>
-              <%= link_to "Meu Perfil", "#", class: "dropdown-item" %>
+              <%= link_to "Meu Perfil", users_profile_path, class: "dropdown-item" %>
               <%= link_to "Minha Agenda", dashboard_path, class: "dropdown-item" %>
               <%= link_to "Publicar Evento", new_event_path, class: "dropdown-item" %>
               <%= link_to "Publicar Desafio", new_challenge_path, class: "dropdown-item" %>
