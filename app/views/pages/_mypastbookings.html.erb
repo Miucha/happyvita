@@ -1,10 +1,10 @@
-<% myfuture_bookings = [] %>
+<% mypast_bookings = [] %>
 <% @bookings.each do |booking| %>
   <%# <% event_date = Activity.find(activity.id).event_date %>
   <% today = Time.now %>
 
   <% if today > booking.schedule_date then %>
-      <% myfuture_bookings << booking %>
+      <% mypast_bookings << booking %>
   <% end %>
 <% end %>
 
@@ -13,7 +13,7 @@
   <%# <% raise   Sem sort %>
   <%# <% activities_ordered = myfuture_bookings.activity.sort_by(&:event_date) %>
 <div class="cards-container my-4 mx-1">
-  <% myfuture_bookings.each do |booking| %>
+  <% mypast_bookings.each do |booking| %>
     <div class="card-activity bg-white mb-3">
       <!-- Imagem -->
       <% if booking.activity.photo? then %>

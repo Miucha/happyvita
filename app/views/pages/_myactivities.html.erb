@@ -4,14 +4,13 @@
 <!-- Para selecionar apenas as atividades com data e que sejam futuras (posterior a hoje): -->
 
 <% myfuture_activities = [] %>
-
-  <% @activities.each do |activity| %>
-    <%# <% event_date = Activity.find(activity.id).event_date %>
-    <% today = Time.now %>
-    <% if activity.event_date && today < activity.event_date %>
-        <% myfuture_activities << activity %>
-    <% end %>
+<% @activities.each do |activity| %>
+  <%# <% event_date = Activity.find(activity.id).event_date %>
+  <% today = Time.now %>
+  <% if activity.event_date && today < activity.event_date %>
+      <% myfuture_activities << activity %>
   <% end %>
+<% end %>
 
 <!-- Para ordenar as atividades com data: -->
 
