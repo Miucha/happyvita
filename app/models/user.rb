@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  mount_uploader :photo, PhotoUploader
+
   has_many :bookings
   has_many :addresses
   has_many :activities  #, through: :bookings

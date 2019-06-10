@@ -1,0 +1,15 @@
+<div class="container my-3">
+
+  <div class="d-flex flex-row align-items-center">
+    <div class="m-4">
+        <%= render 'photo_image'%>
+    </div>
+    <h1>Meu Perfil</h1>
+  </div>
+  <p>Nome: <%= @user.first_name %></p>
+  <p>Nome: <%= @user.last_name %></p>
+  <p>email: <%= @user.email %></p>
+  <br>
+  <%= link_to "Editar Perfil", edit_users_profile_path(@user), class: "btn btn-primary" %>
+</div>
+
