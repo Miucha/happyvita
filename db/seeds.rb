@@ -50,8 +50,7 @@ first = User.first
 last = User.last
 addresses_attributes = [
   {
-    user: User.first,
-    street: "nada"
+    user: User.first
   },
   {
     street: 'Rua Oscar Freire',
