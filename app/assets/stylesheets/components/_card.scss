@@ -60,7 +60,6 @@
   position: relative;
 }
 .card-activity-infos-show {
-  padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: flex-top;
@@ -107,4 +106,13 @@
 
 .card-footer-bg-light-gray {
   background-color: #F0F7EE;
+}
+
+.card-activity-show {
+
+}
+
+.activity-admin-card {
+  margin: auto;
+  width: 400px;
 }
