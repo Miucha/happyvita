@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_profile, only: [:profile, :edit_profile]
+  before_action :set_profile, only: [:profile, :edit_profile, :update_profile]
 
   def index
     @users = User.where.not(latitude: nil, longitude: nil)
@@ -19,11 +19,12 @@ class UsersController < ApplicationController
   end
 
   def update_profile
-    @user = User.find(params[:id])
+    @user.update(user_params)
+    # @user = User.find(params[:id])
 
-    @user.first_name = user_params[:first_name]
-    @user.last_name = user_params[:last_name]
-    @user.photo = user_params[:photo]
+    # @user.first_name = user_params[:first_name]
+    # @user.last_name = user_params[:last_name]
+    # @user.photo = user_params[:photo]
 
     if @user.save
         redirect_to users_profile_path(@user), notice: 'Perfil editado com sucesso.'
@@ -40,5 +41,5 @@ def set_profile
 end
 
 def user_params
-  params.require(:user).permit(:id, :first_name, :last_name, :photo)
+  params.require(:user).permit(:id, :first_name, :last_name, :photo, interest_ids:[], user_interest_id:[])
 end
