@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_153032) do
+ActiveRecord::Schema.define(version: 2019_06_10_183809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,12 +58,15 @@ ActiveRecord::Schema.define(version: 2019_06_10_153032) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.boolean "check", default: false
+    t.boolean "done", default: false
     t.date "schedule_date"
     t.bigint "activity_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "review_photo"
+    t.integer "review_rate"
+    t.text "review_comment"
     t.index ["activity_id"], name: "index_bookings_on_activity_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end

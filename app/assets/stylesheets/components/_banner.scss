@@ -14,6 +14,29 @@
   }
 }
 
+.carousel-item {
+  height: 65vh;
+  min-height: 300px;
+  // background: no-repeat center center scroll;
+  background: top;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+@media(max-width: 992px) {
+  .carousel-item {
+    height: 60vh;
+  }
+}
+
+@media(max-width: 768px) {
+  .carousel-item {
+    height: 50vh;
+  }
+}
+
 .banner-img-vertical-card {
   display: flex;
   justify-content: center;

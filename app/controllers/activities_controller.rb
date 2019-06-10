@@ -8,7 +8,6 @@ class ActivitiesController < ApplicationController
         OR activities.description @@ :query \
         OR addresses.district @@ :query \
         OR addresses.city @@ :query \
-        OR addresses.zipcode @@ :query \
       "
       @activities = Activity.joins(:address).where(sql_query, query: "%#{params[:query]}%").where('confirmed = true')
       if current_user != nil && current_user.bookings != []
@@ -23,17 +22,12 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    @activity = Activity.find(params[:id])
     @activity_address_id = @activity.address_id
 
-    @activity_address_id = Address.where.not(latitude: nil, longitude: nil)
+    @activity_address = Address.find(@activity_address_id)
 
-    @markers_activity = @activity_address_id.map do |activity|
-      {
-        lat: activity.latitude,
-        lng: activity.longitude
-      }
-    end
+    @markers_activity = [lat: @activity_address.latitude, lng: @activity_address.longitude]
+
   end
 
   def new_event
@@ -47,6 +41,7 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
     @activity.owner = current_user
+    raise
 
     if @activity.event?  then
       save_msg = "Evento criado com sucesso!"
@@ -56,6 +51,7 @@ class ActivitiesController < ApplicationController
     end
     if @activity.save
       redirect_to @activity, notice: "#{save_msg}"
+
     else
       if @activity.event? then
         render :new_event
@@ -113,7 +109,7 @@ class ActivitiesController < ApplicationController
 
   def activity_params
     params.require(:activity).permit(:title, :description, :event, :group, :event_date,
-                                      :photo, :capacity, :confirmed, :address_id)
+                                      :photo, :capacity, :confirmed, :address_id, interest_ids:[], activity_interest_id:[])
   end
 
   def cancel_params

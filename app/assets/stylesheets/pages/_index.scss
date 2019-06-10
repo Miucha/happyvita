@@ -2,6 +2,7 @@
 @import "home";
 
 .search-container {
-  margin: 64px 0px 10px 0px;
   z-index: 1;
+  position: sticky;
+  top: 64px;
 }

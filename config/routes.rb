@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   end
   get 'activities/:id/edit_event', to: 'activities#edit_event', as: 'edit_event'
   get 'activities/:id/edit_challenge', to: 'activities#edit_challenge', as: 'edit_challenge'
-  
+
+  resources :activity_interest, only: :create, as: 'activity_interests'
+
   get 'new_event', to: 'activities#new_event'
   get 'new_challenge', to: 'activities#new_challenge'
   
