@@ -1,0 +1,6 @@
+<% if @user.photo? then %>
+  <img class="avatar-profile" alt="avatar-profile" src="<%= cl_image_path @user.photo, height: 200, width: 200, gravity: 'face', crop: 'crop' %>"/>
+  <% else %>
+  <img class="avatar-profile" alt="avatar-profile" src="<%= cl_image_path 'profile_image' %>">
+<% end %>
+
