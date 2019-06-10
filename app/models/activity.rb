@@ -17,7 +17,7 @@ class Activity < ApplicationRecord
   validate :e_date
   validate :e_capacity
   validate :e_address
-  
+
   validate :date_cannot_be_in_the_past
 
   def date_cannot_be_in_the_past
@@ -36,7 +36,7 @@ class Activity < ApplicationRecord
     if event.present?
       if capacity.nil?
         errors.add(:capacity, "Quantas pessoas podem participar deste evento?")
-      elsif !capacity.positive? 
+      elsif !capacity.positive?
         errors.add(:capacity, "O número de pessoas deve ser maior do que 0")
       end
     end

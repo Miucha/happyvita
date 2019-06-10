@@ -47,6 +47,7 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
     @activity.owner = current_user
+    raise
 
     if @activity.event?  then
       save_msg = "Evento criado com sucesso!"
@@ -56,6 +57,7 @@ class ActivitiesController < ApplicationController
     end
     if @activity.save
       redirect_to @activity, notice: "#{save_msg}"
+
     else
       if @activity.event? then
         render :new_event
@@ -113,7 +115,7 @@ class ActivitiesController < ApplicationController
 
   def activity_params
     params.require(:activity).permit(:title, :description, :event, :group, :event_date,
-                                      :photo, :capacity, :confirmed, :address_id)
+                                      :photo, :capacity, :confirmed, :address_id, interest_ids:[], activity_interest_id:[])
   end
 
   def cancel_params
