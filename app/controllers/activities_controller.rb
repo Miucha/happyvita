@@ -23,17 +23,12 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    @activity = Activity.find(params[:id])
     @activity_address_id = @activity.address_id
 
-    @activity_address_id = Address.where.not(latitude: nil, longitude: nil)
+    @activity_address = Address.find(@activity_address_id)
 
-    @markers_activity = @activity_address_id.map do |activity|
-      {
-        lat: activity.latitude,
-        lng: activity.longitude
-      }
-    end
+    @markers_activity = [lat: @activity_address.latitude, lng: @activity_address.longitude]
+
   end
 
   def new_event
