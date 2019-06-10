@@ -7,7 +7,7 @@
     <h1>Meu Perfil</h1>
   </div>
   <p>Nome: <%= @user.first_name %></p>
-  <p>Nome: <%= @user.last_name %></p>
+  <p>Sobrenome: <%= @user.last_name %></p>
   <p>email: <%= @user.email %></p>
   <br>
   <%= link_to "Editar Perfil", edit_users_profile_path(@user), class: "btn btn-primary" %>

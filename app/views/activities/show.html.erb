@@ -3,9 +3,10 @@
   <div class="mx-1 bg-white mb-2 shadow">
     <div class="card-activity">
       <% if @activity.photo? then %>
-        <div class="banner banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @activity.photo, height: 400, crop: :fit %>')">
+        <div class="banner banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @activity.photo, quality: "auto:good", gravity: :auto, crop: :thumb %>')">
       <% else %>
-        <div class="banner banner_noimage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', height: 400, crop: :fit %>')">
+        <div class="banner banner_noimage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', quality: "auto:good", gravity: :auto, crop: :thumb %>')">
+<%# quality: "auto:good", height: 800, crop: :thumb, dpr: 4.0 %>
       <% end %>
         </div>
       <% booking = [] %>
