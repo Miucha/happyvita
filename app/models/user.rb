@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :addresses
   has_many :activities  #, through: :bookings
 
+  has_many :user_interests
+  has_many :interests, through: :user_interests
+
   geocoded_by :localization
   after_validation :geocode, if: :will_save_change_to_localization?
 

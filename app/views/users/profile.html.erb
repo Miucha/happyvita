@@ -9,6 +9,21 @@
   <p>Nome: <%= @user.first_name %></p>
   <p>Nome: <%= @user.last_name %></p>
   <p>email: <%= @user.email %></p>
+  <% if @user.interests.present? %>
+    <p>Interesses: <% @user.interests.each do |interest| %>
+      <%= interest.name %>
+      <% if interest == @user.interests[-2] %>
+        <%= " e " %>
+      <% elsif interest == @user.interests.last %>
+        <%= "." %>
+      <% else %>
+        <%= "," %>
+      <% end %>
+    <% end %>
+    </p>
+  <% else %>
+    <p>Cadastre interesses para melhorar o seu filtro.</p>
+  <% end %>
   <br>
   <%= link_to "Editar Perfil", edit_users_profile_path(@user), class: "btn btn-primary" %>
 </div>
