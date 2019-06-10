@@ -36,7 +36,30 @@
 <!--            INCLUIR BOTÃO "ATIVIDADE REALIZADA" abrindo Modal que dê a possibilidade de incluir foto -->
 <!-- class: "btn btn-success text-white shadow font-weight-bold" -->
                 <% unless booking.first.done %>
-                  <%= button_to "EU FIZ", mark_as_done_path(booking.first), method: :patch, class: "btn btn-body-color shadow text-right border border-dark mr-2" %>
+
+                  <button type="button" class="btn btn-body-color shadow text-right border border-dark mr-2" data-toggle="modal" data-target="#booking-review-Modal">EU FIZ</button>
+                  <br><br>
+
+                  <div class="modal fade" id="booking-review-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalScrollableTitle">Avalie a atividade "<%= @activity.title %>":</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <h4>Adicione sua avaliação com uma foto e um comentário sobre como foi realizar essa atividade para incentivar outros usuários!</h4>
+                          <div class="d-flex justify-content-center mt-2">
+                            <%= button_to "AVALIAR", add_review_path(booking.first), method: :get, class: "btn btn-success shadow text-right mr-2" %>
+                            <%= button_to "MAIS TARDE", mark_as_done_path(booking.first), method: :patch, class: "btn btn-body-color shadow mr-2" %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 <% end %>
               <% end %>
 
@@ -128,8 +151,6 @@
   <% end %>
 
 
-
-
   <% if @activity.event? %>
     <div
       id="map"
@@ -141,6 +162,60 @@
     </div>
   <% end %>
 
+<% @activity.bookings.each do |booking| %>
+
+  <% if booking.review_rate? then %>
+    <%= booking.review_rate %>
+  <% end %>
+
+  <% if booking.review_comment? then %>
+    <%= booking.review_comment %>
+  <% end %>
+
+<% end %>
+
+<div class="cards-container home-cards-container mx-1">
+  <% @activity.bookings.each do |booking| %>
+<!--Se a atividade não tiver data específica ou se tiver data só aparecerá se for data futura: -->
+      <div class="card-activity bg-white mb-5">
+
+        <% if booking.review_photo? then %>
+          <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booking.review_photo, height: 400, crop: :fit %>')">
+        <% else %>
+          <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', height: 400, crop: :fit %>')">
+        <% end %>
+          </div>
 
 
+        <div class="card-activity-infos shadow">
+          <div class="card-event-date text-center mr-2 mt-1">
+            <% if activity.event_date %>
+              <h1><%= activity.event_date.strftime("%d")%></h1>
+              <h4><%= activity.event_date.strftime("%b")%></h4>
+            <% else %>
+              <h1><%= link_to activity_path(activity) do %>
+                <i class="far fa-calendar-alt title-link text-decoration-none"></i>
+              <% end %></h1>
+            <% end %>
+          </div>
+          <div class="card-title-and-buttons">
+            <h4><%= link_to "+ INFO", activity_path(activity), class: "btn btn-info card-btn-position-img-bottom shadow font-weight-bold" %></h4>
+            <h4 class="mt-1 ml-2 text-left"><%= link_to activity.title, activity_path(activity),class: "title-link text-decoration-none"%></h4>
 
+            <% district = activity.address.district.nil? ? district = " " : activity.address.district %>
+            <% city = activity.address.city.nil? ? city = " " : activity.address.city %>
+            <% state = activity.address.state.nil? ? state = " " : activity.address.state %>
+
+            <p class="mt-1 ml-2 text-left"><%= "#{district} #{city} #{state} "%></p>
+            <% if current_user != nil && @user_bookings != nil && @user_bookings.select { |booking| booking.activity_id == activity.id } != [] %>
+              <h4><%= link_to "AGENDADO", activity_path(activity), class: "btn btn-success card-activity-booking-btn shadow font-weight-bold" %></h4>
+            <% else %>
+              <h4><%= link_to "AGENDAR", activity_path(activity), class: "btn btn-primary card-activity-booking-btn shadow font-weight-bold" %></h4>
+            <% end %>
+          </div>
+        </div>
+      <div class="card-footer-bg-light-gray w-2"><br></div>
+    </div>
+
+<% end %>
+</div>

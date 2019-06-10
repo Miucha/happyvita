@@ -1,0 +1,26 @@
+<%= simple_form_for(@booking) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <%= f.hidden_field :done, value: '1'%>
+
+  <p>Avalie e colabore com a experiência de outros usuários:</p><br>
+
+  <div class="form-inputs">
+    <%= f.input :review_rate, required: true, input_html: { min: '1', step: '5'}, label: "Como foi realizar esta atividade? Atribua uma nota de 1 a 5:" %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :review_comment, as: :text, label: "Adicione comentários, dicas e sugestões:" %>
+  </div>
+
+  <div>
+    <%= f.input :review_photo, label: 'Compartilhe uma foto:' %>
+    <%= f.input :review_photo_cache, as: :hidden %>
+  </div>
+
+<br>
+  <div class="form-actions btn btn-success mb-2 p-0">
+    <%= f.button :submit, 'PUBLICAR AVALIAÇÃO'%>
+  </div>
+<% end %>
