@@ -27,7 +27,11 @@
             <h5 class="mt-1"><%= "#{street} #{number}"%></h5>
             <h5><%= "#{district} #{city} #{state} #{zipcode}"%></h5>
             <div class="d-flex align-items-center mt-1">
-<!--          INCLUIR BOTÃO "INDICAR PARA AMIGO" -->
+            
+            <%# Share butons by ShareThis.com %>
+            <div class="sharethis-inline-share-buttons">
+            </div>
+            
 <!-- class: "btn btn-warning text-white shadow font-weight-bold mr-2" -->
               <% unless (current_user == nil) || (booking == []) %>
 <!--            INCLUIR BOTÃO "ATIVIDADE REALIZADA" abrindo Modal que dê a possibilidade de incluir foto -->
