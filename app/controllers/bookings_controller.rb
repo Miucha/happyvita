@@ -8,9 +8,9 @@ class BookingsController < ApplicationController
 
   def create
     @activity = Activity.find(params[:activity_id])
-    
+
     @booking = @activity.event? ? Booking.new : Booking.new(booking_params)
-    
+
     @booking.user = current_user
     @booking.activity = @activity
 
@@ -19,7 +19,6 @@ class BookingsController < ApplicationController
     else
       @booking.schedule_date = booking_params[:schedule_date]
     end
-
     if @booking.save
       redirect_to activity_path(@activity)
     else
@@ -41,6 +40,15 @@ class BookingsController < ApplicationController
   def destroy
   end
 
+  def mark_as_done
+    @booking.done = true
+    if @booking.save
+        redirect_to activity_path(@booking.activity), notice: 'Parabéns! A atividade foi marcada como realizada.'
+    else
+        render :edit
+    end
+  end
+
   private
 
   def set_booking
@@ -48,7 +56,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-  #Acredito que abaixo não precise do :check, mas não verifiquei
-    params.require(:booking).permit(:schedule_date, :check)
+  #Acredito que abaixo não precise do :done, mas não verifiquei
+    params.require(:booking).permit(:schedule_date, :done)
   end
 end
