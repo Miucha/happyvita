@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'pages#dashboard', as: 'dashboard'
   
   patch 'activities/:id/cancel', to: 'activities#cancel', as: 'cancel_activity'
-  
+  patch 'bookings/:id/mark_as_done', to: 'bookings#mark_as_done', as: 'mark_as_done'
+
   resources :activities, except: [:destroy, :new, :edit] do
     resources :bookings, only: [:create, :new]
   end

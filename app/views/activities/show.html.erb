@@ -22,25 +22,26 @@
           <% state = @activity.address.state.nil? ? state = " " : @activity.address.state %>
           <% zipcode = @activity.address.zipcode.nil? ? zipcode = " " : @activity.address.zipcode %>
 
-          <div class="text-left mt-5">
+          <div class="text-left mt-3">
             <h4 class="mt-1 font-weight-bold"><%=@activity.title%></h4>
             <h5 class="mt-1"><%= "#{street} #{number}"%></h5>
             <h5><%= "#{district} #{city} #{state} #{zipcode}"%></h5>
-            <div class="d-flex align-items-center mt-1">
-            
+
             <%# Share butons by ShareThis.com %>
-            <div class="sharethis-inline-share-buttons">
-            </div>
-            
+            <div class="sharethis-inline-share-buttons"></div>
+
+            <div class="d-flex align-items-center mt-2">
 <!-- class: "btn btn-warning text-white shadow font-weight-bold mr-2" -->
               <% unless (current_user == nil) || (booking == []) %>
 <!--            INCLUIR BOTÃO "ATIVIDADE REALIZADA" abrindo Modal que dê a possibilidade de incluir foto -->
 <!-- class: "btn btn-success text-white shadow font-weight-bold" -->
+                <% unless booking.first.done %>
+                  <%= button_to "EU FIZ", mark_as_done_path(booking.first), method: :patch, class: "btn btn-body-color shadow text-right border border-dark mr-2" %>
+                <% end %>
               <% end %>
-            </div>
-            <div class="d-flex align-items-center mt-1">
-              <% if (@activity.event == false) && (booking != []) && (booking.first.check == false) %>
-                <%= button_to "ALTERAR DATA", edit_booking_path(booking.first), method: :get, class: "btn btn-body-color shadow text-right border border-dark mr-2" %>
+
+              <% if (@activity.event == false) && (booking != []) && (booking.first.done == false) %>
+                <%= button_to "REAGENDAR", edit_booking_path(booking.first), method: :get, class: "btn btn-body-color shadow text-right border border-dark mr-2" %>
 <!--            INCLUIR BOTÃO "CANCELAR PARTICIPAÇÃO" -->
 <!-- class: "btn btn-body-color shadow text-right border border-dark mr-2" -->
               <% end %>
@@ -49,7 +50,7 @@
           </div>
         </div>
 
-        <div class="card-event-date text-center mr-2 mt-5">
+        <div class="card-event-date text-center mr-2 mt-3">
 
           <% if current_user == nil || booking == []%>
             <% if @activity.event %>
@@ -58,12 +59,13 @@
               <%= button_to "AGENDAR", new_activity_booking_path(@activity), method: :get, class: "show-btn-position-img-bottom btn btn-primary shadow text-right font-weight-bold" %>
             <% end %>
 
-          <% elsif @activity.event %>
-              <h5 class="show-btn-position-img-bottom text-right bg-info border border-info rounded p-2 shadow font-weight-bold">AGENDADO PARA: <%= booking.first.schedule_date.strftime("%d/%m/%Y") %></h5>
+          <% elsif @activity.event && booking != []%>
+              <h5 class="show-btn-position-img-bottom text-center bg-info border border-info rounded p-2 shadow font-weight-bold">AGENDADO</h5>
             <!--   destroy -->
+
           <% else %>
-            <div class="show-btn-position-img-bottom d-flex align-items-center text-right bg-info border border-info rounded p-2 shadow">
-              <h5 class="mr-2 font-weight-bold">AGENDADO PARA: <%= booking.first.schedule_date.strftime("%d/%m/%Y") %></h5>
+            <div class="show-btn-position-img-bottom d-flex align-items-center text-center bg-info border border-info rounded p-2 shadow">
+              <h5 class="mr-2 font-weight-bold">AGENDADO</h5>
             </div>
           <% end %>
 
