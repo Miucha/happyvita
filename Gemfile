@@ -4,6 +4,7 @@ ruby '2.5.3'
 gem "simple_calendar", "~> 2.0"
 
 gem 'geocoder'
+gem 'mapbox-gl-rails', '~> 0.44.0'
 
 gem 'bootsnap', require: false
 gem 'devise'
@@ -19,8 +20,6 @@ gem 'sassc-rails'
 gem 'uglifier'
 gem 'webpacker'
 gem 'simple_form'
-# gem 'client_side_validations'
-# gem 'client_side_validations-simple_form'
 gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
 
