@@ -8,6 +8,8 @@
 
 puts 'Cleaning database...'
 Booking.destroy_all
+ActivityInterest.destroy_all
+UserInterest.destroy_all
 Activity.destroy_all
 Interest.destroy_all
 Address.destroy_all
@@ -25,21 +27,24 @@ users_attributes = [
     password: 'maria123',
     first_name: 'Maria',
     last_name: 'da Silva',
-    birth_date: '05/12/1950'
+    birth_date: '05/12/1948',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560282814/maria_cx5zdv.jpg'
   },
   {
     email: 'joao@joao.com',
     password: 'joao123',
     first_name: 'João',
     last_name: 'Oliveira',
-    birth_date: '08/04/1954'
+    birth_date: '08/04/1954',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560282813/jo%C3%A3o_jadwxh.jpg'
   },
   {
     email: 'odete@odete.com',
     password: 'odete123',
     first_name: 'Odete',
     last_name: 'Silveira',
-    birth_date: '20/10/1948'
+    birth_date: '20/10/1956',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560282814/odete_l1v2jg.png'
   },
 ]
 User.create!(users_attributes)
@@ -77,13 +82,97 @@ Address.create!(addresses_attributes)
 puts "Finished! #{Address.count} addresses created."
 
 puts 'Creating interests...'
-interests_attributes = [ { name: 'Caminhada'}, { name: 'Culinária'}, { name: 'Cursos'}, { name: 'Dança'}, { name: 'Esporte'}, { name: 'História'}, { name: 'Finanças'}, { name: 'Música'}, { name: 'Saúde'}, { name: 'Show'}, { name: 'Teatro'}, { name: 'Yoga'} ]
+interests_attributes = [
+  { name: 'Alfaiataria'},
+  { name: 'Artesato'},
+  { name: 'Atividades físicas'},
+  { name: 'Culinária'},
+  { name: 'Cultura'},
+  { name: 'Cursos'},
+  { name: 'Danças'},
+  { name: 'Esportes'},
+  { name: 'História'},
+  { name: 'Festas'},
+  { name: 'Filmes'},
+  { name: 'Finanças'},
+  { name: 'Música'},
+  { name: 'Novelas'},
+  { name: 'Pesca'},
+  { name: 'Saúde'},
+  { name: 'Shows'},
+  { name: 'Teatro'},
+  { name: 'Turismo'},
+]
 
 Interest.create!(interests_attributes)
 puts "Finished! #{Interest.count} interests created."
 
+all_interests = Interest.all
+all_users = User.all
+
+puts 'Creating User interests...'
+
+user_interests_attributes = [
+  {
+    interest_id: all_interests[0].id,
+    user_id: all_users[1].id
+  },
+  {
+    interest_id: all_interests[1].id,
+    user_id: all_users[1].id
+  },
+  {
+    interest_id: all_interests[3].id,
+    user_id: all_users[1].id
+  },
+  {
+    interest_id: all_interests[13].id,
+    user_id: all_users[1].id
+  },
+  {
+    interest_id: all_interests[2].id,
+    user_id: all_users[2].id
+  },
+  {
+    interest_id: all_interests[4].id,
+    user_id: all_users[2].id
+  },
+  {
+    interest_id: all_interests[7].id,
+    user_id: all_users[2].id
+  },
+  {
+    interest_id: all_interests[11].id,
+    user_id: all_users[2].id
+  },
+  {
+    interest_id: all_interests[14].id,
+    user_id: all_users[2].id
+  },
+  {
+    interest_id: all_interests[2].id,
+    user_id: all_users[3].id
+  },
+  {
+    interest_id: all_interests[6].id,
+    user_id: all_users[3].id
+  },
+  {
+    interest_id: all_interests[9].id,
+    user_id: all_users[3].id
+  },
+  {
+    interest_id: all_interests[12].id,
+    user_id: all_users[3].id
+  },
+]
+
+UserInterest.create!(user_interests_attributes)
+puts "Finished! #{UserInterest.count} users interests created."
+
 puts 'Creating activities...'
-addr = Address.all
+
+all_addresses = Address.all
 activities_attributes = [
   {
     title: 'A melhor época do ano chegou: Organize um almoço de festa junina!',
@@ -121,7 +210,7 @@ activities_attributes = [
     event: false,
     group: true,
     confirmed: true,
-    photo: 'festa_junina',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919109/festa_junina.jpg',
     owner: User.last,
     address: Address.first
   },
@@ -131,11 +220,11 @@ activities_attributes = [
     event: true,
     group: true,
     event_date: '29/08/2019 19:00',
-    photo: 'finanças',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559920943/finan%C3%A7as.jpg',
     capacity: 20,
     confirmed: true,
     owner: User.last,
-    address: addr[1]
+    address: all_addresses[1]
   },
   {
     title: 'Crie a sua receita de Naked Cake: o famoso ‘bolo pelado’!',
@@ -145,7 +234,7 @@ activities_attributes = [
     event: false,
     group: true,
     confirmed: true,
-    photo: 'naked_cake',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919262/naked_cake.jpg',
     owner: User.last,
     address: Address.first
   },
@@ -155,11 +244,11 @@ activities_attributes = [
     event: true,
     group: true,
     event_date: '18/09/2019 19:00',
-    photo: 'caminhada',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919166/caminhada.jpg',
     capacity: 50,
     confirmed: true,
     owner: User.last,
-    address: addr[1]
+    address: all_addresses[1]
   },
   {
     title: 'Chame os amigos para um piquenique!',
@@ -176,7 +265,7 @@ activities_attributes = [
     event: false,
     group: true,
     confirmed: true,
-    photo: 'piquenique',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919469/piquenique.jpg',
     owner: User.last,
     address: Address.first
 
@@ -187,12 +276,58 @@ activities_attributes = [
     event: true,
     group: true,
     event_date: '29/06/2019 09:00',
-    photo: 'musicoterapia',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919064/musicoterapia.jpg',
     capacity: 15,
     confirmed: true,
     owner: User.last,
-    address: addr[2]
+    address: all_addresses[2]
   },
 ]
 Activity.create!(activities_attributes)
 puts "Finished! #{Activity.count} activities created."
+
+all_activities = Activity.all
+
+puts 'Creating Activity interests...'
+
+activity_interests_attributes = [
+  {
+    interest_id: Interest.where(name: 'Festas').first.id,
+    activity_id: all_activities[0].id
+  },
+  {
+    interest_id: Interest.where(name: 'Culinária').first.id,
+    activity_id: all_activities[0].id
+  },
+  {
+    interest_id: Interest.where(name: 'Danças').first.id,
+    activity_id: all_activities[0].id
+  },
+  {
+    interest_id: Interest.where(name: 'Finanças').first.id,
+    activity_id: all_activities[1].id
+  },
+  {
+    interest_id: Interest.where(name: 'Culinária').first.id,
+    activity_id: all_activities[2].id
+  },
+  {
+    interest_id: Interest.where(name: 'Saúde').first.id,
+    activity_id: all_activities[3].id
+  },
+  {
+    interest_id: Interest.where(name: 'Atividades físicas').first.id,
+    activity_id: all_activities[3].id
+  },
+  {
+    interest_id: Interest.where(name: 'Festas').first.id,
+    activity_id: all_activities[4].id
+  },
+  {
+    interest_id: Interest.where(name: 'Música').first.id,
+    activity_id: all_activities[5].id
+  }
+]
+
+ActivityInterest.create!(activity_interests_attributes)
+puts "Finished! #{ActivityInterest.count} activities interests created."
