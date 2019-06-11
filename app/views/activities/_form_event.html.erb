@@ -1,82 +1,87 @@
-<%= simple_form_for @activity do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div class="form-container row justify-content-center">
+  <div class="col-md-9 col-lg-6">
+    <%= simple_form_for @activity do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <%= f.hidden_field :event, value: '1'%>
+      <%= f.hidden_field :event, value: '1'%>
 
-  <p>*campos obrigatórios:</p><br>
+      <p>*campos obrigatórios:</p><br>
 
-  <div class="form-inputs">
-    <%= f.input :title, label: "Nome da atividade:" %>
-  </div>
-
-  <div class="form-inputs">
-    <%= f.input :description, as: :text, label: "Descrição:" %>
-  </div>
-
-  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#interestModal">Adicione interesses</button>
-  <br><br>
-
-  <div class="modal fade" id="interestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Novo Interesse</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div class="form-inputs">
+        <%= f.input :title, label: "Nome da atividade:" %>
       </div>
-      <div class="modal-body">
-        <%= f.association :interests, as: :check_boxes, label: ""%>
+
+      <div class="form-inputs">
+        <%= f.input :description, as: :text, label: "Descrição:" %>
       </div>
-    </div>
+
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#interestModal">Adicione interesses</button>
+      <br><br>
+
+
+
+      <div class="modal fade" id="interestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Novo Interesse</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <%= f.association :interests, as: :check_boxes, label: ""%>
+        </div>
+      </div>
+
+
+      <div class="form-inputs">
+        <%= f.input :group, label: "Atividade é em grupo?" %>
+      </div>
+
+      <% if @activity.event_date.present? %>
+        <%= f.input :event_date, :as => :string, required: true,
+              :input_html => {
+                :id => 'calendario',
+                :class => ' date_picker form-control date-mask',
+                value: @activity.event_date.strftime("%d/%m/%Y")
+              },
+              label: 'Data da Atividade:' %>
+      <% else %>
+        <%= f.input :event_date, :as => :string, required: true,
+              :input_html => {
+                :id => 'calendario',
+                :class => ' date_picker form-control date-mask'
+              },
+              label: 'Data da Atividade:' %>
+      <% end %>
+
+      <div class="form-inputs">
+        <%= f.input :capacity, required: true, input_html: { min: '1', step: 'any'}, label: "Capacidade da Atividade:" %>
+      </div>
+
+      <!-- encaminhar para a criação ou usar um address antigo -->
+      <div class="form-inputs">
+        <%= f.input :address_id, required: true, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2', id:'user_addresses'}, label: "Escolha um dos seus endereços:" %>
+      </div>
+    <!--   colocar em java opção de address também-->
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addressModal">Criar novo endereço</button>
+      <br><br>
+
+      <div>
+        <%= f.input :photo, label: 'Foto' %>
+        <%= f.input :photo_cache, as: :hidden %>
+      </div>
+
+    <br>
+      <div class="container form-actions btn btn-success mb-2 p-0">
+        <%= f.button :submit, 'PUBLICAR EVENTO'%>
+      </div>
+    <% end %>
   </div>
 </div>
 
-
-  <div class="form-inputs">
-    <%= f.input :group, label: "Atividade é em grupo?" %>
-  </div>
-
-  <% if @activity.event_date.present? %>
-    <%= f.input :event_date, :as => :string, required: true,
-          :input_html => {
-            :id => 'calendario',
-            :class => ' date_picker form-control date-mask',
-            value: @activity.event_date.strftime("%d/%m/%Y")
-          },
-          label: 'Data da Atividade:' %>
-  <% else %>
-    <%= f.input :event_date, :as => :string, required: true,
-          :input_html => {
-            :id => 'calendario',
-            :class => ' date_picker form-control date-mask'
-          },
-          label: 'Data da Atividade:' %>
-  <% end %>
-
-  <div class="form-inputs">
-    <%= f.input :capacity, required: true, input_html: { min: '1', step: 'any'}, label: "Capacidade da Atividade:" %>
-  </div>
-
-  <!-- encaminhar para a criação ou usar um address antigo -->
-  <div class="form-inputs">
-    <%= f.input :address_id, required: true, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2', id:'user_addresses'}, label: "Escolha um dos seus endereços:" %>
-  </div>
-<!--   colocar em java opção de address também-->
-  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addressModal">Criar novo endereço</button>
-  <br><br>
-
-  <div>
-    <%= f.input :photo, label: 'Foto' %>
-    <%= f.input :photo_cache, as: :hidden %>
-  </div>
-
-<br>
-  <div class="form-actions btn btn-success mb-2 p-0">
-    <%= f.button :submit, 'Publicar Evento'%>
-  </div>
-<% end %>
 <script type="text/javascript">
   $(function() {
     $( "#calendario" ).datepicker({
