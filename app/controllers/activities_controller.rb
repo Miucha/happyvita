@@ -19,6 +19,9 @@ class ActivitiesController < ApplicationController
         @user_bookings = current_user.bookings
       end
     end
+    u_act = current_user.interests.collect { |interest| interest.activities }.flatten.uniq
+    @join = @activities & u_act
+    @rest = @activities - @join
   end
 
   def show
