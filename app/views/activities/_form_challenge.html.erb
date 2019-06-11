@@ -1,54 +1,56 @@
-<%= simple_form_for(@activity) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div class="form-container row justify-content-center">
+  <div class="col-md-9 col-lg-6">
+    <%= simple_form_for(@activity) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <%= f.hidden_field :event, value: '0'%>
+      <%= f.hidden_field :event, value: '0'%>
 
-  <p>Todos os campos são obrigatórios:</p><br>
+      <p>Todos os campos são obrigatórios:</p><br>
 
-  <div class="form-inputs">
-    <%= f.input :title, label: "Nome do Desafio:" %>
-  </div>
+      <div class="form-inputs">
+        <%= f.input :title, label: "Nome do Desafio:" %>
+      </div>
 
-  <div class="form-inputs">
-    <%= f.input :description, as: :text, label: "Descrição:" %>
-  </div>
+      <div class="form-inputs">
+        <%= f.input :description, as: :text, label: "Descrição:" %>
+      </div>
 
-  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#interestModal">Adicione interesses</button>
-  <br><br>
+      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#interestModal">Adicione interesses</button>
+      <br><br>
 
-  <div class="modal fade" id="interestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalScrollableTitle">Novo Interesse</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <%= f.association :interests, as: :check_boxes %>
+      <div class="modal fade" id="interestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalScrollableTitle">Novo Interesse</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <%= f.association :interests, as: :check_boxes %>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
+      <div class="form-inputs">
+        <%= f.input :group, label: "Atividade é em grupo?" %>
+      </div>
+
+      <div>
+        <%= f.input :photo, label: 'Foto' %>
+        <%= f.input :photo_cache, as: :hidden %>
+      </div>
+
+    <!--   colocar em java opção de address também
+      colocar photo -->
+
+    <br>
+      <div class="container form-actions btn btn-success mb-2 p-0">
+        <%= f.button :submit, 'PUBLICAR DESAFIO'%>
+      </div>
+    <% end %>
   </div>
-
-  <div class="form-inputs">
-    <%= f.input :group, label: "Atividade é em grupo?" %>
-  </div>
-
-  <div>
-    <%= f.input :photo, label: 'Foto' %>
-    <%= f.input :photo_cache, as: :hidden %>
-  </div>
-
-<!--   colocar em java opção de address também
-  colocar photo -->
-
-<br>
-  <div class="form-actions btn btn-success mb-2 p-0">
-    <%= f.button :submit, 'Publicar Desafio'%>
-  </div>
-<% end %>
-
-
+</div>
