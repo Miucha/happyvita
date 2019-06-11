@@ -142,7 +142,7 @@
 </div>
 
   <% if current_user == @activity.owner%>
-    <div class="container bg-white border border-white border-radius shadow activity-admin-card p-2 my-3 text-center">
+    <div class="container bg-white border border-white border-radius shadow activity-admin-card p-1 text-center">
       <% if @activity.event %>
         <h5>Acesso do administrador do evento publicado:</h5>
         <div class="d-flex mr-2 my-2 justify-content-center">
@@ -184,29 +184,31 @@
   <% end %>
 
 <% unless @activity.bookings == [] %>
-  <h4 class="text-center font-weight-bold mt-2">Inspire-se com as dicas de quem já realizou esta atividade:</h4>
-  <div class="cards-container home-cards-container mx-1">
-    <% @activity.bookings.each do |booking| %>
-  <!--Se a atividade não tiver data específica ou se tiver data só aparecerá se for data futura: -->
+  <h4 class="m-2">Experiências de outros usuários:</h4>
+  <div class="row justify-content-center align-items-center show-cards-container m-1">
+
+    <% limit_3_reviews = @activity.bookings.sample(3) %>
+
+    <% limit_3_reviews.each do |booking| %>
       <% if booking.review_rate != nil && booking.review_comment != nil %>
-        <div class="card-activity bg-white mt-2">
-          <div class="card-footer-bg-light-gray w-2"><br></div>
-            <div class="shadow">
-              <div class="card-activity-infos">
-                <div class="card-title-and-buttons">
-                  <h5 class="mt-1 ml-2 text-left"><%= booking.review_comment %></h5>
-                  <!-- Incluir botão para curtir -->
-                </div>
-                <div class="card-event-date text-center mr-2 mt-3">
-                  <h4>Nota:</h4>
-                  <h1><%=booking.review_rate%></h1>
-                </div>
-              </div>
-              <% if booking.review_photo? then %>
-                <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booking.review_photo, height: 400, crop: :fit %>')">
-              <% end %>
+        <div class="col-md-6 col-lg-4 m-1 p-0 card-activity bg-white shadow">
+          <div class="card-activity-infos">
+            <div class="card-title-and-buttons">
+              <h5 class="mr-2 text-left font-weight-bold"><%= booking.user.first_name %></h5>
+              <h5 class="mt-1 mr-2 text-left font-italic"><%= booking.review_comment %></h5>
+              <!-- Incluir botão para curtir -->
+            </div>
+            <div class="card-event-date text-center">
+              <h4>Nota:</h4>
+              <h1><%=booking.review_rate%></h1>
             </div>
           </div>
+          <% if booking.review_photo? then %>
+            <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booking.review_photo, height: 400, crop: :fit %>')">
+          <% else %>
+            <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', height: 400, crop: :fit %>')">
+          <% end %>
+            </div>
         </div>
       <% end %>
     <% end %>

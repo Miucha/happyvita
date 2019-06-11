@@ -1,26 +1,33 @@
-<%= simple_form_for(@booking) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div class="form-container row justify-content-center">
+  <div class="col-md-9 col-lg-6">
 
-  <%= f.hidden_field :done, value: '1'%>
+    <%= simple_form_for(@booking) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <p>Avalie e colabore com a experiência de outros usuários:</p><br>
+      <%= f.hidden_field :done, value: '1'%>
 
-  <div class="form-inputs">
-    <%= f.input :review_rate, required: true, input_html: { min: '0', step: '10'}, label: "Como foi realizar esta atividade? Atribua uma nota de 0 a 10:" %>
+      <h4 class="text-center font-weight-bold my-2"><%= @booking.activity.title %></h4>
+
+      <h4>Avalie e colabore com a experiência de outros usuários:</h4><br>
+
+      <div class="form-inputs">
+        <%= f.input :review_rate, required: true, input_html: { min: 0, max: 10, step: 1}, label: "Como foi realizar esta atividade? Atribua uma nota de 0 a 10:" %>
+      </div>
+
+      <div class="form-inputs">
+        <%= f.input :review_comment, as: :text, input_html: { maxlength: 100 }, label: "Adicione comentários, dicas e sugestões (limite de 100 caracteres):" %>
+      </div>
+
+      <div>
+        <%= f.input :review_photo, label: 'Compartilhe uma foto:' %>
+        <%= f.input :review_photo_cache, as: :hidden %>
+      </div>
+
+    <br>
+      <div class="container form-actions btn btn-success shadow p-0">
+        <%= f.button :submit, 'PUBLICAR AVALIAÇÃO'%>
+      </div>
+    <% end %>
   </div>
-
-  <div class="form-inputs">
-    <%= f.input :review_comment, as: :text, label: "Adicione comentários, dicas e sugestões:" %>
-  </div>
-
-  <div>
-    <%= f.input :review_photo, label: 'Compartilhe uma foto:' %>
-    <%= f.input :review_photo_cache, as: :hidden %>
-  </div>
-
-<br>
-  <div class="form-actions btn btn-success mb-2 p-0">
-    <%= f.button :submit, 'PUBLICAR AVALIAÇÃO'%>
-  </div>
-<% end %>
+</div>

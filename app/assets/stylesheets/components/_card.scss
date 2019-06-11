@@ -50,7 +50,6 @@
   margin: 0;
 }
 
-
 .card-activity-infos {
   height: 120px;
   padding: 16px;
@@ -59,6 +58,20 @@
   align-items: flex-top;
   position: relative;
 }
+
+.show-cards-container .card-activity {
+  max-width: 400px;
+}
+
+.show-cards-container .card-activity-infos {
+  height: 150px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
 .card-activity-infos-show {
   display: flex;
   justify-content: space-between;
@@ -96,5 +109,5 @@
 
 .activity-admin-card {
   margin: auto;
-  width: 400px;
+  max-width: 350px;
 }
