@@ -19,14 +19,18 @@ class ActivitiesController < ApplicationController
         @user_bookings = current_user.bookings
       end
     end
+    @activities = @activities.order(:event_date)
+
     if current_user != nil
       u_act = current_user.interests.collect { |interest| interest.activities }.flatten.uniq
       @join = @activities & u_act
       @rest = @activities - @join
+      @join << @rest
+      @join = @join.flatten
     else
-      @join = []
-      @rest = @activities
+      @join = @activities
     end
+    @join = organize(@join)
   end
 
   def show
@@ -49,7 +53,6 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
     @activity.owner = current_user
-    raise
 
     if @activity.event?  then
       save_msg = "Evento criado com sucesso!"
@@ -82,7 +85,6 @@ class ActivitiesController < ApplicationController
       # raise
       render :edit_challenge
     else
-      raise
       redirect_to @activity, notice: 'Este desafio não foi criado por você.'
     end
   end
@@ -111,6 +113,7 @@ class ActivitiesController < ApplicationController
   end
 
   private
+
   def set_activity
       @activity = Activity.find(params[:id])
   end
@@ -123,5 +126,27 @@ class ActivitiesController < ApplicationController
   def cancel_params
     params.require(:activity).permit(:confirmed)
     #falta :address
+  end
+
+  def organize(activities_array)
+    if activities_array != []
+      event_activities = activities_array.select {|activity| activity.event == true}
+      challenge_activities = activities_array - event_activities
+      if event_activities.count >= challenge_activities.count
+        bigger = event_activities.count
+      else
+        bigger = challenge_activities.count
+      end
+      cont = 0
+      array_total = []
+      bigger.times do
+        array_total << event_activities[cont] if event_activities[cont] != nil
+        array_total << challenge_activities[cont] if challenge_activities[cont] != nil
+        cont += 1
+      end
+      array_total
+    else
+      []
+    end
   end
 end
