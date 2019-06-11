@@ -38,10 +38,13 @@
 
 
 <div class="tab">
-  <button class="tablinks" onclick="openActivity(event, 'myFutureBookings')">Futuras</button>
-  <button class="tablinks" onclick="openActivity(event, 'myPastBookings')">Passadas</button>
-  <button class="tablinks" onclick="openActivity(event, 'myFutureActivities')">Futuras</button>
-  <button class="tablinks" onclick="openActivity(event, 'myPastActivities')">Passadas</button>
+  <button class="tablinks" onclick="openActivity(event, 'myFutureBookings')">B Futuras</button>
+  <button class="tablinks" onclick="openActivity(event, 'myPastBookings')">B Passadas</button>
+  <button class="tablinks" onclick="openActivity(event, 'myFutureActivities')">A Futuras</button>
+  <button class="tablinks" onclick="openActivity(event, 'myPastActivities')">A Passadas</button>
+
+  <body onload="activateTab()">
+
 </div>
 
 <div id="myFutureBookings" class="tabcontent">
@@ -93,6 +96,14 @@
 </div>
 
 <script>
+
+function activateTab() {
+  tabcontent = document.getElementsByClassName("tabcontent");
+  tabcontent[0].style.display = "block";
+  tablinks = document.getElementsByClassName("tablinks");
+  tablinks[0].className = tablinks[0].className.replace(" active", "");
+}
+
 function openActivity(evt, activityType) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
