@@ -42,11 +42,16 @@ class BookingsController < ApplicationController
 
   def mark_as_done
     @booking.done = true
-    if @booking.save
-        redirect_to activity_path(@booking.activity), notice: 'Parabéns! A atividade foi marcada como realizada.'
-    else
-        render :edit
-    end
+    @booking.save
+    redirect_to activity_path(@booking.activity), notice: 'Parabéns! A atividade foi marcada como realizada.'
+  end
+
+  def add_review
+    # if @booking.save
+    #   redirect_to activity_path(@booking.activity), notice: 'Parabéns! Outros usuários ficarão felizes com a sua contribuição.'
+    # else
+    #   render :edit
+    # end
   end
 
   private
@@ -57,6 +62,6 @@ class BookingsController < ApplicationController
 
   def booking_params
   #Acredito que abaixo não precise do :done, mas não verifiquei
-    params.require(:booking).permit(:schedule_date, :done)
+    params.require(:booking).permit(:schedule_date, :done, :review_photo, :review_rate, :review_comment)
   end
 end
