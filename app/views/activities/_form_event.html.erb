@@ -19,6 +19,8 @@
       <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#interestModal">Adicione interesses</button>
       <br><br>
 
+
+
       <div class="modal fade" id="interestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -29,11 +31,9 @@
             </button>
           </div>
           <div class="modal-body">
-            <%= f.association :interests, as: :check_boxes %>
-          </div>
+            <%= f.association :interests, as: :check_boxes, label: ""%>
         </div>
       </div>
-    </div>
 
 
       <div class="form-inputs">
