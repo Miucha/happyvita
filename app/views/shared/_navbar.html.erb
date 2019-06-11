@@ -26,12 +26,12 @@
               <%= link_to "Minha Agenda", dashboard_path, class: "dropdown-item" %>
               <%= link_to "Publicar Evento", new_event_path, class: "dropdown-item" %>
               <%= link_to "Publicar Desafio", new_challenge_path, class: "dropdown-item" %>
-              <%= link_to "Encerrar", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              <%= link_to "Sair", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Entrar", new_user_session_path, class: "nav-link" %>
           </li>
         <% end %>
       </ul>
