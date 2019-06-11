@@ -36,29 +36,42 @@
   <% end %>
 <% end %>
 
-<div id="#bg-agenda-white" class="mt-5">
-  <div class="d-flex justify-content-center align-items-start text-center bg-white">
-    <h5 class="agenda-booked-or-published flex-fill p-2 font-weight-bold shadow">ATIVIDADES AGENDADAS</h5>
-    <h5 class="agenda-booked-or-published flex-fill p-2 font-weight-bold shadow">ATIVIDADES PUBLICADAS</h5>
-  </div>
-  <div class="d-flex justify-content-center align-items-start text-center bg-white">
-    <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">FUTURAS (<%=myfuture_bookings.count %>)</h5>
-    <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">PASSADAS (<%=mypast_bookings.count %>)</h5>
-    <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">FUTURAS (<%=myfuture_activities.count %>)</h5>
-    <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">PASSADAS (<%=mypast_activities.count %>)</h5>
-  </div>
 
-    <% if @current_user.bookings.empty? then %>
+<div class="tab">
+  <button class="tablinks btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow" onclick="openActivity(event, 'myFutureBookings')">Atividades Agendadas (<%=myfuture_bookings.count %>)</button>
+  <button class="tablinks btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow" onclick="openActivity(event, 'myPastBookings')">Atividades que Participei (<%=mypast_bookings.count %>)</button>
+  <button class="tablinks btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow" onclick="openActivity(event, 'myFutureActivities')">Atividades Publicadas (<%=myfuture_activities.count %>)</button>
+  <button class="tablinks btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow" onclick="openActivity(event, 'myPastActivities')">Atividades que já Publiquei (<%=mypast_activities.count %>)</button>
+
+  <body onload="activateTab()">
+
+</div>
+
+<div id="myFutureBookings" class="tabcontent">
+      <% if @current_user.bookings.empty? then %>
       <div class="container text-center shadow mt-5 p-5 bg-white rounded">
            <h2 class="dark-gray mb-2"> Você ainda não agendou eventos ou desafios! <h2>
           <%= link_to "PARTICIPAR DE UMA ATIVIDADE", root_path, class: "ml-2 btn btn-primary shadow font-weight-bold" %>
       </div>
     <% else %>
       <div class="shadow mt-4"><%= render 'mybookings' %></div>
-      <div class="shadow mt-4"><%= render 'mypastbookings' %></div>
     <% end %>
 
-    <% if @current_user.activities.empty? then %>
+</div>
+
+<div id="myPastBookings" class="tabcontent">
+    <% if @current_user.bookings.empty? then %>
+      <div class="container text-center shadow mt-5 p-5 bg-white rounded">
+           <h2 class="dark-gray mb-2"> Você ainda não agendou eventos ou desafios! <h2>
+          <%= link_to "PARTICIPAR DE UMA ATIVIDADE", root_path, class: "ml-2 btn btn-primary shadow font-weight-bold" %>
+      </div>
+    <% else %>
+      <div class="shadow mt-4"><%= render 'mypastbookings' %></div>
+    <% end %>  
+</div>
+
+<div id="myFutureActivities" class="tabcontent">
+<% if @current_user.activities.empty? then %>
       <div class="container text-center shadow mt-5 p-5 bg-light rounded">
         <h2 class="dark-gray mb-2">Você ainda não publicou eventos ou desafios! </h2>
         <%= link_to "CRIAR EVENTO", new_event_path, class: "ml-2 btn btn-info shadow font-weight-bold" %>
@@ -66,7 +79,50 @@
       </div>
     <% else %>
       <div class="shadow mt-4"><%= render 'myactivities' %></div>
-      <div class="shadow mt-4"><%= render 'mypastactivities' %></div>
     <% end %>
-
 </div>
+
+<div id="myPastActivities" class="tabcontent">
+  <% if @current_user.activities.empty? then %>
+        <div class="container text-center shadow mt-5 p-5 bg-light rounded">
+          <h2 class="dark-gray mb-2">Você ainda não publicou eventos ou desafios! </h2>
+          <%= link_to "CRIAR EVENTO", new_event_path, class: "ml-2 btn btn-info shadow font-weight-bold" %>
+          <%= link_to "CRIAR DESAFIO", new_challenge_path, class: "ml-2 btn btn-info shadow font-weight-bold" %>
+        </div>
+      <% else %>
+        <div class="shadow mt-4"><%= render 'mypastactivities' %></div>
+      <% end %>
+</div>
+</div>
+
+<script>
+
+function activateTab() {
+  tabcontent = document.getElementsByClassName("tabcontent");
+  tabcontent[0].style.display = "block";
+  tablinks = document.getElementsByClassName("tablinks");
+  tablinks[0].className = tablinks[0].className.replace(" active", "");
+}
+
+function openActivity(evt, activityType) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+    }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(activityType).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+
+<%# <div id="#bg-agenda-white" class="mt-5">
+  <div class="d-flex justify-content-center align-items-start text-center bg-white">
+    <h5 class="agenda-booked-or-published flex-fill p-2 font-weight-bold shadow">ATIVIDADES AGENDADAS</h5>
+    <h5 class="agenda-booked-or-published flex-fill p-2 font-weight-bold shadow">ATIVIDADES PUBLICADAS</h5>
+  </div>
+%>

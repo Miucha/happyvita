@@ -12,7 +12,7 @@
 </div>
 
 <div class="cards-container home-cards-container mx-1">
-  <% @activities.each do |activity| %>
+  <% @join.each do |activity| %>
 <!--Se a atividade não tiver data específica ou se tiver data só aparecerá se for data futura: -->
     <% if activity.event_date == nil || (activity.event_date != nil && activity.event_date > Time.now) %>
       <div class="card-activity bg-white mb-5">
@@ -52,8 +52,8 @@
             <% end %>
           </div>
         </div>
-      <div class="card-footer-bg-light-gray w-2"><br></div>
-    </div>
+        <div class="card-footer-bg-light-gray w-2"><br></div>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 </div>
