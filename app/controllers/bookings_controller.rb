@@ -38,6 +38,9 @@ class BookingsController < ApplicationController
   end
 
   def destroy
+    activity = @booking.activity
+    @booking.destroy
+    redirect_to activity_path(activity)
   end
 
   def mark_as_done
