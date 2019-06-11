@@ -1,4 +1,4 @@
-<div class="form-container row justify-content-center">
+<div class="form-container row justify-content-center pt-2">
   <div class="col-md-9 col-lg-6">
 
     <%= simple_form_for(@booking) do |f| %>
@@ -9,7 +9,7 @@
 
       <h4 class="text-center font-weight-bold my-2"><%= @booking.activity.title %></h4>
 
-      <h4>Avalie e colabore com a experiência de outros usuários:</h4><br>
+      <h5>Avalie e colabore com a experiência de outros usuários:</h5><br>
 
       <div class="form-inputs">
         <%= f.input :review_rate, required: true, input_html: { min: 0, max: 10, step: 1}, label: "Como foi realizar esta atividade? Atribua uma nota de 0 a 10:" %>
