@@ -37,7 +37,7 @@ SimpleForm.setup do |config|
 
     # Calculates maxlength from length validations for string inputs
     # and/or database column lengths
-    b.optional :maxlength
+    b.use :maxlength
 
     # Calculate minlength from length validations for string inputs
     b.optional :minlength
