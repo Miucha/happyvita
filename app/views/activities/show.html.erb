@@ -22,22 +22,49 @@
           <% state = @activity.address.state.nil? ? state = " " : @activity.address.state %>
           <% zipcode = @activity.address.zipcode.nil? ? zipcode = " " : @activity.address.zipcode %>
 
+
           <div class="text-left mt-3">
             <h4 class="mt-1 font-weight-bold"><%=@activity.title%></h4>
+            <div class="mt-1">
+
+              <% if current_user == nil || booking == []%>
+                <% if @activity.event %>
+                  <%= button_to "AGENDAR", activity_bookings_path(@activity), method: :post, class: "btn btn-primary shadow text-center font-weight-bold btn-width" %>
+                <% else %>
+                  <%= button_to "AGENDAR", new_activity_booking_path(@activity), method: :get, class: "btn btn-primary shadow text-center font-weight-bold btn-width" %>
+                <% end %>
+
+              <% elsif @activity.event && booking != []%>
+                <% if booking.first.done == true %>
+                  <div class="text-center bg-success border border-success rounded p-2 shadow btn-width">
+                    <h5 class="mr-2 font-weight-bold">JÁ PARTICIPEI</h5>
+                  </div>
+                <% else %>
+                  <h5 class="text-center bg-info border border-info rounded p-2 shadow font-weight-bold btn-width">AGENDADO</h5>
+                <% end %>
+<!--   destroy -->
+              <% elsif booking != [] && booking.first.done == true %>
+                <div class="text-center bg-success border border-success rounded p-2 shadow btn-width">
+                  <h5 class="mr-2 font-weight-bold">JÁ PARTICIPEI</h5>
+                </div>
+              <% else %>
+                <div class="text-center bg-info border border-info rounded p-2 shadow btn-width">
+                  <h5 class="mr-2 font-weight-bold">AGENDADO</h5>
+                </div>
+              <% end %>
+            </div>
+
             <h5 class="mt-1"><%= "#{street} #{number}"%></h5>
             <h5><%= "#{district} #{city} #{state} #{zipcode}"%></h5>
 
-            <%# Share butons by ShareThis.com %>
-            <div class="sharethis-inline-share-buttons"></div>
-
-            <div class="d-flex align-items-center mt-2">
+            <div class="d-flex align-items-center mt-1">
 <!-- class: "btn btn-warning text-white shadow font-weight-bold mr-2" -->
               <% unless (current_user == nil) || (booking == []) %>
 <!--            INCLUIR BOTÃO "ATIVIDADE REALIZADA" abrindo Modal que dê a possibilidade de incluir foto -->
 <!-- class: "btn btn-success text-white shadow font-weight-bold" -->
                 <% unless booking.first.done %>
 
-                  <button type="button" class="btn btn-body-color shadow text-right border border-dark mr-2" data-toggle="modal" data-target="#booking-review-Modal">EU FIZ</button>
+                  <button type="button" class="btn btn-body-color shadow text-center border border-dark mr-2" data-toggle="modal" data-target="#booking-review-Modal">EU FIZ</button>
                   <br><br>
 
                   <div class="modal fade" id="booking-review-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -52,7 +79,7 @@
                         <div class="modal-body">
                           <h4>Adicione sua avaliação com uma foto e um comentário sobre como foi realizar essa atividade para incentivar outros usuários!</h4>
                           <div class="d-flex justify-content-center mt-2">
-                            <%= button_to "AVALIAR", add_review_path(booking.first), method: :get, class: "btn btn-success shadow text-right mr-2" %>
+                            <%= button_to "AVALIAR", add_review_path(booking.first), method: :get, class: "btn btn-success shadow text-center mr-2" %>
                             <%= button_to "MAIS TARDE", mark_as_done_path(booking.first), method: :patch, class: "btn btn-body-color shadow mr-2" %>
                           </div>
                         </div>
@@ -64,9 +91,9 @@
               <% end %>
 
               <% if (@activity.event == false) && (booking != []) && (booking.first.done == false) %>
-                <%= button_to "REAGENDAR", edit_booking_path(booking.first), method: :get, class: "btn btn-body-color shadow text-right border border-dark mr-2" %>
+                <%= button_to "REAGENDAR", edit_booking_path(booking.first), method: :get, class: "btn btn-body-color shadow text-center border border-dark mr-2" %>
 <!--            INCLUIR BOTÃO "CANCELAR PARTICIPAÇÃO" -->
-<!-- class: "btn btn-body-color shadow text-right border border-dark mr-2" -->
+<!-- class: "btn btn-body-color shadow text-center border border-dark mr-2" -->
               <% end %>
             </div>
             <br>
@@ -74,30 +101,17 @@
         </div>
 
         <div class="card-event-date text-center mr-2 mt-3">
-
-          <% if current_user == nil || booking == []%>
-            <% if @activity.event %>
-              <%= button_to "AGENDAR", activity_bookings_path(@activity), method: :post, class: "show-btn-position-img-bottom btn btn-primary shadow text-right font-weight-bold" %>
-            <% else %>
-              <%= button_to "AGENDAR", new_activity_booking_path(@activity), method: :get, class: "show-btn-position-img-bottom btn btn-primary shadow text-right font-weight-bold" %>
-            <% end %>
-
-          <% elsif @activity.event && booking != []%>
-              <h5 class="show-btn-position-img-bottom text-center bg-info border border-info rounded p-2 shadow font-weight-bold">AGENDADO</h5>
-            <!--   destroy -->
-
-          <% else %>
-            <div class="show-btn-position-img-bottom d-flex align-items-center text-center bg-info border border-info rounded p-2 shadow">
-              <h5 class="mr-2 font-weight-bold">AGENDADO</h5>
-            </div>
-          <% end %>
+          <%# Share butons by ShareThis.com %>
+          <div class="sharethis-inline-share-buttons show-btn-position-img-bottom text-right"></div>
 
           <% if @activity.event_date %>
             <h1><%= @activity.event_date.strftime("%d")%></h1>
             <h4><%= @activity.event_date.strftime("%b")%></h4>
+            <h5><%= @activity.event_date.strftime("%Y")%></h5>
           <% elsif booking != [] && booking.first.schedule_date %>
             <h1><%= booking.first.schedule_date.strftime("%d")%></h1>
             <h4><%= booking.first.schedule_date.strftime("%b")%></h4>
+            <h5><%= booking.first.schedule_date.strftime("%Y")%></h5>
           <% else %>
             <h1><%= link_to new_activity_booking_path(@activity) do %>
                <i class="far fa-calendar-alt title-link text-decoration-none"></i>
@@ -110,11 +124,8 @@
       <% if @activity.event? %>
         <h5>Participantes confirmados: <%= @activity.bookings.count%></h5>
         <h5>Vagas disponíveis: <%= @activity.capacity - @activity.bookings.count%></h5>
-      <% else %>
-        <h5>Agendaram este desafio: <%= @activity.bookings.count%></h5>
       <% end %>
-      <br>
-      <h4>Descrição:</h4><br>
+      <h4 class="mt-1">Descrição:</h4><br>
       <h5><%= @activity.description.gsub(/\n/, '<br/>').html_safe %></h5>
     </div>
   </div>
@@ -125,8 +136,8 @@
       <% if @activity.event %>
         <h5>Acesso do administrador do evento publicado:</h5>
         <div class="d-flex mr-2 my-2 justify-content-center">
-          <%= button_to "EDITAR", edit_event_path(@activity), method: :get, class: "btn btn-body-color shadow text-right border border-dark mr-2" %>
-          <%= button_to "CANCELAR", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "btn btn-body-color shadow text-right border border-dark" %>
+          <%= button_to "EDITAR", edit_event_path(@activity), method: :get, class: "btn btn-body-color shadow text-center border border-dark mr-2" %>
+          <%= button_to "CANCELAR", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "btn btn-body-color shadow text-center border border-dark" %>
         </div>
         <div>
           <h5>Este evento já foi agendado por: </h5>
@@ -137,11 +148,11 @@
       <% else %>
         <h5>Acesso do administrador do desafio publicado:</h5>
         <div class="d-flex mr-2 my-2 justify-content-center">
-        <%= button_to "EDITAR", edit_challenge_path(@activity), method: :get, class: "btn btn-body-color shadow text-right border border-dark mr-2" %>
-        <%= button_to "CANCELAR", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "btn btn-body-color shadow text-right border border-dark" %>
+        <%= button_to "EDITAR", edit_challenge_path(@activity), method: :get, class: "btn btn-body-color shadow text-center border border-dark mr-2" %>
+        <%= button_to "CANCELAR", cancel_activity_path(@activity), method: :patch, data: { confirm: "Quer realmente cancelar este evento?" }, class: "btn btn-body-color shadow text-center border border-dark" %>
         </div>
         <div>
-          <h5>Este desafio já foi agendado por: </h5>
+          <h5>Este desafio já foi agendado por: <%= @activity.bookings.count%> usuários</h5>
           <% @activity.bookings.each do |booking| %>
             <p>- <%=booking.user.first_name%> <%=booking.user.last_name%> | E-mail: <b><%=booking.user.email %></b></p>
           <% end %>
@@ -162,60 +173,32 @@
     </div>
   <% end %>
 
-<% @activity.bookings.each do |booking| %>
-
-  <% if booking.review_rate? then %>
-    <%= booking.review_rate %>
-  <% end %>
-
-  <% if booking.review_comment? then %>
-    <%= booking.review_comment %>
-  <% end %>
-
-<% end %>
-
-<div class="cards-container home-cards-container mx-1">
-  <% @activity.bookings.each do |booking| %>
-<!--Se a atividade não tiver data específica ou se tiver data só aparecerá se for data futura: -->
-      <div class="card-activity bg-white mb-5">
-
-        <% if booking.review_photo? then %>
-          <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booking.review_photo, height: 400, crop: :fit %>')">
-        <% else %>
-          <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', height: 400, crop: :fit %>')">
-        <% end %>
-          </div>
-
-
-        <div class="card-activity-infos shadow">
-          <div class="card-event-date text-center mr-2 mt-1">
-            <% if activity.event_date %>
-              <h1><%= activity.event_date.strftime("%d")%></h1>
-              <h4><%= activity.event_date.strftime("%b")%></h4>
-            <% else %>
-              <h1><%= link_to activity_path(activity) do %>
-                <i class="far fa-calendar-alt title-link text-decoration-none"></i>
-              <% end %></h1>
-            <% end %>
-          </div>
-          <div class="card-title-and-buttons">
-            <h4><%= link_to "+ INFO", activity_path(activity), class: "btn btn-info card-btn-position-img-bottom shadow font-weight-bold" %></h4>
-            <h4 class="mt-1 ml-2 text-left"><%= link_to activity.title, activity_path(activity),class: "title-link text-decoration-none"%></h4>
-
-            <% district = activity.address.district.nil? ? district = " " : activity.address.district %>
-            <% city = activity.address.city.nil? ? city = " " : activity.address.city %>
-            <% state = activity.address.state.nil? ? state = " " : activity.address.state %>
-
-            <p class="mt-1 ml-2 text-left"><%= "#{district} #{city} #{state} "%></p>
-            <% if current_user != nil && @user_bookings != nil && @user_bookings.select { |booking| booking.activity_id == activity.id } != [] %>
-              <h4><%= link_to "AGENDADO", activity_path(activity), class: "btn btn-success card-activity-booking-btn shadow font-weight-bold" %></h4>
-            <% else %>
-              <h4><%= link_to "AGENDAR", activity_path(activity), class: "btn btn-primary card-activity-booking-btn shadow font-weight-bold" %></h4>
-            <% end %>
+<% unless @activity.bookings == [] %>
+  <h4 class="text-center font-weight-bold mt-2">Inspire-se com as dicas de quem já realizou esta atividade:</h4>
+  <div class="cards-container home-cards-container mx-1">
+    <% @activity.bookings.each do |booking| %>
+  <!--Se a atividade não tiver data específica ou se tiver data só aparecerá se for data futura: -->
+      <% if booking.review_rate != nil && booking.review_comment != nil %>
+        <div class="card-activity bg-white mt-2">
+          <div class="card-footer-bg-light-gray w-2"><br></div>
+            <div class="shadow">
+              <div class="card-activity-infos">
+                <div class="card-title-and-buttons">
+                  <h5 class="mt-1 ml-2 text-left"><%= booking.review_comment %></h5>
+                  <!-- Incluir botão para curtir -->
+                </div>
+                <div class="card-event-date text-center mr-2 mt-3">
+                  <h4>Nota:</h4>
+                  <h1><%=booking.review_rate%></h1>
+                </div>
+              </div>
+              <% if booking.review_photo? then %>
+                <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booking.review_photo, height: 400, crop: :fit %>')">
+              <% end %>
+            </div>
           </div>
         </div>
-      <div class="card-footer-bg-light-gray w-2"><br></div>
-    </div>
-
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
-</div>
