@@ -1,0 +1,7 @@
+# config/meta.yml
+
+meta_product_name: "Happy Vita"
+meta_title: "Happy Vita - Por uma vida mais ativa"
+meta_description: "Busque por atividades que tornarão sua vida mais ativa."
+meta_image: "cover.png" # should exist in `app/assets/images/`
+twitter_account: "@_brsystems"   # required for Twitter Cards
