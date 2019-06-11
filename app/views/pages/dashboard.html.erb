@@ -38,10 +38,10 @@
 
 
 <div class="tab">
-  <button class="tablinks" onclick="openActivity(event, 'myFutureBookings')">B Futuras</button>
-  <button class="tablinks" onclick="openActivity(event, 'myPastBookings')">B Passadas</button>
-  <button class="tablinks" onclick="openActivity(event, 'myFutureActivities')">A Futuras</button>
-  <button class="tablinks" onclick="openActivity(event, 'myPastActivities')">A Passadas</button>
+  <button class="tablinks btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow" onclick="openActivity(event, 'myFutureBookings')">Atividades Agendadas (<%=myfuture_bookings.count %>)</button>
+  <button class="tablinks btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow" onclick="openActivity(event, 'myPastBookings')">Atividades que Participei (<%=mypast_bookings.count %>)</button>
+  <button class="tablinks btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow" onclick="openActivity(event, 'myFutureActivities')">Atividades Publicadas (<%=myfuture_activities.count %>)</button>
+  <button class="tablinks btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow" onclick="openActivity(event, 'myPastActivities')">Atividades que já Publiquei (<%=mypast_activities.count %>)</button>
 
   <body onload="activateTab()">
 
@@ -109,7 +109,7 @@ function openActivity(evt, activityType) {
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
-  }
+    }
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
@@ -125,10 +125,4 @@ function openActivity(evt, activityType) {
     <h5 class="agenda-booked-or-published flex-fill p-2 font-weight-bold shadow">ATIVIDADES AGENDADAS</h5>
     <h5 class="agenda-booked-or-published flex-fill p-2 font-weight-bold shadow">ATIVIDADES PUBLICADAS</h5>
   </div>
-  <div class="d-flex justify-content-center align-items-start text-center bg-white">
-    <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">FUTURAS (<%=myfuture_bookings.count %>)</h5>
-    <%# <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">PASSADAS (<%=mypast_bookings.count %>)</h5> %>
-    <%# <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">FUTURAS (<%=myfuture_activities.count %>)</h5> %>
-    <%# <h5 class="btn-agenda-menu p-2 flex-fill border-bottom rounded-bottom shadow">PASSADAS (<%=mypast_activities.count %>)</h5> %>
-  <%# </div> %>
- <%# % > %>
+%>

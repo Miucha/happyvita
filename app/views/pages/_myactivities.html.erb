@@ -21,6 +21,7 @@
 <div class="cards-container my-4 mx-1">
   <% activities_ordered.each do |activity| %>
     <div class="card-activity bg-white mb-3">
+    <%= link_to activity_path(activity) do%>
       <!-- Imagem -->
       <% if activity.photo? then %>
         <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path activity.photo, height: 400, crop: :fit %>')">
@@ -29,7 +30,7 @@
       <% end %>
         </div>
       <!-- imagem fim -->
-
+      <% end %>
       <div class="card-activity-infos shadow">
         <div class="card-event-date text-center mr-2 mt-1">
           <% if activity.event_date %>
