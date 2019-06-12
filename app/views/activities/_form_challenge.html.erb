@@ -4,7 +4,7 @@
 
   <%= f.hidden_field :event, value: '0'%>
 
-  <p>Todos os campos são obrigatórios:</p><br>
+  <p>*Todos os campos são obrigatórios:</p><br>
 
   <div class="form-inputs">
     <%= f.input :title, label: "Nome do Desafio:" %>
@@ -14,6 +14,10 @@
     <%= f.input :description, as: :text, label: "Descrição:" %>
   </div>
 
+  <div class="form-inputs">
+    <%= f.input :group, label: "Assinale se o desafio for em grupo." %>
+  </div>
+
   <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#interestModal">Adicione interesses</button>
   <br><br>
 
@@ -21,7 +25,7 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalScrollableTitle">Novo Interesse</h5>
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Interesses relacionados à atividade</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -33,12 +37,8 @@
     </div>
   </div>
 
-  <div class="form-inputs">
-    <%= f.input :group, label: "Atividade é em grupo?" %>
-  </div>
-
   <div>
-    <%= f.input :photo, label: 'Foto' %>
+    <%= f.input :photo, label: 'Adicione uma foto para ilustrar o desafio:' %>
     <%= f.input :photo_cache, as: :hidden %>
   </div>
 

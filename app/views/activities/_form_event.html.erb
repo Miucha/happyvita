@@ -4,17 +4,21 @@
 
   <%= f.hidden_field :event, value: '1'%>
 
-  <p>*campos obrigatórios:</p><br>
+  <p>*Campos obrigatórios:</p><br>
 
   <div class="form-inputs">
-    <%= f.input :title, label: "Nome da atividade:" %>
+    <%= f.input :title, label: "Nome do evento:" %>
   </div>
 
   <div class="form-inputs">
-    <%= f.input :description, as: :text, label: "Descrição:" %>
+    <%= f.input :description, as: :text, label: "Descrição e instruções para inscrição no evento:" %>
   </div>
 
-  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#interestModal">Adicione interesses</button>
+  <div class="form-inputs">
+    <%= f.input :group, label: "Assinale se o evento for em grupo." %>
+  </div>
+
+  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#interestModal">Interesses relacionados ao evento</button>
   <br><br>
 
   <div class="modal fade" id="interestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -36,7 +40,6 @@
   <div class="form-inputs">
     <%= f.input :group, label: "Atividade é em grupo?" %>
   </div>
-
 
   <% if @activity.event_date.present? %>
     <%= f.input :event_date, :as => :string, required: true,
@@ -68,7 +71,7 @@
   <br><br>
 
   <div>
-    <%= f.input :photo, label: 'Foto' %>
+    <%= f.input :photo, label: 'Adicione uma foto para ilustrar o evento:' %>
     <%= f.input :photo_cache, as: :hidden %>
   </div>
 
