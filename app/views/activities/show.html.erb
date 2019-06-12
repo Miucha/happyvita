@@ -1,3 +1,43 @@
+#------- activity-show
+MIUCHA
+<div class="activity-show-container">
+  <div class="card-activity-show">
+
+    <div class="bg-white mb-2 shadow">
+      <div class="card-activity">
+        <% if @activity.photo? then %>
+          <div class="banner banner_img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @activity.photo, quality: "auto:good", gravity: :auto, crop: :thumb %>')">
+        <% else %>
+          <div class="banner banner_noimage" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', quality: "auto:good", gravity: :auto, crop: :thumb %>')">
+  <%# quality: "auto:good", height: 800, crop: :thumb, dpr: 4.0 %>
+        <% end %>
+          </div>
+        <% booking = [] %>
+        <% booking = current_user.bookings.select { |booking| booking.activity_id == @activity.id } unless current_user.nil?%>
+
+        <div class="card-activity-infos-show p-2">
+
+          <div class="card-title-and-buttons mr-2">
+
+            <% street = @activity.address.street.nil? ? street = " " : @activity.address.street %>
+            <% number = @activity.address.number.nil? ? number = " " : @activity.address.number %>
+            <% district = @activity.address.district.nil? ? district = " " : @activity.address.district %>
+            <% city = @activity.address.city.nil? ? city = " " : @activity.address.city %>
+            <% state = @activity.address.state.nil? ? state = " " : @activity.address.state %>
+            <% zipcode = @activity.address.zipcode.nil? ? zipcode = " " : @activity.address.zipcode %>
+
+
+            <div class="text-left mt-3">
+              <h4 class="mt-1 font-weight-bold"><%=@activity.title%></h4>
+              <div class="mt-1">
+
+                <% if current_user == nil || booking == []%>
+                  <% if @activity.event %>
+                    <%= button_to "AGENDAR", activity_bookings_path(@activity), method: :post, class: "btn btn-primary shadow text-center font-weight-bold btn-width" %>
+                  <% else %>
+                    <%= button_to "AGENDAR", new_activity_booking_path(@activity), method: :get, class: "btn btn-primary shadow text-center font-weight-bold btn-width" %>
+                  <% end %>
+#------------------
 <div class="card-activity-show">
 
   <div class="mx-1 bg-white mb-2 shadow">
@@ -34,6 +74,7 @@
                 <% else %>
                   <%= button_to "AGENDAR", new_activity_booking_path(@activity), method: :get, class: "btn btn-primary shadow text-center font-weight-bold btn-width" %>
                 <% end %>
+#>>>>>>> master --------
 
               <% elsif @activity.event && booking != []%>
                 <% if booking.first.done == true %>
