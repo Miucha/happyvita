@@ -8,38 +8,45 @@
   <% end %>
 <% end %>
 
-  <h2 class="text-center mb-2">ATIVIDADES FUTURAS QUE AGENDEI</h2>
+<h4 class="text-center font-weight-bold mb-2">Atividades futuras que agendei</h4>
   <%# <% raise   Sem sort %>
   <%# <% activities_ordered = myfuture_bookings.activity.sort_by(&:event_date) %>
-<div class="cards-container my-4 mx-1">
-  <% myfuture_bookings.each do |booking| %>
-    <div class="card-activity bg-white mb-3">
-    <%= link_to activity_path(booking.activity) do%>
-      <!-- Imagem -->
-      <% if booking.activity.photo? then %>
-        <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booking.activity.photo, height: 400, crop: :fit %>')">
-      <% else %>
-        <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', height: 400, crop: :fit %>')">
-      <% end %>
-        </div>
-      <!-- imagem fim -->
-      <% end %>
-      <div class="card-activity-infos shadow">
-        <div class="card-event-date text-center mr-2 mt-1">
-          <h1><%= booking.schedule_date.strftime("%d")%></h1>
-          <h4><%= booking.schedule_date.strftime("%b")%></h4>
-        </div>
-        <div class="card-title-and-buttons">
-          <% district = booking.activity.address.district.nil? ? district = " " : booking.activity.address.district %>
-          <% city = booking.activity.address.city.nil? ? city = " " : booking.activity.address.city %>
-          <% state = booking.activity.address.state.nil? ? state = " " : booking.activity.address.state %>
+<% if myfuture_bookings.empty? %>
+  <div class="container text-center shadow mt-5 py-4 px-1 bg-white rounded">
+   <h4 class="dark-gray mb-2"> Você não tem novas atividades agendadas para realizar. Aproveite para escolher eventos ou desafios que combinem com você! <h4>
+   <%= link_to "ESCOLHER UMA ATIVIDADE", root_path, class: "ml-2 btn btn-primary shadow font-weight-bold" %>
+  </div>
+<% else %>
+  <div class="cards-container my-4 mx-1">
+    <% myfuture_bookings.each do |booking| %>
+      <div class="card-activity bg-white mb-3">
+      <%= link_to activity_path(booking.activity) do%>
+        <!-- Imagem -->
+        <% if booking.activity.photo? then %>
+          <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path booking.activity.photo, height: 400, crop: :fit %>')">
+        <% else %>
+          <div class="banner-img-vertical-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path 'smyle', height: 400, crop: :fit %>')">
+        <% end %>
+          </div>
+        <!-- imagem fim -->
+        <% end %>
+        <div class="card-activity-infos shadow">
+          <div class="card-event-date text-center mr-2 mt-1">
+            <h1><%= booking.schedule_date.strftime("%d")%></h1>
+            <h4><%= booking.schedule_date.strftime("%b")%></h4>
+          </div>
+          <div class="card-title-and-buttons">
+            <% district = booking.activity.address.district.nil? ? district = " " : booking.activity.address.district %>
+            <% city = booking.activity.address.city.nil? ? city = " " : booking.activity.address.city %>
+            <% state = booking.activity.address.state.nil? ? state = " " : booking.activity.address.state %>
 
-          <h4><%= link_to "+ INFO", activity_path(booking.activity), class: "btn btn-info card-btn-position-img-bottom shadow font-weight-bold" %></h4>
-          <h4 class="mt-1 ml-2 text-left"><%= link_to booking.activity.title, activity_path(booking.activity),class: "title-link text-decoration-none"%></h4>
-          <p class="mt-1 ml-2 text-left"><%= "#{district} #{city} #{state} "%></p>
+            <h4><%= link_to "+ INFO", activity_path(booking.activity), class: "btn btn-info card-btn-position-img-bottom shadow font-weight-bold" %></h4>
+            <h4 class="mt-1 ml-2 text-left"><%= link_to booking.activity.title, activity_path(booking.activity),class: "title-link text-decoration-none"%></h4>
+            <p class="mt-1 ml-2 text-left"><%= "#{district} #{city} #{state} "%></p>
+          </div>
         </div>
+        <div class="card-footer-bg-light-gray w-2"><br></div>
       </div>
-      <div class="card-footer-bg-light-gray w-2"><br></div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>
