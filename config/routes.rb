@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :bookings, only: [:edit, :update, :destroy]
   get 'dashboard', to: 'pages#dashboard', as: 'dashboard'
-
+  get 'agenda', to: 'pages#agenda', as: 'agenda'
   patch 'bookings/:id/mark_as_done', to: 'bookings#mark_as_done', as: 'mark_as_done'
   get 'bookings/:id/add_review', to: 'bookings#add_review', as: 'add_review'
 
