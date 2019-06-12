@@ -8,8 +8,9 @@ class ActivitiesController < ApplicationController
         OR activities.description @@ :query \
         OR addresses.district @@ :query \
         OR addresses.city @@ :query \
+        OR interests.name @@ :query \
       "
-      @activities = Activity.joins(:address).where(sql_query, query: "%#{params[:query]}%").where('confirmed = true')
+      @activities = Activity.joins(:address, :interests).where(sql_query, query: "%#{params[:query]}%").where('confirmed = true')
       if current_user != nil && current_user.bookings != []
         @user_bookings = current_user.bookings
       end
