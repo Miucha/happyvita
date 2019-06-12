@@ -185,9 +185,9 @@
     <% end %>
 
   <div class="reviews-container">
-    <% unless @activity.bookings == [] %>
-      <h4 class="m-2">Experiências de outros usuários:</h4>
-      <div class="row justify-content-center align-items-center show-cards-container m-1">
+    <% unless @activity.bookings.select {|booking| booking.review_rate != nil} == [] %>
+      <h4 class="mx-2 my-4">Experiências de outros usuários:</h4>
+      <div class="row justify-content-center align-items-center show-cards-container my-1">
 
         <% limit_3_reviews = @activity.bookings.sample(3) %>
 
