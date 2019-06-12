@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script language="JavaScript">
   $(function() {
     $( "#calendario" ).datepicker({
       dateFormat: 'dd/mm/yy',
@@ -15,10 +15,10 @@
   <%= simple_form_for [@activity, @booking] do |f| %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <% if f.object.errors[:schedule_date] == ["can't be blank"]%>
-      <% error_msg = 'Não pode estar em branco' %>
+      <% error_msg = 'A data não pode estar em branco' %>
     <% end %>
     <% if f.object.errors[:schedule_date] == ["passado"] %>
-      <% error_msg = 'Não pode estar no passado' %>
+      <% error_msg = 'A data não pode ser no passado' %>
     <% end %>
     <%= f.input :schedule_date, :as => :string,
           :input_html => {
@@ -34,4 +34,3 @@
     </div>
   <% end %>
 </div>
-
