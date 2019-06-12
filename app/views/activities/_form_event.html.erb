@@ -37,6 +37,10 @@
     </div>
   </div>
 
+  <div class="form-inputs">
+    <%= f.input :group, label: "Atividade é em grupo?" %>
+  </div>
+
   <% if @activity.event_date.present? %>
     <%= f.input :event_date, :as => :string, required: true,
           :input_html => {
