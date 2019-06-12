@@ -5,7 +5,7 @@
 
 /* Style the buttons inside the tab */
 .tab button {
-  opacity: 0.5;
+  opacity: 0.6;
   background-color: inherit;
   float: left;
   border: none;
@@ -19,16 +19,12 @@
 /* Change background color of buttons on hover */
 .tab button:hover {
   opacity: 1;
-  border: bottom;
-  border-color: dark-gray;
   text-weight: bold;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
   opacity: 1;
-  border: bottom;
-  border-color: dark-gray;
   text-weight: bold;
 }
 
