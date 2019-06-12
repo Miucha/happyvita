@@ -3,8 +3,10 @@ class CalendarMailer < ApplicationMailer
 
         calendar = Icalendar::Calendar.new
         event = Icalendar::Event.new
-        event.dtstart = activity.event_date.strftime("%Y%m%dT%H%M%S")
-        event.dtend = activity.event_date.strftime("%Y%m%dT%H%M%S")
+        @user = params[:user]
+        booking = @user.bookings.select { |booking| booking.activity_id == activity.id } unless @user.nil?
+        event.dtstart = booking.first.schedule_date.strftime("%Y%m%dT%H%M%S")
+        event.dtend = booking.first.schedule_date.strftime("%Y%m%dT%H%M%S")
         event.summary = activity.title
         event.description = activity.description
         event.location = 'Here !'
@@ -14,7 +16,6 @@ class CalendarMailer < ApplicationMailer
         calendar.add_event(event)
         calendar.publish
 
-        @user = params[:user]
         mail.attachments['activity.ics'] = { :mime_type => 'text/calendar', content:calendar.to_ical}
         mail(to: @user.email, subject: 'Welcome')
   end
