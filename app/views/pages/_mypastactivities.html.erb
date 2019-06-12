@@ -1,4 +1,4 @@
-<h4 class="text-center font-weight-bold mb-2">Atividades passadas publicadas por mim</h4>
+<h4 class="font-weight-bold mb-2">Eventos passados</h4>
 
 <!-- Para selecionar apenas as atividades com data e que sejam passadas (anteriores a hoje): -->
 
@@ -14,7 +14,7 @@
 <!-- Para ordenar as atividades com data: -->
 <% if mypast_activities.empty? %>
   <div class="container text-center shadow mt-5 py-4 px-1 bg-white rounded">
-     <h4 class="dark-gray mb-2"> Você ainda não promoveu um evento público que já tenha sido realizado e que tenha divulgado aqui no <strong>Happy</strong>Vita! <h4>
+     <h4 class="dark-gray mb-2"> Você ainda não promoveu um evento público divulgado aqui que já tenha sido realizado. Aproveite para publicar um novo!<h4>
     <%= link_to "CRIAR EVENTO", new_event_path, class: "ml-2 btn btn-info shadow font-weight-bold" %>
     <%= link_to "CRIAR DESAFIO", new_challenge_path, class: "ml-2 btn btn-info shadow font-weight-bold" %>
   </div>
