@@ -20,6 +20,8 @@ class Activity < ApplicationRecord
 
   validate :date_cannot_be_in_the_past
 
+
+
   def date_cannot_be_in_the_past
     if event_date.present? && event_date < Date.today
       errors.add(:event_date, "não pode estar no passado")
@@ -47,4 +49,6 @@ class Activity < ApplicationRecord
       errors.add(:address_id, "Qual o endereço do evento?")
     end
   end
+
+
 end

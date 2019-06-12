@@ -33,12 +33,16 @@ class ActivitiesController < ApplicationController
     @join = organize(@join)
   end
 
+
   def show
     @activity_address_id = @activity.address_id
 
     @activity_address = Address.find(@activity_address_id)
 
     @markers_activity = [lat: @activity_address.latitude, lng: @activity_address.longitude]
+
+    @activity = Activity.find(params[:id])
+
 
   end
 
@@ -149,4 +153,5 @@ class ActivitiesController < ApplicationController
       []
     end
   end
+
 end

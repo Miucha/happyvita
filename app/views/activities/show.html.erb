@@ -172,6 +172,7 @@
       </div>
     <% end %>
 
+  <%= link_to @activity.title, :controller => 'activities', :action => :show, :format => :ics %>
 
     <% if @activity.event? %>
       <div
