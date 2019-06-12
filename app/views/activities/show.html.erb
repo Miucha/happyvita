@@ -61,38 +61,34 @@
                   </div>
                 <% end %>
               </div>
-
-              <h5 class="mt-1"><%= "#{street} #{number}"%></h5>
-              <h5><%= "#{district} #{city} #{state} #{zipcode}"%></h5>
-              <div class="d-flex flex-column">
-                <div class="d-flex align-items-center mt-1">
-    <!-- class: "btn btn-warning text-white shadow font-weight-bold mr-2" -->
-                  <% unless (current_user == nil) || (booking == []) %>
-    <!--            INCLUIR BOTÃO "ATIVIDADE REALIZADA" abrindo Modal que dê a possibilidade de incluir foto -->
-    <!-- class: "btn btn-success text-white shadow font-weight-bold" -->
-                    <% unless booking.first.done %>
-
-
-                      <div class="modal fade" id="booking-review-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalScrollableTitle">Avalie a atividade "<%= @activity.title %>":</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <h4>Adicione sua avaliação com uma foto e um comentário sobre como foi realizar essa atividade para incentivar outros usuários!</h4>
-                              <div class="d-flex justify-content-center mt-2">
-                                <%= button_to "AVALIAR", add_review_path(booking.first), method: :get, class: "btn btn-success shadow text-center mr-2" %>
-                                <%= button_to "MAIS TARDE", mark_as_done_path(booking.first), method: :patch, class: "btn btn-body-color shadow mr-2" %>
-                              </div>
+            <h5 class="mt-1"><%= "#{street} #{number}"%></h5>
+            <h5><%= "#{district} #{city} #{state} #{zipcode}"%></h5>
+            <div class="d-flex flex-column">
+              <div class="d-flex align-items-center mt-1">
+  <!-- class: "btn btn-warning text-white shadow font-weight-bold mr-2" -->
+                <% unless (current_user == nil) || (booking == []) %>
+  <!--            INCLUIR BOTÃO "ATIVIDADE REALIZADA" abrindo Modal que dê a possibilidade de incluir foto -->
+  <!-- class: "btn btn-success text-white shadow font-weight-bold" -->
+                  <% unless booking.first.done %>
+                    <div class="modal fade" id="booking-review-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Avalie a atividade "<%= @activity.title %>":</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <h4>Adicione sua avaliação com uma foto e um comentário sobre como foi realizar essa atividade para incentivar outros usuários!</h4>
+                            <div class="d-flex justify-content-center mt-2">
+                              <%= button_to "AVALIAR", add_review_path(booking.first), method: :get, class: "btn btn-success shadow text-center mr-2" %>
+                              <%= button_to "MAIS TARDE", mark_as_done_path(booking.first), method: :patch, class: "btn btn-body-color shadow mr-2" %>
                             </div>
                           </div>
                         </div>
                       </div>
-
+                    </div>
                     <% end %>
                   <% end %>
                 </div>
@@ -110,6 +106,25 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="card-event-date text-center mr-2 mt-3">
+          <%# Share butons by ShareThis.com %>
+          <div style= "z-index: auto;"  class="sharethis-inline-share-buttons show-btn-position-img-bottom text-right"></div>
+          <% if @activity.event_date %>
+            <h1><%= I18n.l(@activity.event_date, format: "%d", locale: :'pt-BR') %></h1>
+            <h4><%= I18n.l(@activity.event_date, format: "%b", locale: :'pt-BR') %></h4>
+            <h5><%= I18n.l(@activity.event_date, format: "%Y", locale: :'pt-BR') %></h5>
+          <% elsif booking != [] && booking.first.schedule_date %>
+            <h1><%= I18n.l(booking.first.schedule_date, format: "%d", local: :'pt-BR') %></h1>
+            <h4><%= I18n.l(booking.first.schedule_date, format: "%b", local: :'pt-BR') %></h4>
+            <h5><%= I18n.l(booking.first.schedule_date, format: "%Y", local: :'pt-BR') %></h5>
+          <% else %>
+            <h1><%= link_to new_activity_booking_path(@activity) do %>
+               <i class="far fa-calendar-alt title-link text-decoration-none"></i>
+            <% end %></h1>
+          <% end %>
+
 
           <div class="card-event-date text-center mr-2 mt-3">
             <%# Share butons by ShareThis.com %>
