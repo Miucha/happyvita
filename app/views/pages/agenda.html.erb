@@ -22,7 +22,7 @@
   <div class="container mb-3"><h4 class="text-center font-weight-bold">ATIVIDADES QUE AGENDEI</h4></div>
 
   <div class="tab d-flex justify-content-start align-items-center text-center">
-    <button class="tablinks agenda-booked-or-published btn btn-body-color border border-dark shadow text-center p-2 mx-1" onclick="openActivity(event, 'myFutureBookings')">FUTURAS (<%=myfuture_bookings.count %>)</button>
+    <button class="tablinks agenda-booked-or-published btn btn-body-color border border-dark shadow text-center p-2 mx-1 active" onclick="openActivity(event, 'myFutureBookings')">FUTURAS (<%=myfuture_bookings.count %>)</button>
     <button class="tablinks agenda-booked-or-published btn btn-body-color border border-dark shadow text-center p-2 mx-1" onclick="openActivity(event, 'myPastBookings')">PASSADAS (<%=mypast_bookings.count %>)</button>
     <body onload="activateTab()">
   </div>
@@ -38,7 +38,6 @@
       <% else %>
         <div class="mt-4"><%= render 'mybookings' %></div>
       <% end %>
-
   </div>
 
   <div id="myPastBookings" class="tabcontent">
@@ -51,7 +50,6 @@
         <div class="mt-4"><%= render 'mypastbookings' %></div>
       <% end %>
   </div>
-
 </div>
 
 <script>
@@ -59,8 +57,6 @@
 function activateTab() {
   tabcontent = document.getElementsByClassName("tabcontent");
   tabcontent[0].style.display = "block";
-  tablinks = document.getElementsByClassName("tablinks");
-  tablinks[0].className = tablinks[0].className.replace(" active", "");
 }
 
 function openActivity(evt, activityType) {
