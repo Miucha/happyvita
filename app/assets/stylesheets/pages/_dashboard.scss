@@ -19,3 +19,9 @@
     height: 60px !important;
   }
 }
+
+.container-agenda-menu {
+  z-index: 1;
+  position: sticky;
+  top: 68px;
+}
