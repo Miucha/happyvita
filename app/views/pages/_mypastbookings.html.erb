@@ -35,8 +35,8 @@
 
           <div class="card-activity-infos shadow">
             <div class="card-event-date text-center mr-2 mt-1">
-              <h1><%= booking.schedule_date.strftime("%d")%></h1>
-              <h4><%= booking.schedule_date.strftime("%b")%></h4>
+            <h1><%= I18n.l(booking.schedule_date, format: "%d", locale: :'pt-BR') %></h1>
+            <h4><%= I18n.l(booking.schedule_date, format: "%b", locale: :'pt-BR') %></h4>
             </div>
             <div class="card-title-and-buttons">
               <% district = booking.activity.address.district.nil? ? district = " " : booking.activity.address.district %>

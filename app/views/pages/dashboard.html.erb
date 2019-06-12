@@ -24,9 +24,11 @@
 <div class="container-agenda-menu py-2 mt-0">
   <div class="container mb-3"><h4 class="text-center font-weight-bold">ATIVIDADES QUE PUBLIQUEI</h4></div>
 
+
   <div class="tab d-flex justify-content-start align-items-center text-center">
     <button class="tablinks agenda-booked-or-published btn btn-body-color border border-dark shadow text-center p-2 mx-1" onclick="openActivity(event, 'myFutureActivities')">FUTURAS (<%=myfuture_activities.count + mychallenges.count%>)</button>
     <button class="tablinks agenda-booked-or-published btn btn-body-color border border-dark shadow text-center p-2 mx-1" onclick="openActivity(event, 'myPastActivities')">PASSADAS (<%=mypast_activities.count %>)</button>
+
     <body onload="activateTab()">
   </div>
 </div>
@@ -62,8 +64,6 @@
 function activateTab() {
   tabcontent = document.getElementsByClassName("tabcontent");
   tabcontent[0].style.display = "block";
-  tablinks = document.getElementsByClassName("tablinks");
-  tablinks[0].className = tablinks[0].className.replace(" active", "");
 }
 
 function openActivity(evt, activityType) {
@@ -80,5 +80,3 @@ function openActivity(evt, activityType) {
   evt.currentTarget.className += " active";
 }
 </script>
-
-

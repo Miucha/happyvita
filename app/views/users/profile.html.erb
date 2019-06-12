@@ -1,4 +1,4 @@
-<div class="container my-3">
+<div class="container my-3 ">
 
   <div class="d-flex flex-row align-items-center">
     <div class="m-4">
@@ -6,25 +6,29 @@
     </div>
     <h1>Meu Perfil</h1>
   </div>
-  <p>Nome: <%= @user.first_name %></p>
-  <p>Sobrenome: <%= @user.last_name %></p>
-  <p>email: <%= @user.email %></p>
-  <% if @user.interests.present? %>
-    <p>Interesses: <% @user.interests.each do |interest| %>
-      <%= interest.name %>
-      <% if interest == @user.interests[-2] %>
-        <%= " e " %>
-      <% elsif interest == @user.interests.last %>
-        <%= "." %>
+  <div id="profile-text">
+    <h4>Nome: <%= "#{@user.first_name} #{@user.last_name}" %></h4>
+    <br>
+    <h4>email: <%= @user.email %></h4>
+      <% if @user.interests.present? %>
+        <h5><br>Interesses:<br>
+        <%texto = ""%>
+        <% @user.interests.each do |interest| %>
+            <% if interest == @user.interests[-2] %>
+              <% texto = " e " %>
+            <% elsif interest == @user.interests.last %>
+              <% texto = "." %>
+            <% else %>
+              <% texto = "," %>
+            <% end %>
+            <%= "#{interest.name}#{texto}" %>
+        <% end %>
+        </h5>
       <% else %>
-        <%= "," %>
+        <h5>Cadastre interesses para melhorar o seu filtro.</h5>
       <% end %>
-    <% end %>
-    </p>
-  <% else %>
-    <p>Cadastre interesses para melhorar o seu filtro.</p>
-  <% end %>
-  <br>
+    <br>
+  </div>
   <%= link_to "Editar Perfil", edit_users_profile_path(@user), class: "btn btn-primary" %>
 </div>
 

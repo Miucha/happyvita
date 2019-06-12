@@ -41,8 +41,8 @@
         <div class="card-activity-infos shadow">
           <div class="card-event-date text-center mr-2 mt-1">
             <% if activity.event_date %>
-            <h1><%= activity.event_date.strftime("%d")%></h1>
-            <h4><%= activity.event_date.strftime("%b")%></h4>
+              <h1><%= I18n.l(activity.event_date, format: "%d", locale: :'pt-BR') %></h1>
+              <h4><%= I18n.l(activity.event_date, format: "%b", locale: :'pt-BR') %></h4>
             <% end %>
           </div>
           <div class="card-title-and-buttons">
