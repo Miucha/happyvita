@@ -13,9 +13,9 @@
       <ul class="navbar-nav mr-auto">
         <% if user_signed_in? %>
           <li class="nav-item dropdown">
-        <%# Imagem do Avatar na navbar           %>
+        <%# Imagem do Avatar na navbar %>
         <% if current_user.photo? then %>
-          <%= cl_image_tag current_user.photo, gravity: 'face', class: "avatar ", id: "navbarDropdown", data: { toggle: "dropdown" },'aria-haspopup': true, 'aria-expanded': false %>
+          <%= cl_image_tag current_user.photo, height: 50, width: 50, gravity: 'face', crop: 'thumb', class: "avatar ", id: "navbarDropdown", data: { toggle: "dropdown" } %>
         <% else %>
           <%= cl_image_tag 'profile_image', gravity: 'face', class: "avatar ", id: "navbarDropdown", data: { toggle: "dropdown" },'aria-haspopup': true, 'aria-expanded': false %>
         <% end %>
