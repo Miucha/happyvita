@@ -112,7 +112,7 @@
 
         <div class="card-event-date text-center mr-2 mt-3">
           <%# Share butons by ShareThis.com %>
-          <div class="sharethis-inline-share-buttons show-btn-position-img-bottom text-right"></div>
+          <div style= "z-index: auto;"  class="sharethis-inline-share-buttons show-btn-position-img-bottom text-right"></div>
 
           <% if @activity.event_date %>
             <h1><%= @activity.event_date.strftime("%d")%></h1>
@@ -135,7 +135,7 @@
         <h5>Participantes confirmados: <%= @activity.bookings.count%></h5>
         <h5>Vagas disponíveis: <%= @activity.capacity - @activity.bookings.count%></h5>
       <% end %>
-      <h4 class="mt-1">Descrição:</h4><br>
+      <h4 class="mt-4 mb-2">Descrição:</h4>
       <h5><%= @activity.description.gsub(/\n/, '<br/>').html_safe %></h5>
     </div>
   </div>
