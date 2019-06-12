@@ -1,16 +1,22 @@
-#bg-agenda-white {
-  background-color: white;
+#container-agenda {
+  min-width: 350px;
 }
 
 .agenda-booked-or-published {
-  height: 40px !important;
+  height: 30px !important;
 }
 
 .btn-agenda-menu {
   height: 40px !important;
 }
+
+@media(max-width: 576px) {
+  .btn-agenda-menu {
+    height: 60px !important;
+  }
+}
+
 .btn-agenda-menu:hover {
-  height: 50px !important;
   background-color: #AFB2AB !important;
   text-weight: bold;
 }
