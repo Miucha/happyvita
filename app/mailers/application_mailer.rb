@@ -1,4 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  include SendGrid
+  sendgrid_category :use_subject_lines
+  default from: 'noreply@happyvita.com.br'
   layout 'mailer'
 end

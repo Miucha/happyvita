@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.5.3'
 
+gem 'icalendar'
+
 gem "simple_calendar", "~> 2.0"
 
 gem 'geocoder'
@@ -23,9 +25,11 @@ gem 'webpacker'
 gem 'simple_form'
 gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
+gem 'sendgrid'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
+  gem 'letter_opener'
 end
 
 group :development, :test do

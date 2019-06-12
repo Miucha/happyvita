@@ -20,6 +20,7 @@ class BookingsController < ApplicationController
       @booking.schedule_date = booking_params[:schedule_date]
     end
     if @booking.save
+      CalendarMailer.with(user: current_user).welcome(@activity).deliver_now
       redirect_to activity_path(@activity)
     else
       render :new
