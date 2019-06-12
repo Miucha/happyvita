@@ -115,13 +115,13 @@
           <div class="sharethis-inline-share-buttons show-btn-position-img-bottom text-right"></div>
 
           <% if @activity.event_date %>
-            <h1><%= @activity.event_date.strftime("%d")%></h1>
-            <h4><%= @activity.event_date.strftime("%b")%></h4>
-            <h5><%= @activity.event_date.strftime("%Y")%></h5>
+            <h1><%= I18n.l(@activity.event_date, format: "%d", locale: :'pt-BR') %></h1>
+            <h4><%= I18n.l(@activity.event_date, format: "%b", locale: :'pt-BR') %></h4>
+            <h5><%= I18n.l(@activity.event_date, format: "%Y", locale: :'pt-BR') %></h5>
           <% elsif booking != [] && booking.first.schedule_date %>
-            <h1><%= booking.first.schedule_date.strftime("%d")%></h1>
-            <h4><%= booking.first.schedule_date.strftime("%b")%></h4>
-            <h5><%= booking.first.schedule_date.strftime("%Y")%></h5>
+            <h1><%= I18n.l(@activity.event_date, format: "%d", local: :'pt-BR') %></h1>
+            <h4><%= I18n.l(@activity.event_date, format: "%b", local: :'pt-BR') %></h4>
+            <h5><%= I18n.l(@activity.event_date, format: "%Y", local: :'pt-BR') %></h5>
           <% else %>
             <h1><%= link_to new_activity_booking_path(@activity) do %>
                <i class="far fa-calendar-alt title-link text-decoration-none"></i>

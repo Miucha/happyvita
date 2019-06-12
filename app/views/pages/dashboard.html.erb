@@ -44,7 +44,7 @@
   </div>
 
   <div class="tab d-flex justify-content-center align-items-start text-center">
-    <button class="tablinks btn-agenda-menu bg-success p-1 ml-1 flex-fill border rounded shadow" onclick="openActivity(event, 'myFutureBookings')">FUTURAS (<%=myfuture_bookings.count %>)</button>
+    <button class="tablinks btn-agenda-menu bg-success p-1 ml-1 flex-fill border rounded shadow active" onclick="openActivity(event, 'myFutureBookings')">FUTURAS (<%=myfuture_bookings.count %>)</button>
     <button class="tablinks btn-agenda-menu bg-success p-1 mr-1 flex-fill border rounded shadow" onclick="openActivity(event, 'myPastBookings')">PASSADAS (<%=mypast_bookings.count %>)</button>
     <button class="tablinks btn-agenda-menu bg-success p-1 ml-1 flex-fill border rounded shadow" onclick="openActivity(event, 'myFutureActivities')">FUTURAS (<%=myfuture_activities.count %>)</button>
     <button class="tablinks btn-agenda-menu bg-success p-1 mr-1 flex-fill border rounded shadow" onclick="openActivity(event, 'myPastActivities')">PASSADAS (<%=mypast_activities.count %>)</button>
@@ -104,8 +104,6 @@
 function activateTab() {
   tabcontent = document.getElementsByClassName("tabcontent");
   tabcontent[0].style.display = "block";
-  tablinks = document.getElementsByClassName("tablinks");
-  tablinks[0].className = tablinks[0].className.replace(" active", "");
 }
 
 function openActivity(evt, activityType) {
@@ -122,5 +120,3 @@ function openActivity(evt, activityType) {
   evt.currentTarget.className += " active";
 }
 </script>
-
-
