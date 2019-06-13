@@ -22,9 +22,10 @@
     <% end %>
     <%= f.input :schedule_date, :as => :string,
           :input_html => {
-            :id => 'calendario',
-            :class => ' date_picker form-control date-mask',
-            hint: false
+            id: 'calendario',
+            class: ' date_picker form-control date-mask',
+            hint: false,
+            autocomplete: 'off'
           },
           label: 'Data da Atividade:',
           error: error_msg %>

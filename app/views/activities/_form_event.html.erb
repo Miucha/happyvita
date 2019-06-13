@@ -50,9 +50,10 @@
   <% end %>
     <%= f.input :event_date, :as => :string, required: true,
           :input_html => {
-            :id => 'calendario',
-            :class => ' date_picker form-control date-mask',
-            value: event_date_value
+            id: 'calendario',
+            class: 'date_picker form-control date-mask',
+            value: event_date_value,
+            autocomplete: 'off'
           },
           label: 'Data da Atividade:',
           error: error_event_date
