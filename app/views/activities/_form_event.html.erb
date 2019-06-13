@@ -40,16 +40,18 @@
   <% if @activity.event_date.present? %>
     <%= f.input :event_date, :as => :string, required: true,
           :input_html => {
-            :id => 'calendario',
-            :class => ' date_picker form-control date-mask',
-            value: @activity.event_date.strftime("%d/%m/%Y")
+            id: 'calendario',
+            class: ' date_picker form-control date-mask',
+            value: @activity.event_date.strftime("%d/%m/%Y"),
+            autocomplete: 'off'
           },
           label: 'Data da Atividade:' %>
   <% else %>
     <%= f.input :event_date, :as => :string, required: true,
           :input_html => {
-            :id => 'calendario',
-            :class => ' date_picker form-control date-mask'
+            id: 'calendario',
+            class: ' date_picker form-control date-mask',
+            autocomplete: 'off'
           },
           label: 'Data da Atividade:' %>
   <% end %>
