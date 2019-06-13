@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.5.3'
 
-gem 'jquery-rails'
+# gem 'jquery-rails'
 gem 'icalendar'
 gem "simple_calendar", "~> 2.0"
 gem 'geocoder'
