@@ -46,9 +46,27 @@ users_attributes = [
     birth_date: '20/10/1956',
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560282814/odete_l1v2jg.png'
   },
+  {
+    email: 'sonia@sonia.com',
+    password: 'sonia123',
+    first_name: 'Sônia',
+    last_name: 'Barton',
+    birth_date: '22/06/1953',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560434411/sonia_s0re3b.jpg'
+  },
+  {
+    email: 'rita@rita.com',
+    password: 'rita123',
+    first_name: 'Rita',
+    last_name: 'de Cássia',
+    birth_date: '30/06/1951',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560435658/rita_jzdgsh.jpg'
+  },
 ]
 User.create!(users_attributes)
 puts "Finished! #{User.count} users created."
+
+all_users = User.all
 
 puts 'Creating addresses...'
 first = User.first
@@ -65,7 +83,7 @@ addresses_attributes = [
     city: 'São Paulo',
     state: 'SP',
     zipcode: '05409-012',
-    user: last
+    user: all_users[3].id
   },
   {
     street: 'Rua Catalão',
@@ -75,9 +93,29 @@ addresses_attributes = [
     city: 'São Paulo',
     state: 'SP',
     zipcode: '01255-020',
-    user: last
+    user: all_users[2].id
+  },
+  {
+    street: 'Av. Pedro Álvares Cabral',
+    number: 0,
+    suite: 's/n',
+    district: 'Vila Mariana',
+    city: 'São Paulo',
+    state: 'SP',
+    zipcode: '04094-050',
+    user: all_users[2].id
+  },
+  {
+    street: 'Rua Harmonia',
+    number: 28,
+    district: 'Vila Madalena',
+    city: 'São Paulo',
+    state: 'SP',
+    zipcode: '05435-000',
+    user: all_users[2].id
   }
 ]
+
 Address.create!(addresses_attributes)
 puts "Finished! #{Address.count} addresses created."
 
@@ -108,7 +146,6 @@ Interest.create!(interests_attributes)
 puts "Finished! #{Interest.count} interests created."
 
 all_interests = Interest.all
-all_users = User.all
 
 puts 'Creating User interests...'
 
@@ -211,7 +248,7 @@ activities_attributes = [
     group: true,
     confirmed: true,
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919109/festa_junina.jpg',
-    owner: User.last,
+    owner: all_users[1].id,
     address: Address.first
   },
   {
@@ -223,7 +260,7 @@ activities_attributes = [
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559920943/finan%C3%A7as.jpg',
     capacity: 20,
     confirmed: true,
-    owner: User.last,
+    owner: all_users[3].id,
     address: all_addresses[1]
   },
   {
@@ -234,8 +271,8 @@ activities_attributes = [
     event: false,
     group: true,
     confirmed: true,
-    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919262/naked_cake.jpg',
-    owner: User.last,
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560433295/naked_cake_post_ajcdgi.jpg',
+    owner: all_users[1].id,
     address: Address.first
   },
   {
@@ -247,7 +284,7 @@ activities_attributes = [
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919166/caminhada.jpg',
     capacity: 50,
     confirmed: true,
-    owner: User.last,
+    owner: all_users[3].id,
     address: all_addresses[1]
   },
   {
@@ -266,22 +303,55 @@ activities_attributes = [
     group: true,
     confirmed: true,
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919469/piquenique.jpg',
-    owner: User.last,
+    owner: all_users[3].id,
     address: Address.first
 
   },
   {
     title: 'Musicoterapia com Idosos: a experiência musical na prevenção e reabilitação',
-    description: 'Seja bem vindo Congresso nacional de treinamento para grupos especiais. Temos como objetivo reunir 4 profissionais que decidiram se dedicar a este este perfil que tende a crescer cada vez mais (idosos), Personal Trainer de idosos é uma das principais tendências do mercado, mas poucos tem capacidade para tal! Este publico exige uma atenção redobrada, E por que deve investir neste nicho? Em 2030, estima-se que o Brasil terá aproximadamente ~ 33 milhões de idosos, o que leva o país a ocupar o 5º lugar no ranking mundial de população idosa. Porém, o mercado de profissionais de Educação Física nessa área é escasso. Tenha um público diferenciado, O que realmente pode fazer toda diferença em sua carreira profissional sendo capacitado a atender este público com maior responsabilidade.',
+    description: 'Serão abordados temas relacionados ao idoso, ao envelhecimento, à musicoterapia e à música como recurso no contexto preventivo e de reabilitação. Alguns tópicos:
+
+                - considerações sobre o envelhecimento ativo
+                - re-pensando quem é o sujeito do envelhecimento
+                - identidade sonora do idoso: corpo e memórias
+                - música e memória autobiográfica
+                - oficinas musicoterapêuticas
+                - experiências musicais com o idoso nos diferentes contextos
+                - recreação musical X estimulação cognitiva X musicoterapia',
     event: true,
     group: true,
     event_date: '29/06/2019 09:00',
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919064/musicoterapia.jpg',
     capacity: 15,
     confirmed: true,
-    owner: User.last,
+    owner: all_users[2].id,
     address: all_addresses[2]
   },
+  {
+    title: 'Yoga no Parque Ibirapuera',
+    description: 'Seja bem vindo Congresso nacional de treinamento para grupos especiais. Temos como objetivo reunir 4 profissionais que decidiram se dedicar a este este perfil que tende a crescer cada vez mais (idosos), Personal Trainer de idosos é uma das principais tendências do mercado, mas poucos tem capacidade para tal! Este publico exige uma atenção redobrada, E por que deve investir neste nicho? Em 2030, estima-se que o Brasil terá aproximadamente ~ 33 milhões de idosos, o que leva o país a ocupar o 5º lugar no ranking mundial de população idosa. Porém, o mercado de profissionais de Educação Física nessa área é escasso. Tenha um público diferenciado, O que realmente pode fazer toda diferença em sua carreira profissional sendo capacitado a atender este público com maior responsabilidade.',
+    event: true,
+    group: true,
+    event_date: '16/06/2019 08:30',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919297/yoga.jpg',
+    capacity: 40,
+    confirmed: true,
+    owner: all_users[5].id,
+    address: all_addresses[3]
+  },
+  {
+    title: 'Coral da Vila Madalena no Beco do Batman',
+    description: 'Eu participo do coral da Vila Madela e faremos uma apresentação aberta ao público no sábado, dia 22 de junho.
+                  Será no Beco do Batman. Venha conhecer!',
+    event: true,
+    group: true,
+    event_date: '22/06/2019 16:00',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919306/coral.jpg',
+    capacity: 40,
+    confirmed: true,
+    owner: all_users[5].id,
+    address: all_addresses[4]
+  }
 ]
 Activity.create!(activities_attributes)
 puts "Finished! #{Activity.count} activities created."
@@ -326,8 +396,90 @@ activity_interests_attributes = [
   {
     interest_id: Interest.where(name: 'Música').first.id,
     activity_id: all_activities[5].id
+  },
+  {
+    interest_id: Interest.where(name: 'Yoga').first.id,
+    activity_id: all_activities[6].id
+  },
+  {
+    interest_id: Interest.where(name: 'Saúde').first.id,
+    activity_id: all_activities[6].id
+  },
+  {
+    interest_id: Interest.where(name: 'Atividades físicas').first.id,
+    activity_id: all_activities[6].id
   }
 ]
 
 ActivityInterest.create!(activity_interests_attributes)
 puts "Finished! #{ActivityInterest.count} activities interests created."
+
+puts 'Creating Bookings...'
+
+bookings_attributes = [
+  {
+    done: true,
+    schedule_date: '20/05/2019',
+    activity_id: all_activities[2].id,
+    user_id: all_users[1].id,
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560379656/jcmncctaifl4huj54a4v.jpg",
+    review_rate: 10,
+    review_comment: "Adorei a experiência de usar ingredientes e frutas que eu nunca tinha misturado antes!"
+  },
+  {
+    done: true,
+    schedule_date: '06/06/2019',
+    activity_id: all_activities[2].id,
+    user_id: all_users[4].id,
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560435349/cake_review8_sll3js.jpg",
+    review_rate: 10,
+    review_comment: "Amei! Ficou bem gostoso. Misturei massa de chocolate e recheio de maracujá. Experimentem!"
+  },
+  {
+    done: true,
+    schedule_date: '10/06/2019',
+    activity_id: all_activities[2].id,
+    user_id: all_users[3].id,
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560379781/qnhpan8qkhxixmrpcgel.jpg",
+    review_rate: 9,
+    review_comment: "Meu neto que pediu para fazer de bolacha. Achei muito doce, mas ele ficou muito feliz!"
+  },
+  {
+    done: true,
+    schedule_date: '01/06/2019',
+    activity_id: all_activities[2].id,
+    user_id: all_users[5].id,
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560378854/cake_review_xli3ee.jpg",
+    review_rate: 10,
+    review_comment: "Uma delícia! Minha família gosta muito de churros e eles amaram!"
+  },
+  {
+    done: true,
+    schedule_date: '09/06/2019',
+    activity_id: all_activities[0].id,
+    user_id: all_users[5].id,
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560436022/festa_junina_review2_gil6be.jpg",
+    review_rate: 10,
+    review_comment: "Que festa boa! Convidei amigos e cada um levou algo. Foi uma delícia!"
+  },
+  {
+    done: true,
+    schedule_date: '08/06/2019',
+    activity_id: all_activities[0].id,
+    user_id: all_users[4].id,
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560436022/festa_junina_review3_mgxqeu.jpg",
+    review_rate: 9,
+    review_comment: "Deu trabalho, mas amei! Fiz lá em casa com a família e no fim foi muito divertido."
+  },
+  {
+    done: true,
+    schedule_date: '01/06/2019',
+    activity_id: all_activities[0].id,
+    user_id: all_users[1].id,
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560436508/festa_junina_review1_wn8vtc.jpg",
+    review_rate: 10,
+    review_comment: "Amei! Eu adoro cozinhar e tenho uma amiga que ama decorar. Nossos amigos elogiaram muito!"
+  },
+
+Booking.create!(bookings_attributes)
+puts "Finished! #{Booking.count} activities interests created."
