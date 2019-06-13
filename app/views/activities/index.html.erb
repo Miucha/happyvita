@@ -1,6 +1,7 @@
 <%= render 'banner_home' %>
 <div class="search-container d-flex justify-content-between align-items-center fixed-top bg-light">
-  <h5 class="btn btn-dark shadow m-2 font-weight-bold">FILTROS</h5>
+  <h5 class="btn  font-weight-bold"></h5>
+  <%# Tirei o filtro e deixei o botao vazio acima <h5 class="btn btn-dark shadow m-2 font-weight-bold">FILTROS</h5> %>
   <%= form_tag activities_path, method: :get do %>
     <%= text_field_tag :query,
       params[:query],
@@ -45,10 +46,18 @@
             <% state = activity.address.state.nil? ? state = " " : activity.address.state %>
 
             <p class="mt-1 ml-2 text-left"><%= "#{district} #{city} #{state} "%></p>
-            <% if current_user != nil && @user_bookings != nil && @user_bookings.select { |booking| booking.activity_id == activity.id } != [] %>
-              <h4><%= link_to "AGENDADO", activity_path(activity), class: "btn btn-success card-activity-booking-btn shadow font-weight-bold" %></h4>
+            
+            <% @current_bookings = @user_bookings.select { |booking| booking.activity_id == activity.id } %>
+            
+            <%# if current_user != nil && @user_bookings != nil && @current_bookings != [] %>
+            <% if !current_user.nil? && !@user_bookings.nil? && !@current_bookings.empty?%>
+                <% if @current_bookings.first.done == true %>
+                  <h4><%= link_to "JÁ PARTICIPEI", activity_path(activity), class: "text-center bg-success btn btn-success btn-width border border-success rounded shadow card-activity-booking-btn font-weight-bold p-2 mr-2" %></h4>
+                <% elsif !current_user.nil? && !@user_bookings.nil? %>
+                  <h4><%= link_to "AGENDADO", activity_path(activity), class: "btn btn-info card-activity-booking-btn shadow font-weight-bold" %></h4>
+                <% end %>
             <% else %>
-              <h4><%= link_to "AGENDAR", activity_path(activity), class: "btn btn-primary card-activity-booking-btn shadow font-weight-bold" %></h4>
+                <h4><%= link_to "AGENDAR", activity_path(activity), class: "btn btn-primary card-activity-booking-btn shadow font-weight-bold" %></h4>
             <% end %>
           </div>
         </div>
