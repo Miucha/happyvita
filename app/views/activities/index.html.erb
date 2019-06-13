@@ -47,18 +47,14 @@
 
             <p class="mt-1 ml-2 text-left"><%= "#{district} #{city} #{state} "%></p>
             
-            <% @current_bookings = @user_bookings.select { |booking| booking.activity_id == activity.id } %>
+            <% @current_bookings = @user_bookings.select { |booking| booking.activity_id == activity.id } if !@current_bookings.nil? %>
             
             <%# if current_user != nil && @user_bookings != nil && @current_bookings != [] %>
-            <% if !current_user.nil? && !@user_bookings.nil? && !@current_bookings.empty?%>
-                <% if @current_bookings.first.done == true %>
-                  <h4><%= link_to "JÁ PARTICIPEI", activity_path(activity), class: "text-center bg-success btn btn-success btn-width border border-success rounded shadow card-activity-booking-btn font-weight-bold p-2 mr-2" %></h4>
-                <% elsif !current_user.nil? && !@user_bookings.nil? %>
-                  <h4><%= link_to "AGENDADO", activity_path(activity), class: "btn btn-info card-activity-booking-btn shadow font-weight-bold" %></h4>
-                <% end %>
+            <% if current_user != nil && @user_bookings != nil && @user_bookings.select { |booking| booking.activity_id == activity.id } != [] %>
+              <h4><%= link_to "AGENDADO", activity_path(activity), class: "btn btn-success card-activity-booking-btn shadow font-weight-bold" %></h4>            
             <% else %>
-                <h4><%= link_to "AGENDAR", activity_path(activity), class: "btn btn-primary card-activity-booking-btn shadow font-weight-bold" %></h4>
-            <% end %>
+              <h4><%= link_to "AGENDAR", activity_path(activity), class: "btn btn-primary card-activity-booking-btn shadow font-weight-bold" %></h4>
+            <% end %>              
           </div>
         </div>
         <div class="card-footer-bg-light-gray w-2"><br></div>
