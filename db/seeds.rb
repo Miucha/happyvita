@@ -304,7 +304,7 @@ activities_attributes = [
     group: true,
     confirmed: true,
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919109/festa_junina.jpg',
-    owner: all_users[1],
+    owner: User.where(email: 'maria@maria.com').first,
     address: Address.first
   },
   {
@@ -316,7 +316,7 @@ activities_attributes = [
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559920943/finan%C3%A7as.jpg',
     capacity: 20,
     confirmed: true,
-    owner: all_users[3],
+    owner: User.where(email: 'odete@odete.com').first,
     address: all_addresses[1]
   },
   {
@@ -328,7 +328,7 @@ activities_attributes = [
     group: true,
     confirmed: true,
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560433295/naked_cake_post_ajcdgi.jpg',
-    owner: all_users[1],
+    owner: User.where(email: 'maria@maria.com').first,
     address: Address.first
   },
   {
@@ -340,7 +340,7 @@ activities_attributes = [
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919166/caminhada.jpg',
     capacity: 50,
     confirmed: true,
-    owner: all_users[3],
+    owner: User.where(email: 'odete@odete.com').first,
     address: all_addresses[1]
   },
   {
@@ -359,9 +359,8 @@ activities_attributes = [
     group: true,
     confirmed: true,
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919469/piquenique.jpg',
-    owner: all_users[3],
+    owner: User.where(email: 'joao@joao.com').first,
     address: Address.first
-
   },
   {
     title: 'Musicoterapia com Idosos: a experiência musical na prevenção e reabilitação',
@@ -376,11 +375,11 @@ activities_attributes = [
                 - recreação musical X estimulação cognitiva X musicoterapia',
     event: true,
     group: true,
-    event_date: '29/06/2019 09:00',
+    event_date: '29/06/2019',
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919064/musicoterapia.jpg',
     capacity: 15,
     confirmed: true,
-    owner: all_users[2],
+    owner: User.where(email: 'joao@joao.com').first,
     address: all_addresses[2]
   },
   {
@@ -394,7 +393,7 @@ activities_attributes = [
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919297/yoga.jpg',
     capacity: 40,
     confirmed: true,
-    owner: all_users[5],
+    owner: User.where(email: 'rita@rita.com').first,
     address: all_addresses[3]
   },
   {
@@ -409,7 +408,7 @@ activities_attributes = [
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919306/coral.jpg',
     capacity: 40,
     confirmed: true,
-    owner: all_users[7],
+    owner: User.where(email: 'clesia.tts@gmail.com').first,
     address: all_addresses[4]
   },
   {
@@ -422,7 +421,7 @@ activities_attributes = [
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560441164/pesca_wmo7bq.jpg',
     capacity: 12,
     confirmed: true,
-    owner: all_users[2],
+    owner: User.where(email: 'joao@joao.com').first,
     address: all_addresses[4]
   }
 ]
