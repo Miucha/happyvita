@@ -62,6 +62,22 @@ users_attributes = [
     birth_date: '30/06/1951',
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560435658/rita_jzdgsh.jpg'
   },
+  {
+    email: 'luizsalge@hotmail.com',
+    password: 'luiz123',
+    first_name: 'Luiz',
+    last_name: 'Mendes',
+    birth_date: '13/12/1952',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560452373/luiz_s9ntjt.jpg'
+  },
+  {
+    email: 'clesia.tts@gmail.com',
+    password: 'clesia123',
+    first_name: 'Clésia',
+    last_name: 'Mendes',
+    birth_date: '27/04/1953',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560452373/cl%C3%A9sia_zwftox.jpg'
+  }
 ]
 User.create!(users_attributes)
 puts "Finished! #{User.count} users created."
@@ -83,7 +99,7 @@ addresses_attributes = [
     city: 'São Paulo',
     state: 'SP',
     zipcode: '05409-012',
-    user: all_users[3].id
+    user_id: all_users[3].id
   },
   {
     street: 'Rua Catalão',
@@ -93,17 +109,16 @@ addresses_attributes = [
     city: 'São Paulo',
     state: 'SP',
     zipcode: '01255-020',
-    user: all_users[2].id
+    user_id: all_users[2].id
   },
   {
-    street: 'Av. Pedro Álvares Cabral',
-    number: 0,
-    suite: 's/n',
-    district: 'Vila Mariana',
+    street: 'Av. Henrique Chamma',
+    number: 420,
+    district: 'Pinheiros',
     city: 'São Paulo',
     state: 'SP',
-    zipcode: '04094-050',
-    user: all_users[2].id
+    zipcode: '04533-130',
+    user_id: all_users[5].id
   },
   {
     street: 'Rua Harmonia',
@@ -112,7 +127,16 @@ addresses_attributes = [
     city: 'São Paulo',
     state: 'SP',
     zipcode: '05435-000',
-    user: all_users[2].id
+    user_id: all_users[7].id
+  },
+  {
+    street: 'Rod. Dep. Archimedes Lammoglia',
+    number: 18,
+    suite: 'Km 18',
+    city: 'Itu',
+    state: 'SP',
+    zipcode: '13300-000',
+    user_id: all_users[2].id
   }
 ]
 
@@ -202,6 +226,38 @@ user_interests_attributes = [
     interest_id: all_interests[12].id,
     user_id: all_users[3].id
   },
+  {
+    interest_id: all_interests[12].id,
+    user_id: all_users[3].id
+  },
+  {
+    interest_id: Interest.where(name: 'Saúde').first.id,
+    user_id: all_users[7].id
+  },
+  {
+    interest_id: Interest.where(name: 'Culinária').first.id,
+    user_id: all_users[7].id
+  },
+  {
+    interest_id: Interest.where(name: 'Atividades físicas').first.id,
+    user_id: all_users[7].id
+  },
+  {
+    interest_id: Interest.where(name: 'Esportes').first.id,
+    user_id: all_users[6].id
+  },
+  {
+    interest_id: Interest.where(name: 'Pesca').first.id,
+    user_id: all_users[6].id
+  },
+  {
+    interest_id: Interest.where(name: 'História').first.id,
+    user_id: all_users[6].id
+  },
+  {
+    interest_id: Interest.where(name: 'Música').first.id,
+    user_id: all_users[6].id
+  }
 ]
 
 UserInterest.create!(user_interests_attributes)
@@ -248,7 +304,7 @@ activities_attributes = [
     group: true,
     confirmed: true,
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919109/festa_junina.jpg',
-    owner: all_users[1].id,
+    owner: all_users[1],
     address: Address.first
   },
   {
@@ -260,7 +316,7 @@ activities_attributes = [
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559920943/finan%C3%A7as.jpg',
     capacity: 20,
     confirmed: true,
-    owner: all_users[3].id,
+    owner: all_users[3],
     address: all_addresses[1]
   },
   {
@@ -272,7 +328,7 @@ activities_attributes = [
     group: true,
     confirmed: true,
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560433295/naked_cake_post_ajcdgi.jpg',
-    owner: all_users[1].id,
+    owner: all_users[1],
     address: Address.first
   },
   {
@@ -284,7 +340,7 @@ activities_attributes = [
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919166/caminhada.jpg',
     capacity: 50,
     confirmed: true,
-    owner: all_users[3].id,
+    owner: all_users[3],
     address: all_addresses[1]
   },
   {
@@ -303,7 +359,7 @@ activities_attributes = [
     group: true,
     confirmed: true,
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919469/piquenique.jpg',
-    owner: all_users[3].id,
+    owner: all_users[3],
     address: Address.first
 
   },
@@ -324,32 +380,49 @@ activities_attributes = [
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919064/musicoterapia.jpg',
     capacity: 15,
     confirmed: true,
-    owner: all_users[2].id,
+    owner: all_users[2],
     address: all_addresses[2]
   },
   {
-    title: 'Yoga no Parque Ibirapuera',
-    description: 'Seja bem vindo Congresso nacional de treinamento para grupos especiais. Temos como objetivo reunir 4 profissionais que decidiram se dedicar a este este perfil que tende a crescer cada vez mais (idosos), Personal Trainer de idosos é uma das principais tendências do mercado, mas poucos tem capacidade para tal! Este publico exige uma atenção redobrada, E por que deve investir neste nicho? Em 2030, estima-se que o Brasil terá aproximadamente ~ 33 milhões de idosos, o que leva o país a ocupar o 5º lugar no ranking mundial de população idosa. Porém, o mercado de profissionais de Educação Física nessa área é escasso. Tenha um público diferenciado, O que realmente pode fazer toda diferença em sua carreira profissional sendo capacitado a atender este público com maior responsabilidade.',
+    title: 'Yoga no Parque do Povo',
+    description: 'Faço yoga há 2 anos e faz muito bem para mim.
+                  Dei a ideia para a minha professora de yoga de realizarmos um aulão gratuito no Parque Ibirapuera e ela gostou.
+                  Aproveite essa oportunidade! Ela é muito boa!',
     event: true,
     group: true,
     event_date: '16/06/2019 08:30',
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919297/yoga.jpg',
     capacity: 40,
     confirmed: true,
-    owner: all_users[5].id,
+    owner: all_users[5],
     address: all_addresses[3]
   },
   {
-    title: 'Coral da Vila Madalena no Beco do Batman',
-    description: 'Eu participo do coral da Vila Madela e faremos uma apresentação aberta ao público no sábado, dia 22 de junho.
-                  Será no Beco do Batman. Venha conhecer!',
+    title: 'Coral R2 no Beco do Batman',
+    description: 'Eu participo do coral R2 e faremos uma apresentação aberta ao público no sábado, dia 22 de junho.
+                  O meu marido participa comigo e nos divertimos bastante com o pessoal.
+                  Será no Beco do Batman. Venha conhecer!
+                  O nosso professor é ótimo e poderá abrir novas turmas.',
     event: true,
     group: true,
     event_date: '22/06/2019 16:00',
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919306/coral.jpg',
     capacity: 40,
     confirmed: true,
-    owner: all_users[5].id,
+    owner: all_users[7],
+    address: all_addresses[4]
+  },
+  {
+    title: 'Um domingo no pesqueiro Maeda',
+    description: 'O pesqueiro Maeda fica em Itu (São Paulo) e é um dos pesqueiros mais populares de todo o Brasil.
+                  Sairemos de São Paulo em uma van para até 12 pessoas, mas você pode ir direto também se preferir!',
+    event: true,
+    group: true,
+    event_date: '23/06/2019 08:00',
+    remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560441164/pesca_wmo7bq.jpg',
+    capacity: 12,
+    confirmed: true,
+    owner: all_users[2],
     address: all_addresses[4]
   }
 ]
@@ -398,7 +471,7 @@ activity_interests_attributes = [
     activity_id: all_activities[5].id
   },
   {
-    interest_id: Interest.where(name: 'Yoga').first.id,
+    interest_id: Interest.where(name: 'Esportes').first.id,
     activity_id: all_activities[6].id
   },
   {
@@ -408,7 +481,15 @@ activity_interests_attributes = [
   {
     interest_id: Interest.where(name: 'Atividades físicas').first.id,
     activity_id: all_activities[6].id
-  }
+  },
+  {
+    interest_id: Interest.where(name: 'Música').first.id,
+    activity_id: all_activities[7].id
+  },
+  {
+    interest_id: Interest.where(name: 'Pesca').first.id,
+    activity_id: all_activities[8].id
+  },
 ]
 
 ActivityInterest.create!(activity_interests_attributes)
@@ -419,16 +500,16 @@ puts 'Creating Bookings...'
 bookings_attributes = [
   {
     done: true,
-    schedule_date: '20/05/2019',
+    schedule_date: '13/06/2019',
     activity_id: all_activities[2].id,
     user_id: all_users[1].id,
-    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560379656/jcmncctaifl4huj54a4v.jpg",
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560439713/cake_review7_jko1d9.jpg",
     review_rate: 10,
     review_comment: "Adorei a experiência de usar ingredientes e frutas que eu nunca tinha misturado antes!"
   },
   {
     done: true,
-    schedule_date: '06/06/2019',
+    schedule_date: '13/06/2019',
     activity_id: all_activities[2].id,
     user_id: all_users[4].id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560435349/cake_review8_sll3js.jpg",
@@ -437,16 +518,16 @@ bookings_attributes = [
   },
   {
     done: true,
-    schedule_date: '10/06/2019',
+    schedule_date: '13/06/2019',
     activity_id: all_activities[2].id,
     user_id: all_users[3].id,
-    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560379781/qnhpan8qkhxixmrpcgel.jpg",
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560378854/cake_review3_tz83vj.jpg",
     review_rate: 9,
     review_comment: "Meu neto que pediu para fazer de bolacha. Achei muito doce, mas ele ficou muito feliz!"
   },
   {
     done: true,
-    schedule_date: '01/06/2019',
+    schedule_date: '13/06/2019',
     activity_id: all_activities[2].id,
     user_id: all_users[5].id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560378854/cake_review_xli3ee.jpg",
@@ -455,7 +536,7 @@ bookings_attributes = [
   },
   {
     done: true,
-    schedule_date: '09/06/2019',
+    schedule_date: '13/06/2019',
     activity_id: all_activities[0].id,
     user_id: all_users[5].id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560436022/festa_junina_review2_gil6be.jpg",
@@ -464,7 +545,7 @@ bookings_attributes = [
   },
   {
     done: true,
-    schedule_date: '08/06/2019',
+    schedule_date: '13/06/2019',
     activity_id: all_activities[0].id,
     user_id: all_users[4].id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560436022/festa_junina_review3_mgxqeu.jpg",
@@ -473,13 +554,14 @@ bookings_attributes = [
   },
   {
     done: true,
-    schedule_date: '01/06/2019',
+    schedule_date: '13/06/2019',
     activity_id: all_activities[0].id,
     user_id: all_users[1].id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560436508/festa_junina_review1_wn8vtc.jpg",
     review_rate: 10,
     review_comment: "Amei! Eu adoro cozinhar e tenho uma amiga que ama decorar. Nossos amigos elogiaram muito!"
-  },
+  }
+]
 
 Booking.create!(bookings_attributes)
 puts "Finished! #{Booking.count} activities interests created."
