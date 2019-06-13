@@ -21,10 +21,10 @@ class BookingsController < ApplicationController
     #Para mudar precisa criar a opção de incluir horário nos forms
 
     if @activity.event? then
-      @booking.schedule_date = "#{I18n.l(@activity.event_date, format: "%d %B %Y")} 12:00:00 UTC"
+      @booking.schedule_date = "#{I18n.l(@activity.event_date, format: "%d %B %Y")} 09:00:00 AM UTC"
       # @booking.schedule_date = @activity.event_date
     else
-      @booking.schedule_date = "#{booking_params[:schedule_date].split.first} 12:00:00 UTC"
+      @booking.schedule_date = "#{booking_params[:schedule_date].split.first} 09:00:00 AM UTC"
     end
     if @booking.save
       CalendarMailer.with(user: current_user).welcome(@activity).deliver_now
@@ -41,7 +41,7 @@ class BookingsController < ApplicationController
     #No update e no create os horários estão sendo colocados como 12PM por padrão,
     #Para mudar precisa criar a opção de incluir horário nos forms
 
-    newdate = "#{params[:booking][:schedule_date].split.first} 12:00:00 UTC"
+    newdate = "#{params[:booking][:schedule_date].split.first} 09:00:00 AM UTC"
     params[:booking][:schedule_date] = newdate
 
     if @booking.update(booking_params)
