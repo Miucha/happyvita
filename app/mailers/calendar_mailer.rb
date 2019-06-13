@@ -15,7 +15,6 @@ class CalendarMailer < ApplicationMailer
         event.uid = event.url = "#{event.url}"
         calendar.add_event(event)
         calendar.publish
-
         mail.attachments['activity.ics'] = { :mime_type => 'text/calendar', content:calendar.to_ical}
         mail(to: @user.email, subject: 'Welcome')
   end
