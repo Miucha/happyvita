@@ -99,7 +99,7 @@ class ActivitiesController < ApplicationController
     if @activity.save
         redirect_to @activity, notice: 'Atividade editada com sucesso.'
     else
-      if activity.event? then
+      if @activity.event? then
         render :edit_event
       else
         render :edit_challenge
