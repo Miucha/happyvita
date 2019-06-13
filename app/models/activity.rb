@@ -24,29 +24,29 @@ class Activity < ApplicationRecord
 
   def date_cannot_be_in_the_past
     if event_date.present? && event_date < Date.today
-      errors.add(:event_date, "não pode estar no passado")
+      errors.add(:event_date, "passado")
     end
   end
 
   def e_date
     if event.present? && event_date.nil?
-      errors.add(:event_date, "Data do Evento deve ser selecionada")
+      errors.add(:event_date, "selecionada")
     end
   end
 
   def e_capacity
     if event.present?
       if capacity.nil?
-        errors.add(:capacity, "Quantas pessoas podem participar deste evento?")
+        errors.add(:capacity, "Quantas")
       elsif !capacity.positive?
-        errors.add(:capacity, "O número de pessoas deve ser maior do que 0")
+        errors.add(:capacity, "número")
       end
     end
   end
 
   def e_address
     if event.present? && address_id.nil?
-      errors.add(:address_id, "Qual o endereço do evento?")
+      errors.add(:address_id, "Qual")
     end
   end
 

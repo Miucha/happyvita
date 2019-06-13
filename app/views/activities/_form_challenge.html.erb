@@ -7,11 +7,11 @@
   <p>*Todos os campos são obrigatórios:</p><br>
 
   <div class="form-inputs">
-    <%= f.input :title, label: "Nome do Desafio:" %>
+    <%= f.input :title, label: "Nome do Desafio:", error: "Nome não pode estar em branco." %>
   </div>
 
   <div class="form-inputs">
-    <%= f.input :description, as: :text, label: "Descrição:" %>
+    <%= f.input :description, as: :text, label: "Descrição:", error: "Descrição não pode estar em branco." %>
   </div>
 
   <div class="form-inputs">

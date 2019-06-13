@@ -7,11 +7,11 @@
   <p>*Campos obrigatórios:</p><br>
 
   <div class="form-inputs">
-    <%= f.input :title, label: "Nome do evento:" %>
+    <%= f.input :title, label: "Nome do evento:", error: "Nome não pode estar em branco." %>
   </div>
 
   <div class="form-inputs">
-    <%= f.input :description, as: :text, label: "Descrição e instruções para inscrição no evento:" %>
+    <%= f.input :description, as: :text, label: "Descrição e instruções para inscrição no evento:", error: "Descrição não pode estar em branco." %>
   </div>
 
   <div class="form-inputs">
@@ -36,31 +36,40 @@
       </div>
     </div>
   </div>
-
+  <% if f.object.errors[:event_date] == ["can't be blank"]%>
+      <% error_event_date = 'Data não pode estar em branco' %>
+  <% elsif f.object.errors[:event_date] == ["passado"] %>
+      <% error_event_date = 'Data não pode ser no passado' %>
+  <% elsif f.object.errors[:event_date] == ["selecionada"] %>
+      <% error_event_date = 'Data do Evento deve ser selecionada' %>
+  <% end %>
   <% if @activity.event_date.present? %>
+      <% event_date_value = @activity.event_date.strftime("%d/%m/%Y") %>
+  <% else %>
+      <% event_date_value = nil %>
+  <% end %>
     <%= f.input :event_date, :as => :string, required: true,
           :input_html => {
             :id => 'calendario',
             :class => ' date_picker form-control date-mask',
-            value: @activity.event_date.strftime("%d/%m/%Y")
+            value: event_date_value
           },
-          label: 'Data da Atividade:' %>
-  <% else %>
-    <%= f.input :event_date, :as => :string, required: true,
-          :input_html => {
-            :id => 'calendario',
-            :class => ' date_picker form-control date-mask'
-          },
-          label: 'Data da Atividade:' %>
-  <% end %>
+          label: 'Data da Atividade:',
+          error: error_event_date
+          %>
 
-  <div class="form-inputs">
-    <%= f.input :capacity, required: true, input_html: { min: '1', step: 'any'}, label: "Capacidade da Atividade:" %>
+    <% if f.object.errors[:capacity] == ["Quantas"] %>
+      <% error_capacity = 'Quantas pessoas podem participar deste evento?' %>
+    <% elsif f.object.errors[:capacity] == ["número"] %>
+      <% error_capacity = 'O número de pessoas deve ser maior do que 0' %>
+    <% end %>
+    <div class="form-inputs">
+    <%= f.input :capacity, required: true, input_html: { min: '1', step: 'any'}, label: "Capacidade da Atividade:", error: error_capacity %>
   </div>
 
   <!-- encaminhar para a criação ou usar um address antigo -->
   <div class="form-inputs">
-    <%= f.input :address_id, required: true, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2', id:'user_addresses'}, label: "Escolha um dos seus endereços:" %>
+    <%= f.input :address_id, required: true, collection: current_user.addresses.order(:street), label_method: :street, input_html: { class: 'select2', id:'user_addresses'}, label: "Escolha um dos seus endereços:", error: "Qual o endereço do evento?" %>
   </div>
 <!--   colocar em java opção de address também-->
   <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addressModal">Criar novo endereço</button>
