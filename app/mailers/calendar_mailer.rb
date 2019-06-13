@@ -9,13 +9,13 @@ class CalendarMailer < ApplicationMailer
         event.dtend = booking.first.schedule_date.strftime("%Y%m%dT%H%M%S")
         event.summary = activity.title
         event.description = activity.description
-        event.location = 'Here !'
+        event.location = "#{activity.address.street}, #{activity.address.number}"
         event.created = activity.created_at
         event.last_modified = activity.updated_at
         event.uid = event.url = "#{event.url}"
         calendar.add_event(event)
         calendar.publish
         mail.attachments['activity.ics'] = { :mime_type => 'text/calendar', content:calendar.to_ical}
-        mail(to: @user.email, subject: 'Welcome')
+        mail(to: @user.email, subject: 'Confirmação de Atividade')
   end
 end
