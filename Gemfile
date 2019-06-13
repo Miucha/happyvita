@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.5.3'
 
+gem 'jquery-rails'
 gem 'icalendar'
-
 gem "simple_calendar", "~> 2.0"
-
 gem 'geocoder'
 gem 'mapbox-gl-rails', '~> 0.44.0'
 gem 'rails-i18n'
