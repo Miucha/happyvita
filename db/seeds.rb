@@ -176,87 +176,87 @@ puts 'Creating User interests...'
 user_interests_attributes = [
   {
     interest_id: all_interests[0].id,
-    user_id: all_users[1].id
+    user_id: User.where(email: 'maria@maria.com').first.id
   },
   {
     interest_id: all_interests[1].id,
-    user_id: all_users[1].id
+    user_id: User.where(email: 'maria@maria.com').first.id
   },
   {
     interest_id: all_interests[3].id,
-    user_id: all_users[1].id
+    user_id: User.where(email: 'maria@maria.com').first.id
   },
   {
     interest_id: all_interests[13].id,
-    user_id: all_users[1].id
+    user_id: User.where(email: 'maria@maria.com').first.id
   },
   {
     interest_id: all_interests[2].id,
-    user_id: all_users[2].id
+    user_id: User.where(email: 'joao@joao.com').first.id
   },
   {
     interest_id: all_interests[4].id,
-    user_id: all_users[2].id
+    user_id: User.where(email: 'joao@joao.com').first.id
   },
   {
     interest_id: all_interests[7].id,
-    user_id: all_users[2].id
+    user_id: User.where(email: 'joao@joao.com').first.id
   },
   {
     interest_id: all_interests[11].id,
-    user_id: all_users[2].id
+    user_id: User.where(email: 'joao@joao.com').first.id
   },
   {
     interest_id: all_interests[14].id,
-    user_id: all_users[2].id
+    user_id: User.where(email: 'joao@joao.com').first.id
   },
   {
     interest_id: all_interests[2].id,
-    user_id: all_users[3].id
+    user_id: User.where(email: 'odete@odete.com').first.id
   },
   {
     interest_id: all_interests[6].id,
-    user_id: all_users[3].id
+    user_id: User.where(email: 'odete@odete.com').first.id
   },
   {
     interest_id: all_interests[9].id,
-    user_id: all_users[3].id
+    user_id: User.where(email: 'odete@odete.com').first.id
   },
   {
     interest_id: all_interests[12].id,
-    user_id: all_users[3].id
+    user_id: User.where(email: 'odete@odete.com').first.id
   },
   {
     interest_id: all_interests[12].id,
-    user_id: all_users[3].id
-  },
-  {
-    interest_id: Interest.where(name: 'Saúde').first.id,
-    user_id: all_users[7].id
-  },
-  {
-    interest_id: Interest.where(name: 'Culinária').first.id,
-    user_id: all_users[7].id
+    user_id: User.where(email: 'odete@odete.com').first.id
   },
   {
     interest_id: Interest.where(name: 'Atividades físicas').first.id,
-    user_id: all_users[7].id
+    user_id: User.where(email: 'clesia.tts@gmail.com').first.id
+  },
+  {
+    interest_id: Interest.where(name: 'Culinária').first.id,
+    user_id: User.where(email: 'clesia.tts@gmail.com').first.id
+  },
+  {
+    interest_id: Interest.where(name: 'Saúde').first.id,
+    user_id: User.where(email: 'clesia.tts@gmail.com').first.id
   },
   {
     interest_id: Interest.where(name: 'Esportes').first.id,
-    user_id: all_users[6].id
+    user_id: User.where(email: 'luizsalge@hotmail.com').first.id
   },
   {
     interest_id: Interest.where(name: 'Pesca').first.id,
-    user_id: all_users[6].id
+    user_id: User.where(email: 'luizsalge@hotmail.com').first.id
   },
   {
     interest_id: Interest.where(name: 'História').first.id,
-    user_id: all_users[6].id
+    user_id: User.where(email: 'luizsalge@hotmail.com').first.id
   },
   {
     interest_id: Interest.where(name: 'Música').first.id,
-    user_id: all_users[6].id
+    user_id: User.where(email: 'luizsalge@hotmail.com').first.id
   }
 ]
 
@@ -317,7 +317,7 @@ activities_attributes = [
     capacity: 20,
     confirmed: true,
     owner: User.where(email: 'odete@odete.com').first,
-    address: all_addresses[1]
+    address: Address.where(street: 'Rua Oscar Freire').first
   },
   {
     title: 'Crie a sua receita de Naked Cake: o famoso ‘bolo pelado’!',
@@ -341,7 +341,7 @@ activities_attributes = [
     capacity: 50,
     confirmed: true,
     owner: User.where(email: 'odete@odete.com').first,
-    address: all_addresses[1]
+    address: Address.where(street: 'Rua Oscar Freire').first
   },
   {
     title: 'Chame os amigos para um piquenique!',
@@ -375,12 +375,12 @@ activities_attributes = [
                 - recreação musical X estimulação cognitiva X musicoterapia',
     event: true,
     group: true,
-    event_date: '29/06/2019',
+    event_date: '29/06/2019 9:00',
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919064/musicoterapia.jpg',
     capacity: 15,
     confirmed: true,
     owner: User.where(email: 'joao@joao.com').first,
-    address: all_addresses[2]
+    address: Address.where(street: 'Rua Catalão').first
   },
   {
     title: 'Yoga no Parque do Povo',
@@ -389,12 +389,12 @@ activities_attributes = [
                   Aproveite essa oportunidade! Ela é muito boa!',
     event: true,
     group: true,
-    event_date: '16/06/2019 08:30',
+    event_date: '16/06/2019 8:30',
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1559919297/yoga.jpg',
     capacity: 40,
     confirmed: true,
     owner: User.where(email: 'rita@rita.com').first,
-    address: all_addresses[3]
+    address: Address.where(street: 'Av. Henrique Chamma').first
   },
   {
     title: 'Coral R2 no Beco do Batman',
@@ -409,20 +409,21 @@ activities_attributes = [
     capacity: 40,
     confirmed: true,
     owner: User.where(email: 'clesia.tts@gmail.com').first,
-    address: all_addresses[4]
+    address: Address.where(street: 'Rua Harmonia').first
   },
   {
     title: 'Um domingo no pesqueiro Maeda',
     description: 'O pesqueiro Maeda fica em Itu (São Paulo) e é um dos pesqueiros mais populares de todo o Brasil.
+                  O restaurante é uma delícia, com aquele tempero caseiro, e o almoço será ao som de viola.
                   Sairemos de São Paulo em uma van para até 12 pessoas, mas você pode ir direto também se preferir!',
     event: true,
     group: true,
-    event_date: '23/06/2019 08:00',
+    event_date: '23/06/2019 9:00',
     remote_photo_url: 'https://res.cloudinary.com/lewagon-256/image/upload/v1560441164/pesca_wmo7bq.jpg',
     capacity: 12,
     confirmed: true,
     owner: User.where(email: 'joao@joao.com').first,
-    address: all_addresses[4]
+    address: Address.where(street: 'Rod. Dep. Archimedes Lammoglia').first
   }
 ]
 Activity.create!(activities_attributes)
@@ -435,59 +436,63 @@ puts 'Creating Activity interests...'
 activity_interests_attributes = [
   {
     interest_id: Interest.where(name: 'Festas').first.id,
-    activity_id: all_activities[0].id
+    activity_id: Activity.where(title: 'A melhor época do ano chegou: Organize um almoço de festa junina!').first.id
   },
   {
     interest_id: Interest.where(name: 'Culinária').first.id,
-    activity_id: all_activities[0].id
+    activity_id: Activity.where(title: 'A melhor época do ano chegou: Organize um almoço de festa junina!').first.id
   },
   {
     interest_id: Interest.where(name: 'Danças').first.id,
-    activity_id: all_activities[0].id
+    activity_id: Activity.where(title: 'A melhor época do ano chegou: Organize um almoço de festa junina!').first.id
   },
   {
     interest_id: Interest.where(name: 'Finanças').first.id,
-    activity_id: all_activities[1].id
+    activity_id: Activity.where(title: 'Capital financeiro: Importância para um envelhecimento ativo.').first.id
   },
   {
     interest_id: Interest.where(name: 'Culinária').first.id,
-    activity_id: all_activities[2].id
+    activity_id: Activity.where(title: 'Crie a sua receita de Naked Cake: o famoso ‘bolo pelado’!').first.id
   },
   {
     interest_id: Interest.where(name: 'Saúde').first.id,
-    activity_id: all_activities[3].id
+    activity_id: Activity.where(title: 'Envelhecimento e Cuidados paliativos').first.id
   },
   {
     interest_id: Interest.where(name: 'Atividades físicas').first.id,
-    activity_id: all_activities[3].id
+    activity_id: Activity.where(title: 'Envelhecimento e Cuidados paliativos').first.id
   },
   {
     interest_id: Interest.where(name: 'Festas').first.id,
-    activity_id: all_activities[4].id
+    activity_id: Activity.where(title: 'Chame os amigos para um piquenique!').first.id
+  },
+  {
+    interest_id: Interest.where(name: 'Culinária').first.id,
+    activity_id: Activity.where(title: 'Chame os amigos para um piquenique!').first.id
   },
   {
     interest_id: Interest.where(name: 'Música').first.id,
-    activity_id: all_activities[5].id
+    activity_id: Activity.where(title: 'Musicoterapia com Idosos: a experiência musical na prevenção e reabilitação').first.id
   },
   {
     interest_id: Interest.where(name: 'Esportes').first.id,
-    activity_id: all_activities[6].id
+    activity_id: Activity.where(title: 'Yoga no Parque do Povo').first.id
   },
   {
     interest_id: Interest.where(name: 'Saúde').first.id,
-    activity_id: all_activities[6].id
+    activity_id: Activity.where(title: 'Yoga no Parque do Povo').first.id
   },
   {
     interest_id: Interest.where(name: 'Atividades físicas').first.id,
-    activity_id: all_activities[6].id
+    activity_id: Activity.where(title: 'Yoga no Parque do Povo').first.id
   },
   {
     interest_id: Interest.where(name: 'Música').first.id,
-    activity_id: all_activities[7].id
+    activity_id: Activity.where(title: 'Coral R2 no Beco do Batman').first.id
   },
   {
     interest_id: Interest.where(name: 'Pesca').first.id,
-    activity_id: all_activities[8].id
+    activity_id: Activity.where(title: 'Um domingo no pesqueiro Maeda').first.id
   },
 ]
 
@@ -499,66 +504,93 @@ puts 'Creating Bookings...'
 bookings_attributes = [
   {
     done: true,
-    schedule_date: '13/06/2019',
-    activity_id: all_activities[2].id,
-    user_id: all_users[1].id,
+    schedule_date: '14/06/2019',
+    activity_id: Activity.where(title: 'Crie a sua receita de Naked Cake: o famoso ‘bolo pelado’!').first.id,
+    user_id: User.where(email: 'maria@maria.com').first.id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560439713/cake_review7_jko1d9.jpg",
     review_rate: 10,
     review_comment: "Adorei a experiência de usar ingredientes e frutas que eu nunca tinha misturado antes!"
   },
   {
     done: true,
-    schedule_date: '13/06/2019',
-    activity_id: all_activities[2].id,
-    user_id: all_users[4].id,
+    schedule_date: '14/06/2019',
+    activity_id: Activity.where(title: 'Crie a sua receita de Naked Cake: o famoso ‘bolo pelado’!').first.id,
+    user_id: User.where(email: 'sonia@sonia.com').first.id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560435349/cake_review8_sll3js.jpg",
     review_rate: 10,
     review_comment: "Amei! Ficou bem gostoso. Misturei massa de chocolate e recheio de maracujá. Experimentem!"
   },
   {
     done: true,
-    schedule_date: '13/06/2019',
-    activity_id: all_activities[2].id,
-    user_id: all_users[3].id,
+    schedule_date: '14/06/2019',
+    activity_id: Activity.where(title: 'Crie a sua receita de Naked Cake: o famoso ‘bolo pelado’!').first.id,
+    user_id: User.where(email: 'odete@odete.com').first.id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560378854/cake_review3_tz83vj.jpg",
     review_rate: 9,
     review_comment: "Meu neto que pediu para fazer de bolacha. Achei muito doce, mas ele ficou muito feliz!"
   },
   {
     done: true,
-    schedule_date: '13/06/2019',
-    activity_id: all_activities[2].id,
-    user_id: all_users[5].id,
+    schedule_date: '14/06/2019',
+    activity_id: Activity.where(title: 'Crie a sua receita de Naked Cake: o famoso ‘bolo pelado’!').first.id,
+    user_id: User.where(email: 'rita@rita.com').first.id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560378854/cake_review_xli3ee.jpg",
     review_rate: 10,
     review_comment: "Uma delícia! Minha família gosta muito de churros e eles amaram!"
   },
   {
     done: true,
-    schedule_date: '13/06/2019',
-    activity_id: all_activities[0].id,
-    user_id: all_users[5].id,
+    schedule_date: '14/06/2019',
+    activity_id: Activity.where(title: 'A melhor época do ano chegou: Organize um almoço de festa junina!').first.id,
+    user_id: User.where(email: 'rita@rita.com').first.id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560436022/festa_junina_review2_gil6be.jpg",
     review_rate: 10,
     review_comment: "Que festa boa! Convidei amigos e cada um levou algo. Foi uma delícia!"
   },
   {
     done: true,
-    schedule_date: '13/06/2019',
-    activity_id: all_activities[0].id,
-    user_id: all_users[4].id,
+    schedule_date: '14/06/2019',
+    activity_id: Activity.where(title: 'A melhor época do ano chegou: Organize um almoço de festa junina!').first.id,
+    user_id: User.where(email: 'sonia@sonia.com').first.id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560436022/festa_junina_review3_mgxqeu.jpg",
     review_rate: 9,
     review_comment: "Deu trabalho, mas amei! Fiz lá em casa com a família e no fim foi muito divertido."
   },
   {
     done: true,
-    schedule_date: '13/06/2019',
-    activity_id: all_activities[0].id,
-    user_id: all_users[1].id,
+    schedule_date: '14/06/2019',
+    activity_id: Activity.where(title: 'A melhor época do ano chegou: Organize um almoço de festa junina!').first.id,
+    user_id: User.where(email: 'maria@maria.com').first.id,
     remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560436508/festa_junina_review1_wn8vtc.jpg",
     review_rate: 10,
     review_comment: "Amei! Eu adoro cozinhar e tenho uma amiga que ama decorar. Nossos amigos elogiaram muito!"
+  },
+  {
+    done: true,
+    schedule_date: '14/06/2019',
+    activity_id: Activity.where(title: 'Chame os amigos para um piquenique!').first.id,
+    user_id: User.where(email: 'maria@maria.com').first.id,
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560484521/piquenique_review2_zwfxlj.jpg",
+    review_rate: 10,
+    review_comment: "Fomos com um casal de amigos e nos divertimos demais! Parecíamos crianças."
+  },
+  {
+    done: true,
+    schedule_date: '14/06/2019',
+    activity_id: Activity.where(title: 'Chame os amigos para um piquenique!').first.id,
+    user_id: User.where(email: 'odete@odete.com').first.id,
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560484521/piquenique_review3_lgyjxd.jpg",
+    review_rate: 10,
+    review_comment: "Eu chamei a mulherada da família e foi muito gostoso! Demos boas risadas!"
+  },
+  {
+    done: true,
+    schedule_date: '14/06/2019',
+    activity_id: Activity.where(title: 'Chame os amigos para um piquenique!').first.id,
+    user_id: User.where(email: 'sonia@sonia.com').first.id,
+    remote_review_photo_url: "https://res.cloudinary.com/lewagon-256/image/upload/v1560484521/piquenique_review1_yplj8s.jpg",
+    review_rate: 10,
+    review_comment: "Levamos poucas coisas, então foi um piquenique muito simples. Mas muito bom!"
   }
 ]
 
